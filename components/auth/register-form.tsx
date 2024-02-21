@@ -53,7 +53,7 @@ const RegisterForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="max-w-[310px] space-y-6 bg-slate-200 p-4"
+        className="max-w-[310px] space-y-6 rounded-3xl bg-secondary p-4"
       >
         <div className="space-y-4">
           <FormField
