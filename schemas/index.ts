@@ -68,3 +68,21 @@ export const SettingsSchema = z
       path: ["password"],
     },
   );
+
+export const profileFormSchema = z.object({
+  dob: z
+    .date()
+    .min(new Date("1920-01-01"))
+    .max(new Date("2018-01-01"))
+    .optional(),
+  gender: z.string().optional(),
+  country: z.string().optional(),
+  bio: z.string().max(160).min(4).optional(),
+  urls: z
+    .array(
+      z.object({
+        value: z.string().url({ message: "Please enter a valid URL." }),
+      }),
+    )
+    .optional(),
+});
