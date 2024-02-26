@@ -11,7 +11,7 @@ const HomePage = () => {
         </h1>
         <p className="text-xl">
           Explore iconic museums, delightful restaurants, and hidden gems
-          recommended by traveler's like you.
+          recommended by traveler&apos;s like you.
         </p>
         <div className="flex flex-row gap-9">
           <Button
