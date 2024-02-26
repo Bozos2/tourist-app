@@ -14,7 +14,10 @@ export const NavbarAuth = () => {
     <section className="flex flex-row gap-2 px-6">
       {!user ? (
         <>
-          <Button variant="outline" className="px-4 py-2" asChild>
+          <Button
+            className="border border-primary bg-transparent px-4 py-2  text-primary hover:text-white"
+            asChild
+          >
             <Link href="/auth/login">Login</Link>
           </Button>
           <Button variant="default" className="px-4 py-2" asChild>

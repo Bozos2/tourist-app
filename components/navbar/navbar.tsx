@@ -1,11 +1,12 @@
-import { UserAvatarButton } from "../auth/user-avatar-button";
-import { ThemeToggle } from "../theme-toogle";
 import { NavbarAuth } from "./navbar-auth";
+import { NavbarLinks } from "./navbar-links";
+import { Logo } from "./navbar-logo";
 
 export const Navbar = () => {
   return (
-    <nav className="font-poppins flex flex-row items-center justify-end gap-4 py-2">
-      <ThemeToggle />
+    <nav className="mx-36 flex  flex-row items-center justify-between gap-4 py-3 font-poppins">
+      <Logo />
+      <NavbarLinks />
       <NavbarAuth />
     </nav>
   );
