@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 
 const HomePage = () => {
   return (
-    <div className="flex min-h-[calc(100vh-64px)] flex-col justify-between pt-48">
-      <div className="mx-36 flex h-72 w-[700px] flex-col justify-between font-poppins">
+    <div className="flex min-h-[calc(100vh-64px)] flex-col justify-between pt-24 sm:pt-36 lg:pt-48">
+      <div className="mx-6 flex flex-col justify-between gap-10 font-poppins sm:mx-24 lg:h-72 lg:w-[700px] lg:gap-0 xl:mx-36">
         <h1 className="text-4xl">
           Discover and rate the best places in your{" "}
           <span className="text-primary">Favourite Cities</span>
@@ -25,7 +25,7 @@ const HomePage = () => {
           </Button>
         </div>
       </div>
-      <div className="hidden opacity-40 lg:block">
+      <div className="z-0 hidden opacity-40 sm:block">
         <WaveSvg />
       </div>
     </div>

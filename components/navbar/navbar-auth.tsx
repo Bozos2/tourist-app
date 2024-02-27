@@ -11,7 +11,7 @@ export const NavbarAuth = () => {
   const user = useCurrentUser();
 
   return (
-    <section className="flex flex-row gap-2 px-6">
+    <section className="hidden flex-row gap-2 px-6 sm:flex">
       {!user ? (
         <>
           <Button
