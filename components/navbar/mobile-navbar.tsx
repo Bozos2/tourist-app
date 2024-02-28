@@ -1,12 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoHome, IoSettings } from "react-icons/io5";
+import { MdExplore } from "react-icons/md";
 import { CgMenuGridR } from "react-icons/cg";
+import { BsFillTelephoneFill } from "react-icons/bs";
+import { FaUser } from "react-icons/fa";
+import { ExitIcon } from "@radix-ui/react-icons";
+
+import { LogoutButton } from "../auth/logout-button";
+import { Logo } from "./navbar-logo";
+import { useCurrentUser } from "@/hooks/use-current-user";
+
+import { Button } from "../ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export const MobileNavbar = () => {
   const [nav, setNav] = useState<boolean>(false);
+
+  const user = useCurrentUser();
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setNav(!nav);
+  }, [pathname]);
 
   const handleNav = () => {
     setNav(!nav);
@@ -17,15 +42,122 @@ export const MobileNavbar = () => {
       <div onClick={handleNav} className="block lg:hidden">
         {nav ? <AiOutlineClose size={24} /> : <CgMenuGridR size={24} />}
       </div>
-      <div
+      <nav
         className={
           nav
-            ? "absolute bottom-0 left-0 right-0 top-0 z-10 flex h-screen w-3/4 flex-col items-center justify-around bg-gradient-to-br from-[#121212] to-[#303367] text-center duration-300 ease-in lg:hidden"
-            : "absolute bottom-0 left-[-100%] right-0 top-0 flex h-screen w-full flex-col items-center justify-around bg-gradient-to-br from-[#121212] to-[#303367] text-center duration-300 ease-in lg:hidden"
+            ? "absolute bottom-0 left-0 right-0 top-0 z-10 flex h-screen w-4/6 flex-col bg-gradient-to-br   from-[#121212] to-[#303367] duration-300  ease-in sm:w-2/5 lg:hidden"
+            : "absolute bottom-0 left-[-100%] right-0 top-0 flex h-screen w-full flex-col  bg-gradient-to-br from-[#121212] to-[#303367] duration-300 ease-in lg:hidden"
         }
       >
-        <div>test test</div>
-      </div>
+        <div className="flex flex-grow flex-col px-6 py-2">
+          <div className="pb-12 pt-4">
+            <Logo />
+          </div>
+          <Separator />
+          <div className="w-full">
+            <div className="flex w-full flex-col gap-4 py-8">
+              <Link
+                href="/home"
+                className={cn(
+                  "flex  flex-row items-center gap-4 rounded-lg py-1 pl-2 text-lg ",
+                  pathname === "/home" ? "bg-secondary" : "",
+                )}
+              >
+                <IoHome size={28} /> Home
+              </Link>
+              <Link
+                href="/explore"
+                className={cn(
+                  "flex  flex-row items-center gap-4 rounded-lg py-1 pl-2 text-lg ",
+                  pathname === "/explore" ? "bg-secondary" : "",
+                )}
+              >
+                <MdExplore size={28} /> Explore
+              </Link>
+              <Link
+                href="/contact-us"
+                className={cn(
+                  "flex  flex-row items-center gap-4 rounded-lg py-1 pl-2 text-lg ",
+                  pathname === "/contact-us" ? "bg-secondary" : "",
+                )}
+              >
+                <BsFillTelephoneFill size={28} /> Contact us
+              </Link>
+              {user ? (
+                <Link
+                  href="/profile"
+                  className={cn(
+                    "flex  flex-row items-center gap-4 rounded-lg py-1 pl-2 text-lg ",
+                    pathname === "/profile" ? "bg-secondary" : "",
+                  )}
+                >
+                  <FaUser size={28} /> Profile
+                </Link>
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
+          <div>
+            <Separator />
+            {user ? (
+              <div className="flex w-full flex-col gap-4 py-8">
+                <Link
+                  href="/settings"
+                  className={cn(
+                    "flex  flex-row items-center gap-4 rounded-lg py-1 pl-2 text-lg ",
+                    pathname === "/settings" ? "bg-secondary" : "",
+                  )}
+                >
+                  <IoSettings size={28} /> Settings
+                </Link>
+
+                <LogoutButton style="flex flex-row items-center gap-4 rounded-lg py-1 pl-2 text-lg">
+                  <ExitIcon className="h-7 w-7" /> Logout
+                </LogoutButton>
+              </div>
+            ) : (
+              <div className="flex flex-row justify-center gap-4 py-8">
+                <Button
+                  className="border border-primary bg-transparent px-4 py-2  text-primary hover:text-white"
+                  asChild
+                >
+                  <Link href="/auth/login">Login</Link>
+                </Button>
+                <Button variant="default" className="px-4 py-2" asChild>
+                  <Link href="/auth/register" className="text-white">
+                    Sign up
+                  </Link>
+                </Button>
+              </div>
+            )}
+          </div>
+          {user ? (
+            <>
+              <div className="flex-grow" />
+              <div className="justify-end pb-4">
+                <Separator />
+                <div className="flex flex-row  gap-2 pt-4">
+                  <Avatar>
+                    <AvatarImage src={user?.image || ""} sizes="h-16 w-16" />
+                    <AvatarFallback className="bg-primary">
+                      <FaUser className="text-white" />
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col">
+                    <h2>{user?.name}</h2>
+                    <p className="... overflow-hidden text-[10px] text-muted-foreground">
+                      {user?.email}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+        </div>
+      </nav>
     </>
   );
 };
