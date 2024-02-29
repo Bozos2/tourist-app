@@ -53,7 +53,7 @@ const RegisterForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="max-w-[310px] space-y-6 rounded-3xl bg-secondary p-4"
+        className="max-w-[310px] space-y-4 rounded-3xl border  p-4"
       >
         <div className="space-y-4">
           <FormField
@@ -113,7 +113,12 @@ const RegisterForm = () => {
         <Social />
         <p>{success}</p>
         <FormError message={error} />
-        <Button type="submit" disabled={isPending} className="w-full">
+        <Button
+          type="submit"
+          disabled={isPending}
+          className="w-full text-white"
+          variant="default"
+        >
           Register
         </Button>
       </form>

@@ -75,7 +75,7 @@ const LoginForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="max-w-[310px] space-y-6 rounded-3xl border bg-secondary p-4"
+        className="max-w-[310px] space-y-4 rounded-3xl border  p-4"
       >
         <div className="space-y-4">
           {showTwoFactor && (
@@ -135,7 +135,7 @@ const LoginForm = () => {
                       size="sm"
                       variant="link"
                       asChild
-                      className="px-0 font-normal"
+                      className="px-0 font-normal text-secondary"
                     >
                       <Link href="/auth/reset-password">Forgot password?</Link>
                     </Button>
@@ -149,7 +149,12 @@ const LoginForm = () => {
         <Social />
         <FormError message={error || urlError} />
         <p>{success}</p>
-        <Button type="submit" disabled={isPending} className="w-full">
+        <Button
+          type="submit"
+          variant="default"
+          disabled={isPending}
+          className="w-full text-white"
+        >
           {showTwoFactor ? "Confirm" : "Login"}
         </Button>
       </form>
