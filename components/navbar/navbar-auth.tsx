@@ -15,7 +15,8 @@ export const NavbarAuth = () => {
       {!user ? (
         <>
           <Button
-            className="border border-primary bg-transparent px-4 py-2  text-primary hover:text-white"
+            variant="outline"
+            className="bg-transparent px-4 py-2"
             asChild
           >
             <Link href="/auth/login">Login</Link>

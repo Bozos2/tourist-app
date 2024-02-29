@@ -20,7 +20,10 @@ const HomePage = () => {
           >
             Explore Now
           </Button>
-          <Button className="rounded border border-primary bg-transparent py-6 tracking-wide text-primary hover:text-white">
+          <Button
+            variant="outline"
+            className=" rounded bg-transparent py-6 tracking-wide text-primary hover:text-white"
+          >
             Join Now
           </Button>
         </div>
