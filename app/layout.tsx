@@ -29,11 +29,11 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="en">
         <body
-          className={`${poppins.variable} bg-gradient-to-br from-[#121212]  from-30% via-[#303367] via-70% to-[#676FFE]`}
+          className={`${poppins.variable} from-[#121212] from-30%  via-[#303367] via-70% to-[#676FFE] dark:bg-gradient-to-br`}
         >
           <ThemeProvider
             attribute="class"
-            defaultTheme="dark"
+            defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >

@@ -22,7 +22,7 @@ const HomePage = () => {
           </Button>
           <Button
             variant="outline"
-            className=" rounded bg-transparent py-6 tracking-wide text-primary hover:text-white"
+            className=" rounded bg-transparent py-6 tracking-wide  dark:hover:text-white"
           >
             Join Now
           </Button>

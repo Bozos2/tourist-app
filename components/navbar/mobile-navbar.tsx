@@ -45,8 +45,8 @@ export const MobileNavbar = () => {
       <nav
         className={
           nav
-            ? "absolute bottom-0 left-0 right-0 top-0 z-10 flex h-screen w-4/6 flex-col bg-gradient-to-br   from-[#121212] to-[#303367] duration-300  ease-in sm:w-2/5 lg:hidden"
-            : "absolute bottom-0 left-[-100%] right-0 top-0 flex h-screen w-full flex-col  bg-gradient-to-br from-[#121212] to-[#303367] duration-300 ease-in lg:hidden"
+            ? "absolute bottom-0 left-0 right-0 top-0 z-10 flex h-screen w-4/6 flex-col border-r border-border bg-background from-[#121212]   to-[#303367] duration-300 ease-in  dark:bg-gradient-to-br sm:w-2/5 lg:hidden"
+            : "absolute bottom-0 left-[-100%] right-0 top-0 flex h-screen w-full flex-col  border-r border-border bg-background from-[#121212] to-[#303367] duration-300 ease-in dark:bg-gradient-to-br lg:hidden"
         }
       >
         <div className="flex flex-grow flex-col px-6 py-2">
