@@ -22,9 +22,7 @@ export const NavbarAuth = () => {
             <Link href="/auth/login">Login</Link>
           </Button>
           <Button variant="default" className="px-4 py-2" asChild>
-            <Link href="/auth/register" className="text-white">
-              Sign up
-            </Link>
+            <Link href="/auth/register">Sign up</Link>
           </Button>
         </>
       ) : (

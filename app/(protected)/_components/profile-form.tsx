@@ -118,7 +118,7 @@ export function ProfileForm() {
             <FormItem className="flex flex-col">
               <FormLabel>Date of birth</FormLabel>
               <Popover>
-                <PopoverTrigger asChild>
+                <PopoverTrigger asChild className="bg-transparent">
                   <FormControl>
                     <Button
                       variant={"outline"}
@@ -163,7 +163,7 @@ export function ProfileForm() {
             <FormItem className="flex flex-col">
               <FormLabel>Country</FormLabel>
               <Popover>
-                <PopoverTrigger asChild>
+                <PopoverTrigger asChild className="bg-transparent">
                   <FormControl>
                     <Button
                       variant="outline"
@@ -268,7 +268,9 @@ export function ProfileForm() {
             Add URL
           </Button>
         </div>
-        <Button type="submit">Update profile</Button>
+        <Button variant="default" type="submit">
+          Update profile
+        </Button>
       </form>
     </Form>
   );

@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { Separator } from "@/components/ui/separator";
-import { SidebarNav } from "./_components/sidebar-nav";
+import { SidebarNav } from "../_components/sidebar-nav";
 
 const sidebarNavItems = [
   {
