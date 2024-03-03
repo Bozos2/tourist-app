@@ -6,12 +6,14 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 import { AiOutlineClose } from "react-icons/ai";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { IoHome, IoSettings } from "react-icons/io5";
-import { MdExplore } from "react-icons/md";
+import {
+  IoHomeOutline,
+  IoCallOutline,
+  IoSettingsOutline,
+} from "react-icons/io5";
+import { MdOutlineExplore } from "react-icons/md";
 import { CgMenuGridR } from "react-icons/cg";
-import { BsFillTelephoneFill } from "react-icons/bs";
-import { FaUser } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
 import { ExitIcon } from "@radix-ui/react-icons";
 
 import { LogoutButton } from "../auth/logout-button";
@@ -63,7 +65,7 @@ export const MobileNavbar = () => {
                   pathname === "/home" ? "bg-secondary" : "",
                 )}
               >
-                <IoHome size={28} /> Home
+                <IoHomeOutline size={28} /> Home
               </Link>
               <Link
                 href="/explore"
@@ -72,7 +74,7 @@ export const MobileNavbar = () => {
                   pathname === "/explore" ? "bg-secondary" : "",
                 )}
               >
-                <MdExplore size={28} /> Explore
+                <MdOutlineExplore size={28} /> Explore
               </Link>
               <Link
                 href="/contact-us"
@@ -81,7 +83,7 @@ export const MobileNavbar = () => {
                   pathname === "/contact-us" ? "bg-secondary" : "",
                 )}
               >
-                <BsFillTelephoneFill size={28} /> Contact us
+                <IoCallOutline size={28} /> Contact us
               </Link>
               {user ? (
                 <Link
@@ -91,7 +93,7 @@ export const MobileNavbar = () => {
                     pathname === "/profile" ? "bg-secondary" : "",
                   )}
                 >
-                  <FaUser size={28} /> Profile
+                  <FaRegUser size={28} /> Profile
                 </Link>
               ) : (
                 ""
@@ -109,7 +111,7 @@ export const MobileNavbar = () => {
                     pathname === "/settings" ? "bg-secondary" : "",
                   )}
                 >
-                  <IoSettings size={28} /> Settings
+                  <IoSettingsOutline size={28} /> Settings
                 </Link>
 
                 <LogoutButton style="flex flex-row items-center gap-4 rounded-lg py-1 pl-2 text-lg">
@@ -141,7 +143,7 @@ export const MobileNavbar = () => {
                   <Avatar>
                     <AvatarImage src={user?.image || ""} sizes="h-16 w-16" />
                     <AvatarFallback className="bg-primary">
-                      <FaUser className="text-white" />
+                      <FaRegUser className="text-white" />
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col">
