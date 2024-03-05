@@ -48,6 +48,8 @@ import { Calendar } from "@/components/ui/calendar";
 
 import { profileFormSchema } from "@/schemas";
 
+import { countryOptions } from "@/helpers/countries";
+
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 const defaultValues: Partial<ProfileFormValues> = {
@@ -81,6 +83,19 @@ export function ProfileForm() {
     { label: "France", value: "fr" },
     { label: "Germany", value: "de" },
     { label: "Spain", value: "es" },
+    { label: "Russia", value: "rus" },
+    { label: "Frce", value: "fre" },
+    { label: "Germasdny", value: "deds" },
+    { label: "Spafddin", value: "ess" },
+    { label: "Englasand", value: "efn" },
+    { label: "Fradsdnce", value: "fr" },
+    { label: "Gerfakmany", value: "dke" },
+    { label: "Spaikln", value: "esjk" },
+    { label: "Spafddin", value: "ess" },
+    { label: "Englasand", value: "efn" },
+    { label: "Fradsdnce", value: "fr" },
+    { label: "Gerfakmany", value: "dke" },
+    { label: "Spaikln", value: "esjk" },
   ] as const;
 
   return (
@@ -174,7 +189,7 @@ export function ProfileForm() {
                       )}
                     >
                       {field.value
-                        ? country.find(
+                        ? countryOptions.find(
                             (country) => country.value === field.value,
                           )?.label
                         : "Select country"}
@@ -186,8 +201,8 @@ export function ProfileForm() {
                   <Command>
                     <CommandInput placeholder="Search country..." />
                     <CommandEmpty>No country found.</CommandEmpty>
-                    <CommandGroup>
-                      {country.map((country) => (
+                    <CommandGroup className="max-h-[200px] overflow-y-auto">
+                      {countryOptions.map((country) => (
                         <CommandItem
                           value={country.label}
                           key={country.value}
