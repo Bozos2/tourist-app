@@ -78,26 +78,6 @@ export function ProfileForm() {
     });
   }
 
-  const country = [
-    { label: "England", value: "en" },
-    { label: "France", value: "fr" },
-    { label: "Germany", value: "de" },
-    { label: "Spain", value: "es" },
-    { label: "Russia", value: "rus" },
-    { label: "Frce", value: "fre" },
-    { label: "Germasdny", value: "deds" },
-    { label: "Spafddin", value: "ess" },
-    { label: "Englasand", value: "efn" },
-    { label: "Fradsdnce", value: "fr" },
-    { label: "Gerfakmany", value: "dke" },
-    { label: "Spaikln", value: "esjk" },
-    { label: "Spafddin", value: "ess" },
-    { label: "Englasand", value: "efn" },
-    { label: "Fradsdnce", value: "fr" },
-    { label: "Gerfakmany", value: "dke" },
-    { label: "Spaikln", value: "esjk" },
-  ] as const;
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
