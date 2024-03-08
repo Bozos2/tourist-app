@@ -7,8 +7,8 @@ export default function AccountPage() {
       <div>
         <h3 className="text-lg font-medium">Account</h3>
         <p className="text-sm text-muted-foreground">
-          Update your account settings. Set your preferred language and
-          timezone.
+          Update your account settings. Set your profile image and enable Two
+          Factor Authentication to be safe.
         </p>
       </div>
       <Separator />

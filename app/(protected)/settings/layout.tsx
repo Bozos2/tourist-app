@@ -12,6 +12,10 @@ const sidebarNavItems = [
     title: "Account",
     href: "/settings/account",
   },
+  {
+    title: "Image",
+    href: "/settings/image",
+  },
 ];
 
 interface SettingsLayoutProps {
@@ -20,7 +24,7 @@ interface SettingsLayoutProps {
 
 export default function SettingsLayout({ children }: SettingsLayoutProps) {
   return (
-    <div className="space-y-6 py-12 md:block">
+    <div className="min-h-[calc(100vh-64px)] space-y-6 py-12 md:block">
       <div className="flex items-center justify-center">
         <div className="mx-2 w-full max-w-4xl rounded-2xl border p-6">
           <div className="space-y-0.5">
