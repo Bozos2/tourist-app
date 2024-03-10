@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback, useTransition } from "react";
+import { useSession } from "next-auth/react";
 
 import { getSignature, saveToDatabase } from "@/actions/profile-image";
 
@@ -10,9 +11,16 @@ import { IoImagesOutline } from "react-icons/io5";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { useToast } from "@/components/ui/use-toast";
 
 export const ImageDropzone = () => {
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
+
+  const [isPending, startTransition] = useTransition();
+
+  const { toast } = useToast();
+
+  const { update } = useSession();
 
   const onDrop = useCallback((acceptedFiles: Array<File>) => {
     const file = new FileReader();
@@ -22,7 +30,6 @@ export const ImageDropzone = () => {
     };
 
     file.readAsDataURL(acceptedFiles[0]);
-    console.log(acceptedFiles[0]);
   }, []);
 
   const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
@@ -36,7 +43,7 @@ export const ImageDropzone = () => {
     });
 
   async function imageSubmitHandler() {
-    if (typeof acceptedFiles[0] === "undefined") return;
+    if (!preview) return;
 
     const { timestamp, signature } = await getSignature();
 
@@ -54,10 +61,35 @@ export const ImageDropzone = () => {
       body: formData,
     }).then((res) => res.json());
 
-    await saveToDatabase({
-      version: data?.version,
-      signature: data?.signature,
-      public_id: data?.public_id,
+    await startTransition(() => {
+      saveToDatabase({
+        version: data?.version,
+        signature: data?.signature,
+        public_id: data?.public_id,
+        url: data?.secure_url,
+      })
+        .then((data) => {
+          if (data && data.error) {
+            toast({
+              variant: "destructive",
+              title: `${data.error}`,
+            });
+          }
+
+          if (data && data.success) {
+            toast({
+              title: `${data.success}`,
+            });
+            update();
+            setPreview(null);
+          }
+        })
+        .catch(() =>
+          toast({
+            variant: "destructive",
+            title: `Something went wrong!`,
+          }),
+        );
     });
   }
 
@@ -72,7 +104,7 @@ export const ImageDropzone = () => {
           {...getRootProps()}
           className="mt-10 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-primary bg-transparent/5 p-16 dark:border-white dark:bg-transparent/15"
         >
-          <input {...getInputProps()} />
+          <input {...getInputProps()} disabled={isPending} />
           <IoImagesOutline size={36} />
           {isDragActive ? (
             <p>Drop the files here ...</p>
@@ -114,6 +146,7 @@ export const ImageDropzone = () => {
                   </Avatar>
                 </div>
                 <button
+                  type="button"
                   onClick={handleRemove}
                   className="mr-1 mt-1 flex h-7 w-7 items-center justify-center  rounded-full p-0.5 opacity-70 hover:opacity-100"
                 >
@@ -133,7 +166,7 @@ export const ImageDropzone = () => {
             </div>
           )}
         </div>
-        <Button type="submit" className="mt-6">
+        <Button disabled={isPending} type="submit" className="mt-6">
           Save Image
         </Button>
       </form>
