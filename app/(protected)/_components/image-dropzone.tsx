@@ -32,8 +32,9 @@ export const ImageDropzone = () => {
     file.readAsDataURL(acceptedFiles[0]);
   }, []);
 
-  const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
+  const { acceptedFiles, getRootProps, getInputProps, isDragActive, open } =
     useDropzone({
+      noClick: true,
       accept: {
         "image/*": [],
       },
@@ -103,6 +104,7 @@ export const ImageDropzone = () => {
         <div
           {...getRootProps()}
           className="mt-10 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-primary bg-transparent/5 p-16 dark:border-white dark:bg-transparent/15"
+          onClick={open}
         >
           <input {...getInputProps()} disabled={isPending} />
           <IoImagesOutline size={36} />
