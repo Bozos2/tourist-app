@@ -26,6 +26,11 @@ model User {
   accounts      Account[]
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  gender String?
+  dob DateTime?
+  country String?
+  bio String?
+  urls Json?
 }
 
 model Account {
@@ -46,6 +51,8 @@ model Account {
 
   @@unique([provider, providerAccountId])
 }
+
+
 
 model VerificationToken {
   id String @id @default(cuid())

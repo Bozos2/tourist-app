@@ -1,8 +1,10 @@
 "use client";
 
+import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
+import { useSession } from "next-auth/react";
 
 import { format } from "date-fns";
 import { CalendarIcon, CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
@@ -47,23 +49,38 @@ import { toast } from "@/components/ui/use-toast";
 import { Calendar } from "@/components/ui/calendar";
 
 import { profileFormSchema } from "@/schemas";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 import { countryOptions } from "@/helpers/countries";
+import { profileSettings } from "@/actions/profile-settings";
+
+type Url = {
+  value: string;
+};
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
-const defaultValues: Partial<ProfileFormValues> = {
-  dob: undefined,
-  gender: "",
-  country: "",
-  bio: "This is my bio.",
-  urls: [{ value: "https://tripteasers23232.com" }],
-};
-
 export function ProfileForm() {
+  const user = useCurrentUser();
+
+  const { update } = useSession();
+
+  const [isPending, startTransition] = useTransition();
+
+  const defaultValues = {
+    gender: user?.gender || undefined,
+    dob: user?.dob || undefined,
+    country: user?.country || undefined,
+    bio: user?.bio || "This is my bio.",
+    urls:
+      user?.urls && user.urls.length > 0
+        ? user.urls.map((url: Url) => ({ value: url.value }))
+        : [{ value: "https://tripteasers23232.com" }],
+  };
+
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
-    defaultValues,
+    defaultValues: defaultValues,
     mode: "onChange",
   });
 
@@ -72,9 +89,27 @@ export function ProfileForm() {
     control: form.control,
   });
 
-  function onSubmit(data: ProfileFormValues) {
-    toast({
-      title: "You submitted new data!",
+  function onSubmit(values: ProfileFormValues) {
+    startTransition(() => {
+      profileSettings(values)
+        .then((data) => {
+          if (data && data.error) {
+            toast({ title: `${data.error}`, variant: "destructive" });
+          }
+
+          if (data && data.success) {
+            toast({
+              title: `${data.success}`,
+            });
+            update();
+          }
+        })
+        .catch(() =>
+          toast({
+            variant: "destructive",
+            title: `Something went wrong!`,
+          }),
+        );
     });
   }
 
@@ -263,7 +298,7 @@ export function ProfileForm() {
             Add URL
           </Button>
         </div>
-        <Button variant="default" type="submit">
+        <Button variant="default" type="submit" disabled={isPending}>
           Update profile
         </Button>
       </form>

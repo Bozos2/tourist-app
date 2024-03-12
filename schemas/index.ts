@@ -70,19 +70,17 @@ export const SettingsSchema = z
   );
 
 export const profileFormSchema = z.object({
-  dob: z
-    .date()
-    .min(new Date("1920-01-01"))
-    .max(new Date("2018-01-01"))
-    .optional(),
-  gender: z.string().optional(),
-  country: z.string().optional(),
-  bio: z.string().max(160).min(4).optional(),
-  urls: z
-    .array(
+  gender: z.optional(z.string()),
+  dob: z.optional(
+    z.date().min(new Date("1920-01-01")).max(new Date("2018-01-01")),
+  ),
+  country: z.optional(z.string()),
+  bio: z.optional(z.string().max(320).min(4)),
+  urls: z.optional(
+    z.array(
       z.object({
         value: z.string().url({ message: "Please enter a valid URL." }),
       }),
-    )
-    .optional(),
+    ),
+  ),
 });

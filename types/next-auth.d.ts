@@ -7,6 +7,11 @@ declare module "next-auth" {
       role: UserRole;
       isTwoFactorEnabled: boolean;
       isOauth: boolean;
+      gender: string | null;
+      dob: Date | null;
+      country: string | null;
+      bio: string | null;
+      urls: Json;
     } & DefaultSession["user"];
   }
 }

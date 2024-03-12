@@ -11,14 +11,12 @@ import { IoImagesOutline } from "react-icons/io5";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "@/components/ui/use-toast";
 
 export const ImageDropzone = () => {
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
 
   const [isPending, startTransition] = useTransition();
-
-  const { toast } = useToast();
 
   const { update } = useSession();
 

@@ -72,6 +72,14 @@ export const {
         session.user.isOauth = token.isOauth as boolean;
       }
 
+      if (session.user) {
+        session.user.gender = token.gender as string;
+        session.user.dob = token.dob as Date;
+        session.user.country = token.country as string;
+        session.user.bio = token.bio as string;
+        session.user.urls = token.urls as string[];
+      }
+
       return session;
     },
     async jwt({ token }) {
@@ -88,6 +96,11 @@ export const {
       token.email = existingUser.email;
       token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
+      token.gender = existingUser.gender;
+      token.dob = existingUser.dob;
+      token.country = existingUser.country;
+      token.bio = existingUser.bio;
+      token.urls = existingUser.urls;
 
       return token;
     },
