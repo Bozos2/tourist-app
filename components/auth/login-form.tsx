@@ -20,17 +20,23 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
 import { Input } from "@/components/ui/input";
 import { FormError } from "../form-error";
 import { login } from "@/actions/login";
 import { Social } from "./social";
+import { toast } from "@/components/ui/use-toast";
 
 const LoginForm = () => {
   const searchParams = useSearchParams();
 
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, setTransition] = useTransition();
 
   const callbackUrl = searchParams.get("callbackUrl");
@@ -49,8 +55,6 @@ const LoginForm = () => {
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
-    setSuccess("");
-
     setTransition(() => {
       login(values, callbackUrl)
         .then((data) => {
@@ -60,7 +64,7 @@ const LoginForm = () => {
           }
           if (data?.success) {
             form.reset();
-            setSuccess(data.success);
+            toast({ title: `${data.success}` });
           }
 
           if (data?.twoFactor) {
@@ -75,27 +79,40 @@ const LoginForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="max-w-[310px] space-y-4 rounded-3xl border  p-4"
+        className={`space-y-4 rounded-3xl ${!showTwoFactor ? "max-w-[310px] border" : ""}  pb-16 sm:p-4`}
       >
         <div className="space-y-4">
           {showTwoFactor && (
-            <FormField
-              control={form.control}
-              name="code"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Two Factor Code</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="234619"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="max-w-60 sm:max-w-[420px]">
+              <h1 className="pb-4 text-3xl font-semibold sm:text-4xl">
+                <span className="text-4xl text-primary sm:text-5xl">2FA</span>{" "}
+                verification code
+              </h1>
+              <p className="pb-16 opacity-80">
+                Please enter the verification code sent to your registered email
+                to proceed with the authentication process.
+              </p>
+              <InputOTP
+                name="code"
+                disabled={isPending}
+                maxLength={6}
+                render={({ slots }) => (
+                  <>
+                    <InputOTPGroup>
+                      {slots.slice(0, 3).map((slot, index) => (
+                        <InputOTPSlot key={index} {...slot} />
+                      ))}{" "}
+                    </InputOTPGroup>
+                    <InputOTPSeparator />
+                    <InputOTPGroup>
+                      {slots.slice(3).map((slot, index) => (
+                        <InputOTPSlot key={index + 3} {...slot} />
+                      ))}
+                    </InputOTPGroup>
+                  </>
+                )}
+              />
+            </div>
           )}
           {!showTwoFactor && (
             <>
@@ -143,12 +160,11 @@ const LoginForm = () => {
                   </FormItem>
                 )}
               />
+              <Social />
             </>
           )}
         </div>
-        <Social />
         <FormError message={error || urlError} />
-        <p>{success}</p>
         <Button
           type="submit"
           variant="default"

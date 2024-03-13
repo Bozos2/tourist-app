@@ -1,8 +1,8 @@
-import RegisterForm from '@/components/auth/register-form';
+import RegisterForm from "@/components/auth/register-form";
 
 const RegisterPage = () => {
   return (
-    <section className="flex min-h-screen items-center justify-center">
+    <section className="flex min-h-[calc(100vh-64px)] items-center justify-center">
       <RegisterForm />
     </section>
   );

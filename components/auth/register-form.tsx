@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { FormError } from "../form-error";
 import { register } from "@/actions/register";
 import { Social } from "./social";
+import { toast } from "@/components/ui/use-toast";
 
 const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -44,7 +45,14 @@ const RegisterForm = () => {
     setTransition(() => {
       register(values).then((data) => {
         setError(data.error);
-        setSuccess(data.success);
+
+        if (data?.success) {
+          form.reset();
+          toast({
+            title: "Successfully registered!",
+            description: `${data.success}`,
+          });
+        }
       });
     });
   };
