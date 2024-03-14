@@ -63,8 +63,9 @@ export const FeaturesPage = () => {
             <p className="pt-1.5 opacity-85">
               Tailored just for you, our app provides personalized
               recommendations based on your preferences and past interactions.
-              Whether you're a foodie, history buff, or nature lover, we've got
-              you covered with recommendations that suit your interests.
+              Whether you&apos;re a foodie, history buff, or nature lover,
+              we&apos;ve got you covered with recommendations that suit your
+              interests.
             </p>
           </div>
           <div className="flex justify-center lg:w-[470px] lg:justify-start">

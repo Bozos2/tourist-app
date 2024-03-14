@@ -32,11 +32,13 @@ export const MobileNavbar = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    setNav(!nav);
+    if (nav) {
+      setNav(false);
+    }
   }, [pathname]);
 
   const handleNav = () => {
-    setNav(!nav);
+    setNav((prevNav) => !prevNav);
   };
 
   return (
