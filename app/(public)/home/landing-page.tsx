@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 export const LandingPage = () => {
   return (
     <section className="flex min-h-[calc(100vh-64px)] flex-col justify-between pt-24 sm:pt-36 lg:pt-48">
-      <div className="mx-6 flex flex-col justify-between gap-10 font-poppins sm:mx-24 lg:h-72 lg:w-[700px] lg:gap-0 xl:mx-36">
+      <div className="mx-6 flex flex-col justify-between gap-10 font-poppins sm:mx-24 lg:h-72 lg:w-[700px] lg:gap-0 xl:mx-32">
         <h1 className="text-4xl">
           Discover and rate the best places in your{" "}
           <span className="text-primary">Favourite Cities</span>

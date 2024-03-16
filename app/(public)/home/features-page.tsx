@@ -29,7 +29,7 @@ export const FeaturesPage = () => {
           <Image alt="book-background" src={book} width={80} height={80} />
         </div>
       </aside>
-      <div className="z-10 flex w-[990px] flex-col justify-center  gap-8 py-16 lg:gap-4">
+      <div className="z-10 flex w-[990px] flex-col justify-center gap-8 py-16 lg:gap-4">
         <div className="flex flex-col items-center">
           <h1 className=" text-3xl font-medium tracking-wide">Features</h1>
           <div className="h-1 w-20 bg-primary pt-1"></div>
@@ -124,23 +124,23 @@ export const FeaturesPage = () => {
         <div className="inset-center absolute  w-10">
           <div className="hidden h-full flex-col items-center lg:flex">
             <div className="h-3 w-3 rounded-full bg-primary"></div>
-            <div className="h-20 w-1 bg-primary"></div>
-            <div className="align-center flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary">
+            <div className="h-20 w-0.5 bg-primary"></div>
+            <div className="align-center flex h-8 w-8 items-center justify-center rounded-full border bg-neutral-50 shadow-2xl dark:bg-primary">
               <HiOutlineGlobeAsiaAustralia className="h-6 w-6 text-center text-primary dark:text-white" />
             </div>
-            <div className="h-44 w-1 bg-primary"></div>
-            <div className="align-center flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary">
+            <div className="h-52 w-0.5 bg-primary"></div>
+            <div className="align-center flex h-8 w-8 items-center justify-center rounded-full border bg-neutral-50 shadow-2xl dark:bg-primary">
               <IoBookmarksOutline className="h-5 w-5 text-center text-primary dark:text-white" />
             </div>
-            <div className="h-64 w-1 bg-primary"></div>
-            <div className="align-center flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary">
+            <div className="h-64 w-0.5 bg-primary"></div>
+            <div className="align-center flex h-8 w-8 items-center justify-center rounded-full border bg-neutral-50 shadow-2xl dark:bg-primary">
               <IoImagesOutline className="h-5 w-5 text-center text-primary dark:text-white" />
             </div>
-            <div className="h-44 w-1 bg-primary"></div>
-            <div className="align-center flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary">
+            <div className="h-44 w-0.5 bg-primary"></div>
+            <div className="align-center flex h-8 w-8 items-center justify-center rounded-full border bg-neutral-50 shadow-2xl dark:bg-primary">
               <HiOutlinePaintBrush className="h-5 w-5 text-center text-primary dark:text-white" />
             </div>
-            <div className="h-24 w-1 bg-primary"></div>
+            <div className="h-24 w-0.5 bg-primary"></div>
             <div className="h-3 w-3 rounded-full bg-primary"></div>
           </div>
         </div>
