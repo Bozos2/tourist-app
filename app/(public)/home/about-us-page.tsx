@@ -23,7 +23,7 @@ export const AboutUs = () => {
             comprehensive guidance and a platform to share their travel
             adventures, both visually and descriptively. At Trip Teasers, we
             understand the challenges and excitement that come with exploring
-            new destinations. That's why we've created a user-friendly
+            new destinations. That&apos;s why we&apos;ve created a user-friendly
             application designed to streamline your travel planning process,
             making your journey as smooth and enjoyable as possible. Our
             platform serves as a hub for travelers to explore and review
