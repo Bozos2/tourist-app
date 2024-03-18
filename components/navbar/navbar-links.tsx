@@ -18,10 +18,10 @@ export const NavbarLinks = () => {
         <span className="block h-0.5 max-w-0 bg-primary transition-all duration-500 group-hover:max-w-full"></span>
       </Link>
       <Link
-        href="/contact-us"
+        href="/contact"
         className="group tracking-wider transition duration-300 hover:text-primary focus:text-primary"
       >
-        Contact us
+        Contact
         <span className="block h-0.5 max-w-0 bg-primary transition-all duration-500 group-hover:max-w-full"></span>
       </Link>
     </nav>

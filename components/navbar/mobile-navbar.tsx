@@ -42,7 +42,7 @@ export const MobileNavbar = () => {
   };
 
   return (
-    <>
+    <header>
       <div onClick={handleNav} className="block lg:hidden">
         {nav ? <AiOutlineClose size={24} /> : <CgMenuGridR size={24} />}
       </div>
@@ -162,6 +162,6 @@ export const MobileNavbar = () => {
           )}
         </div>
       </nav>
-    </>
+    </header>
   );
 };
