@@ -101,8 +101,7 @@ export const ImageDropzone = () => {
       <form action={imageSubmitHandler}>
         <div
           {...getRootProps()}
-          className="mt-10 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-primary bg-transparent/5 p-16 dark:border-white dark:bg-transparent/15"
-          onClick={open}
+          className="mt-10 flex flex-col items-center justify-center rounded-lg border border-dashed border-primary bg-transparent/5 p-16 dark:border-white dark:bg-transparent/15"
         >
           <input {...getInputProps()} disabled={isPending} />
           <IoImagesOutline size={36} />
@@ -112,7 +111,12 @@ export const ImageDropzone = () => {
             <div className="pt-6">
               <p className="text-center text-xl font-medium">
                 Drag & Drop or{" "}
-                <span className="text-primary dark:text-secondary">browse</span>
+                <button
+                  className="text-primary hover:underline dark:text-secondary"
+                  onClick={open}
+                >
+                  browse
+                </button>
               </p>
               <p className="pt-2 text-center text-sm text-muted-foreground">
                 Supports: JPEG, JPG, PNG
