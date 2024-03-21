@@ -17,11 +17,11 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
 
-const VerifyEmail = ({ token }: { token: string }) => {
+const NewPassword = ({ token }: { token: string }) => {
   return (
     <Html>
       <Head />
-      <Preview>Trip Teaser verification email</Preview>
+      <Preview>Trip Teaser Password reset</Preview>
       <Body style={main}>
         <Container>
           <Section style={content}>
@@ -35,26 +35,28 @@ const VerifyEmail = ({ token }: { token: string }) => {
 
             <Row style={{ ...boxInfos, paddingBottom: "0" }}>
               <Section style={upperSection}>
-                <Heading style={h1}>Verify your email address</Heading>
+                <Heading style={h1}>Reset your password</Heading>
                 <Text style={mainText}>
-                  Thank you for initiating the process to create your new
-                  account. To proceed, we need to verify your identity. Please
-                  click on the following link to confirm your account creation.
-                  If you haven't initiated this process, you can safely ignore
-                  this message.
+                  Someone recently requested a password change for your Trip
+                  Teasers account.If this was you, you can click on link below
+                  to set new one.
                 </Text>
                 <Section style={verificationSection}>
-                  <Text style={verifyText}>Verification Link</Text>
+                  <Text style={verifyText}>Reset password</Text>
                   <Link
                     style={link}
-                    href={`${baseUrl}/auth/new-verification?token=${token}`}
+                    href={`${baseUrl}/auth/new-password?token=${token}`}
                   >
-                    <strong>Click here to verify account</strong>
+                    <strong>Click here to reset password</strong>
                   </Link>
                   <Text style={validityText}>
                     (This link is valid for 60 minutes)
                   </Text>
                 </Section>
+                <Text style={mainText}>
+                  If you haven't initiated this process, you can safely ignore
+                  this message.
+                </Text>
               </Section>
             </Row>
           </Section>
@@ -82,7 +84,7 @@ const VerifyEmail = ({ token }: { token: string }) => {
   );
 };
 
-export default VerifyEmail;
+export default NewPassword;
 
 const main = {
   marginTop: "15px",

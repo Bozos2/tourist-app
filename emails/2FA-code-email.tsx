@@ -13,15 +13,11 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
-
-const VerifyEmail = ({ token }: { token: string }) => {
+const TwoFACode = ({ token }: { token: string }) => {
   return (
     <Html>
       <Head />
-      <Preview>Trip Teaser verification email</Preview>
+      <Preview>Trip Teaser 2FA code</Preview>
       <Body style={main}>
         <Container>
           <Section style={content}>
@@ -35,26 +31,22 @@ const VerifyEmail = ({ token }: { token: string }) => {
 
             <Row style={{ ...boxInfos, paddingBottom: "0" }}>
               <Section style={upperSection}>
-                <Heading style={h1}>Verify your email address</Heading>
+                <Heading style={h1}>2FA Code Verification</Heading>
                 <Text style={mainText}>
-                  Thank you for initiating the process to create your new
-                  account. To proceed, we need to verify your identity. Please
-                  click on the following link to confirm your account creation.
+                  You have requested a 2-factor authentication (2FA) code for
+                  your Trip Teasers account. Please use the code below to
+                  complete the verification process:
+                </Text>
+                <Section style={codeContainer}>
+                  <Text style={code}>{token}</Text>
+                </Section>
+                <Text style={validityText}>
+                  (This code is valid for 5 minutes)
+                </Text>
+                <Text style={mainText}>
                   If you haven't initiated this process, you can safely ignore
                   this message.
                 </Text>
-                <Section style={verificationSection}>
-                  <Text style={verifyText}>Verification Link</Text>
-                  <Link
-                    style={link}
-                    href={`${baseUrl}/auth/new-verification?token=${token}`}
-                  >
-                    <strong>Click here to verify account</strong>
-                  </Link>
-                  <Text style={validityText}>
-                    (This link is valid for 60 minutes)
-                  </Text>
-                </Section>
               </Section>
             </Row>
           </Section>
@@ -82,7 +74,7 @@ const VerifyEmail = ({ token }: { token: string }) => {
   );
 };
 
-export default VerifyEmail;
+export default TwoFACode;
 
 const main = {
   marginTop: "15px",
@@ -158,4 +150,27 @@ const link = {
   padding: "3px 0",
   alignItems: "center",
   justifyContent: "center",
+};
+
+const codeContainer = {
+  background: "rgba(0,0,0,.05)",
+  borderRadius: "4px",
+  margin: "16px auto 14px",
+  verticalAlign: "middle",
+  width: "280px",
+};
+
+const code = {
+  color: "#000",
+  display: "inline-block",
+  fontFamily: "HelveticaNeue-Bold",
+  fontSize: "32px",
+  fontWeight: 700,
+  letterSpacing: "6px",
+  lineHeight: "40px",
+  paddingBottom: "8px",
+  paddingTop: "8px",
+  margin: "0 auto",
+  width: "100%",
+  textAlign: "center" as const,
 };
