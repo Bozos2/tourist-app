@@ -123,34 +123,13 @@ const text = {
 
 const upperSection = { padding: "25px 35px" };
 
-const verifyText = {
-  ...text,
-  margin: 0,
-  fontWeight: "bold",
-  textAlign: "center" as const,
-};
-
 const validityText = {
   ...text,
   margin: "0px",
   textAlign: "center" as const,
 };
 
-const verificationSection = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
-
 const mainText = { ...text, marginBottom: "14px" };
-
-const link = {
-  color: "#454dd8",
-  display: "flex",
-  padding: "3px 0",
-  alignItems: "center",
-  justifyContent: "center",
-};
 
 const codeContainer = {
   background: "rgba(0,0,0,.05)",

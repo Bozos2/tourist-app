@@ -154,8 +154,6 @@ const mainText = { ...text, marginBottom: "14px" };
 
 const link = {
   color: "#454dd8",
-  display: "flex",
   padding: "3px 0",
-  alignItems: "center",
-  justifyContent: "center",
+  textAlign: "center" as const,
 };
