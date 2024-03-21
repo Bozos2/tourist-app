@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 
 import { newVerification } from "@/actions/new-verification";
 import { FormError } from "../form-error";
+import { AuthSuccess } from "../auth-success";
+import { AuthError } from "../auth-error";
 
 export const NewVerificationData = () => {
   const [success, setSuccess] = useState<string | undefined>();
@@ -36,9 +38,9 @@ export const NewVerificationData = () => {
   }, [onSubmit]);
 
   return (
-    <div>
-      <FormError message={error} />
-      <p>{success}</p>
+    <div className="flex items-center justify-center">
+      <AuthError message={error} />
+      <AuthSuccess message={success} />
     </div>
   );
 };

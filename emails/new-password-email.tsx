@@ -147,9 +147,7 @@ const validityText = {
 };
 
 const verificationSection = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
+  textAlign: "center" as const,
 };
 
 const mainText = { ...text, marginBottom: "14px" };
