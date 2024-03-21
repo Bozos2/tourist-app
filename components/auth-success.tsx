@@ -11,9 +11,8 @@ interface SuccessProps {
 }
 
 export const AuthSuccess = ({ message }: SuccessProps) => {
-  if (!message) return null;
-
   const router = useRouter();
+  if (!message) return null;
 
   return (
     <div className="mx-3 flex flex-col items-center rounded-md border border-input bg-background px-12  py-4 text-sm shadow-sm  dark:border-0 dark:bg-transparent/40">
