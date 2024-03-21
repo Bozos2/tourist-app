@@ -15,7 +15,7 @@ import * as React from "react";
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : "";
+  : "http://localhost:3000";
 
 export const VerifyEmail = ({ token }: { token: string }) => {
   return (
@@ -29,7 +29,7 @@ export const VerifyEmail = ({ token }: { token: string }) => {
               <Img
                 style={image}
                 width={620}
-                src={`${baseUrl}/static/email-header.png`}
+                src={`${baseUrl}/email-header.png`}
               />
             </Row>
 
@@ -63,7 +63,7 @@ export const VerifyEmail = ({ token }: { token: string }) => {
             <Img
               style={image}
               width={620}
-              src={`${baseUrl}/static/email-footer.png`}
+              src={`${baseUrl}/email-footer.png`}
             />
           </Section>
 
