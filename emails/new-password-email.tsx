@@ -13,9 +13,7 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+const domain = process.env.NEXT_APP_URL;
 
 const NewPassword = ({ token }: { token: string }) => {
   return (
@@ -45,7 +43,7 @@ const NewPassword = ({ token }: { token: string }) => {
                   <Text style={verifyText}>Reset password</Text>
                   <Link
                     style={link}
-                    href={`${baseUrl}/auth/new-password?token=${token}`}
+                    href={`${domain}/auth/new-password?token=${token}`}
                   >
                     <strong>Click here to reset password</strong>
                   </Link>

@@ -13,9 +13,7 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+const domain = process.env.NEXT_APP_URL;
 
 const VerifyEmail = ({ token }: { token: string }) => {
   return (
@@ -47,7 +45,7 @@ const VerifyEmail = ({ token }: { token: string }) => {
                   <Text style={verifyText}>Verification Link</Text>
                   <Link
                     style={link}
-                    href={`${baseUrl}/auth/new-verification?token=${token}`}
+                    href={`${domain}/auth/new-verification?token=${token}`}
                   >
                     <strong>Click here to verify account</strong>
                   </Link>
