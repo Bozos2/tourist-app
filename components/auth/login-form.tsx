@@ -4,6 +4,7 @@ import * as z from "zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
 import { useTransition } from "react";
@@ -31,6 +32,9 @@ import { FormError } from "../form-error";
 import { login } from "@/actions/login";
 import { Social } from "./social";
 import { toast } from "@/components/ui/use-toast";
+
+import logo from "@/assets/images/sign-logo.png";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -79,7 +83,7 @@ const LoginForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={`space-y-4 rounded-3xl ${!showTwoFactor ? "max-w-[310px] border" : ""}  pb-16 sm:p-4`}
+        className={`space-y-4 ${!showTwoFactor ? "mx-6 max-w-[510px]" : ""}  pb-16 sm:p-4`}
       >
         <div className="space-y-4">
           {showTwoFactor && (
@@ -116,6 +120,22 @@ const LoginForm = () => {
           )}
           {!showTwoFactor && (
             <>
+              <div>
+                <Image alt="logo image" width={300} height={300} src={logo} />
+                <h1 className="mt-[-60px] text-center text-2xl font-semibold">
+                  Sign in to your account
+                </h1>
+                <Button
+                  asChild
+                  variant="link"
+                  className="flex items-center justify-center text-muted-foreground"
+                >
+                  <Link href="/register">
+                    Don&apos;t have an account?
+                    <ArrowRightIcon className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
               <FormField
                 control={form.control}
                 name="email"
@@ -160,19 +180,30 @@ const LoginForm = () => {
                   </FormItem>
                 )}
               />
-              <Social />
+              <FormError message={error || urlError} />
+              <Button
+                type="submit"
+                variant="default"
+                disabled={isPending}
+                className="w-full text-white"
+              >
+                {showTwoFactor ? "Confirm" : "Login"}
+              </Button>
             </>
           )}
         </div>
-        <FormError message={error || urlError} />
-        <Button
-          type="submit"
-          variant="default"
-          disabled={isPending}
-          className="w-full text-white"
-        >
-          {showTwoFactor ? "Confirm" : "Login"}
-        </Button>
+        <div className="relative py-1.5">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 flex items-center"
+          >
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">or</span>
+          </div>
+        </div>
+        <Social />
       </form>
     </Form>
   );
