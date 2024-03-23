@@ -26,7 +26,6 @@ import { toast } from "@/components/ui/use-toast";
 
 const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, setTransition] = useTransition();
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -40,7 +39,6 @@ const RegisterForm = () => {
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError("");
-    setSuccess("");
 
     setTransition(() => {
       register(values).then((data) => {
@@ -119,7 +117,6 @@ const RegisterForm = () => {
           />
         </div>
         <Social />
-        <p>{success}</p>
         <FormError message={error} />
         <Button
           type="submit"

@@ -22,10 +22,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { FormError } from "../form-error";
+import { toast } from "@/components/ui/use-toast";
+
+import NewPasswordIcon from "@/assets/svgs/padlock-svg";
 
 const NewPasswordForm = () => {
   const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, setTransition] = useTransition();
 
   const searchParams = useSearchParams();
@@ -40,7 +42,6 @@ const NewPasswordForm = () => {
 
   const onSubmit = (values: z.infer<typeof NewPasswordSchema>) => {
     setError("");
-    setSuccess("");
 
     setTransition(() => {
       newPassword(values, token).then((data) => {
@@ -48,7 +49,10 @@ const NewPasswordForm = () => {
           setError(data.error);
         }
         if (data?.success) {
-          setSuccess(data.success);
+          form.reset();
+          toast({
+            title: `${data.success}`,
+          });
         }
       });
     });
@@ -58,15 +62,22 @@ const NewPasswordForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="max-w-[310px] space-y-6 bg-slate-200 p-4"
+        className="bg-background-lg max-w-[310px] space-y-4 rounded-md border border-input px-12 pb-6 pt-4 dark:border-0 dark:bg-transparent/40"
       >
+        <div className="flex flex-col items-center justify-center">
+          <NewPasswordIcon className="h-24 w-24" />
+          <h4 className="text-center text-muted-foreground">
+            You're one step away! Please choose a new password to secure your
+            account.
+          </h4>
+        </div>
         <div className="space-y-4">
           <FormField
             control={form.control}
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>New Password</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -81,7 +92,6 @@ const NewPasswordForm = () => {
           />
         </div>
         <FormError message={error} />
-        <p>{success}</p>
         <Button type="submit" disabled={isPending} className="w-full">
           Send
         </Button>

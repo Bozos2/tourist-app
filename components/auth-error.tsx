@@ -26,7 +26,7 @@ export const AuthError = ({ message }: ErrorProps) => {
       <h1 className="text-center text-2xl font-semibold tracking-wide">
         Ooops...
       </h1>
-      <p className="pt-4 text-lg font-semibold text-muted-foreground dark:text-white">
+      <p className="pt-4 text-center text-lg font-semibold text-muted-foreground dark:text-white">
         {message}
       </p>
       <Button

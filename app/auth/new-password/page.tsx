@@ -2,9 +2,9 @@ import NewPasswordForm from "@/components/auth/new-password-form";
 
 const NewPasswordPage = () => {
   return (
-    <div>
+    <main className="flex min-h-[calc(100vh-64px)] items-center justify-center">
       <NewPasswordForm />
-    </div>
+    </main>
   );
 };
 

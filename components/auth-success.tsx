@@ -22,8 +22,8 @@ export const AuthSuccess = ({ message }: SuccessProps) => {
         width={300}
         height={180}
       />
-      <h1 className="text-center text-2xl">Successful verified Email</h1>
-      <p className="pt-4 text-lg font-bold text-muted-foreground dark:text-white">
+      <h1 className="text-center text-2xl">Email Successfully Verified</h1>
+      <p className="pt-4 text-center text-lg font-bold text-muted-foreground dark:text-white">
         {message}
       </p>
       <Button

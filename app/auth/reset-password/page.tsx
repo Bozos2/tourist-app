@@ -2,9 +2,9 @@ import ResetPasswordForm from "@/components/auth/reset-password-form";
 
 const ResetPasswordPage = () => {
   return (
-    <div>
+    <main className="flex min-h-[calc(100vh-64px)] items-center justify-center">
       <ResetPasswordForm />
-    </div>
+    </main>
   );
 };
 
