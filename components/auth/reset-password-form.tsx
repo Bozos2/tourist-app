@@ -64,8 +64,8 @@ const ResetPasswordForm = () => {
         <div className="flex flex-col items-center justify-center">
           <Image alt="enter email image" width={270} height={216} src={mail} />
           <h4 className="text-center text-muted-foreground">
-            You're one step away! Please choose a new password to secure your
-            account.
+            You&apos;re one step away! Please choose a new password to secure
+            your account.
           </h4>
         </div>
         <div className="space-y-1 pb-2">

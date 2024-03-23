@@ -67,8 +67,8 @@ const NewPasswordForm = () => {
         <div className="flex flex-col items-center justify-center">
           <NewPasswordIcon className="h-24 w-24" />
           <h4 className="text-center text-muted-foreground">
-            You're one step away! Please choose a new password to secure your
-            account.
+            You&apos;re one step away! Please choose a new password to secure
+            your account.
           </h4>
         </div>
         <div className="space-y-4">
