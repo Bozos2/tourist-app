@@ -27,7 +27,7 @@ const VerifyEmail = ({ token }: { token: string }) => {
               <Img
                 style={image}
                 width={620}
-                src="https://res.cloudinary.com/djlkrfxbq/image/upload/v1711030742/profile/erelwhplnf6g3i8mkvkr.png"
+                src="https://res.cloudinary.com/djlkrfxbq/image/upload/v1711321683/profile/w451uv5rfhj6tcer2jrn.png"
               />
             </Row>
 

@@ -68,7 +68,7 @@ const ResetPasswordForm = () => {
             your account.
           </h4>
         </div>
-        <div className="space-y-1 pb-2">
+        <div className="space-y-1 pb-3">
           <FormField
             control={form.control}
             name="email"
