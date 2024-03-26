@@ -33,7 +33,7 @@ import { login } from "@/actions/login";
 import { Social } from "./social";
 import { toast } from "@/components/ui/use-toast";
 
-import logo from "@/assets/images/sign-logo.png";
+import logo from "@/assets/images/trip-teasers-logo.png";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 const LoginForm = () => {
@@ -122,7 +122,7 @@ const LoginForm = () => {
             <>
               <div>
                 <Image alt="logo image" width={300} height={300} src={logo} />
-                <h1 className="mt-[-60px] text-center text-2xl font-semibold">
+                <h1 className="mt-[-40px] text-center text-2xl font-semibold">
                   Sign in to your account
                 </h1>
                 <Button

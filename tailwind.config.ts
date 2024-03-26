@@ -75,6 +75,9 @@ const config = {
       fontFamily: {
         poppins: ["var(--font-poppins)"],
       },
+      screens: {
+        "3xl": "1700px",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
