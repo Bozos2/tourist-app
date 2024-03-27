@@ -32,7 +32,7 @@ export const Navbar = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: scrolled ? 0 : 1, y: scrolled ? 0 : 1 }}
         transition={{ duration: 0.3 }}
-        className="flex flex-row items-center  justify-between gap-4 px-6 py-3 font-poppins sm:px-24 xl:px-32"
+        className="flex h-16 flex-row  items-center justify-between gap-4 px-6 py-3 font-poppins sm:px-24 xl:px-32"
       >
         <Logo />
         <NavbarLinks />

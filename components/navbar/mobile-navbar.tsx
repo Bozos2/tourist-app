@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 import { AiOutlineClose } from "react-icons/ai";
 import {
@@ -23,6 +24,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { Button } from "../ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import logo from "@/assets/svgs/trip-teasers-logo.svg";
 
 export const MobileNavbar = () => {
   const [nav, setNav] = useState<boolean>(false);
@@ -54,8 +56,8 @@ export const MobileNavbar = () => {
         }
       >
         <div className="flex flex-grow flex-col px-6 py-2">
-          <div className="pb-12 pt-4">
-            <Logo />
+          <div className="pt-4">
+            <Image src={logo} width={170} height={170} alt="logo" />
           </div>
           <Separator />
           <div className="w-full">

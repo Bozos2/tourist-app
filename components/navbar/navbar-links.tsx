@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const NavbarLinks = () => {
   return (
-    <nav className="hidden gap-16  text-lg lg:flex">
+    <nav className="hidden items-center  justify-center gap-16 text-lg lg:flex">
       <Link
         href="/home"
         className="group tracking-wider transition duration-300 hover:text-primary focus:text-primary"
