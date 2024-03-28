@@ -84,8 +84,8 @@ const ContactPage = () => {
             <div className="flex flex-col items-center sm:items-start">
               <h1 className="text-lg font-medium">Contact via Email</h1>
               <p className="text-center text-muted-foreground sm:text-start">
-                Have a question or feedback? Fill out the form below and we'll
-                get back to you promptly!
+                Have a question or feedback? Fill out the form below and
+                we&apos;ll get back to you promptly!
               </p>
             </div>
           </div>
@@ -124,7 +124,7 @@ const ContactPage = () => {
               </h2>
               <p className="pl-12 pt-12 opacity-80">
                 Feel free to reach out with any questions, feedback, or
-                inquiries. We're always ready to assist you.
+                inquiries. We&apos;re always ready to assist you.
               </p>
             </div>
           </div>
@@ -142,7 +142,7 @@ const ContactPage = () => {
                 </h2>
                 <p className="hidden  text-center opacity-80 sm:block">
                   Feel free to reach out with any questions, feedback, or
-                  inquiries. We're always ready to assist you.
+                  inquiries. We&apos;re always ready to assist you.
                 </p>
               </div>
               <FormField
