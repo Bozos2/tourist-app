@@ -41,6 +41,7 @@ export const FeaturesPage = () => {
               src={world}
               width={310}
               height={230}
+              quality={100}
             />
           </div>
           <div className="flex max-w-[315px] flex-col px-4 py-2 sm:max-w-[470px]">
@@ -74,6 +75,7 @@ export const FeaturesPage = () => {
               src={recommendations}
               width={310}
               height={230}
+              quality={100}
             />
           </div>
         </div>
@@ -84,6 +86,7 @@ export const FeaturesPage = () => {
               src={storytelling}
               width={310}
               height={230}
+              quality={100}
             />
           </div>
           <div className="flex max-w-[315px] flex-col px-4 py-2 sm:max-w-[470px]">
@@ -118,6 +121,7 @@ export const FeaturesPage = () => {
               src={experience}
               width={310}
               height={230}
+              quality={100}
             />
           </div>
         </div>

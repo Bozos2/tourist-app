@@ -59,7 +59,7 @@ const ResetPasswordForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="bg-background-lg max-w-[310px] space-y-1 rounded-md border border-input px-12 pb-8 pt-4 dark:border-0 dark:bg-transparent/40"
+        className="max-w-[310px] space-y-1 rounded-md border border-input bg-background px-12 pb-8 pt-4 dark:border-0 dark:bg-transparent/40"
       >
         <div className="flex flex-col items-center justify-center">
           <Image alt="enter email image" width={270} height={216} src={mail} />

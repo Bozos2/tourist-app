@@ -255,6 +255,7 @@ export function ProfileForm() {
                 <Textarea
                   placeholder="Tell us a little bit about yourself"
                   className="resize-none"
+                  disabled={isPending}
                   {...field}
                 />
               </FormControl>

@@ -84,3 +84,16 @@ export const profileFormSchema = z.object({
     ),
   ),
 });
+
+export const ContactFormSchema = z.object({
+  name: z.string().min(1, {
+    message: "Name is required",
+  }),
+  email: z.string().email({
+    message: "Email is required",
+  }),
+  subject: z.string().min(2, {
+    message: "Subject is required",
+  }),
+  message: z.string().max(999).min(4),
+});
