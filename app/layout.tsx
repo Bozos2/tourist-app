@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   },
   description: "Get everything what you need for your next adventure!",
   icons: { icon: "favicon.ico" },
+  openGraph: {
+    images: "/opengraph-image.png",
+  },
   twitter: {
     card: "summary_large_image",
   },
