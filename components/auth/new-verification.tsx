@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { newVerification } from "@/actions/new-verification";
-import { FormError } from "../form-error";
 import { AuthSuccess } from "../auth-success";
 import { AuthError } from "../auth-error";
 

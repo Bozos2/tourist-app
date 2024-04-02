@@ -1,4 +1,10 @@
+import { Metadata } from "next";
+
 import { NewVerificationData } from "@/components/auth/new-verification";
+
+export const metadata: Metadata = {
+  title: "New Verification",
+};
 
 const NewVerificationPage = () => {
   return (

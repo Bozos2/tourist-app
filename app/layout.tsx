@@ -16,9 +16,15 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Trip Teasers",
+  title: {
+    default: "Trip Teasers",
+    template: "%s - Trip Teasers",
+  },
   description: "Get everything what you need for your next adventure!",
   icons: { icon: "favicon.ico" },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default async function RootLayout({

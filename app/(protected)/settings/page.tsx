@@ -1,5 +1,11 @@
+import { Metadata } from "next";
+
 import { ProfileForm } from "../_components/profile-form";
 import { Separator } from "@/components/ui/separator";
+
+export const metadata: Metadata = {
+  title: "Settings",
+};
 
 export default function SettingsProfilePage() {
   return (

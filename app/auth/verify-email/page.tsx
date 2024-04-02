@@ -1,4 +1,10 @@
+import { Metadata } from "next";
+
 import SentMail from "@/assets/svgs/sent-mail-svg";
+
+export const metadata: Metadata = {
+  title: "Verify Email",
+};
 
 const VerifyEmail = () => {
   return (
