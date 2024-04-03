@@ -5,6 +5,7 @@ import VerifyEmail from "@/emails/verify-email";
 import NewPassword from "@/emails/new-password-email";
 import TwoFACode from "@/emails/2FA-code-email";
 import ContactEmail from "@/emails/contact-form-email";
+import NewsletterEmail from "@/emails/newsletter-email";
 
 import { ContactFormSchema } from "@/schemas";
 
@@ -58,4 +59,13 @@ export const sendContactEmail = async (data: ContactFormInputs) => {
   if (inputs.error) {
     return { success: false };
   }
+};
+
+export const sendNewsletterEmail = async (email: string) => {
+  await resend.emails.send({
+    from: "Trip Teasers <info@bozesoldo.com>",
+    to: email,
+    subject: "Newsletter Subscription!",
+    react: NewsletterEmail(),
+  });
 };

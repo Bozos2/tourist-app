@@ -26,6 +26,7 @@ model User {
   accounts      Account[]
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  newsletter Boolean @default(false)
   gender String?
   dob DateTime?
   country String?

@@ -8,6 +8,7 @@ import { auth } from "@/auth";
 import { Navbar } from "@/components/navbar/navbar";
 import { Toaster } from "@/components/ui/toaster";
 import { CrispProvider } from "@/components/crisp-provider";
+import { Footer } from "@/components/footer/footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -52,6 +53,7 @@ export default async function RootLayout({
           >
             <Navbar />
             {children}
+            <Footer />
             <Toaster />
           </ThemeProvider>
         </body>

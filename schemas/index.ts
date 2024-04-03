@@ -97,3 +97,9 @@ export const ContactFormSchema = z.object({
   }),
   message: z.string().max(999).min(4),
 });
+
+export const NewsletterFormSchema = z.object({
+  email: z.string().email({
+    message: "Email is required",
+  }),
+});
