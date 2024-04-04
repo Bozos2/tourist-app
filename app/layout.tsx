@@ -9,6 +9,8 @@ import { Navbar } from "@/components/navbar/navbar";
 import { Toaster } from "@/components/ui/toaster";
 import { CrispProvider } from "@/components/crisp-provider";
 import { Footer } from "@/components/footer/footer";
+import { Progress } from "@/components/scroll-progress";
+import { ScrollToTop } from "@/components/scroll-to-top";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -51,9 +53,11 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Progress />
             <Navbar />
             {children}
             <Footer />
+            <ScrollToTop />
             <Toaster />
           </ThemeProvider>
         </body>
