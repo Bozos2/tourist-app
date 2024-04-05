@@ -77,6 +77,7 @@ const config = {
       },
       screens: {
         "3xl": "1700px",
+        scrollScreen: "480px",
       },
     },
   },
