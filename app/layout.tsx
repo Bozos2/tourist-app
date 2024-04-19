@@ -6,11 +6,11 @@ import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 
 import { Navbar } from "@/components/navbar/navbar";
-import { Toaster } from "@/components/ui/toaster";
 import { CrispProvider } from "@/components/crisp-provider";
 import { Footer } from "@/components/footer/footer";
 import { Progress } from "@/components/scroll-progress";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { Toaster } from "@/components/ui/sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],

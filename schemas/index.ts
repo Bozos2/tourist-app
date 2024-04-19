@@ -103,3 +103,25 @@ export const NewsletterFormSchema = z.object({
     message: "Email is required",
   }),
 });
+
+export const AddLocationFormSchema = z.object({
+  name: z
+    .string()
+    .max(40)
+    .min(5, { message: "Name must be between 5 and 40 characters" }),
+  country: z.string(),
+  city: z.string(),
+  category: z.string(),
+  description: z.string().max(999).min(60),
+  images: z.array(z.string()),
+  video: z.optional(z.string().url({ message: "URL/link of video required" })),
+  dateArrived: z.date(),
+  address: z.string().min(1),
+  openingTime: z.optional(z.coerce.number().min(1)),
+  closingTime: z.optional(z.coerce.number().min(1)),
+  price: z.optional(z.coerce.number().min(1)),
+  specialFeatures: z.array(z.string()).optional(),
+  idealFor: z.array(z.string()).refine((value) => value.some((item) => item), {
+    message: "You have to select at least one item.",
+  }),
+});

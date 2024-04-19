@@ -32,6 +32,7 @@ model User {
   country String?
   bio String?
   urls Json?
+  locations Locations[]
 }
 
 model Account {
@@ -90,4 +91,25 @@ model TwoFactorConfirmation {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+}
+
+model Locations {
+  id String @id @default(cuid())
+  locationId String
+  name String
+  country String
+  city String
+  category String
+  description String
+  dateArrived DateTime
+  images String[]
+  video String?
+  address String
+  openingTime Int?
+  closingTime Int?
+  price Int?
+  specialFeatures String[]
+  idealFor String[]
+
+  user User @relation(fields: [locationId], references: [id], onDelete: Cascade)
 }
