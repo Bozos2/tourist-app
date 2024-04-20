@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { FormError } from "../form-error";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 import NewPasswordIcon from "@/assets/svgs/padlock-svg";
 
@@ -50,9 +50,7 @@ const NewPasswordForm = () => {
         }
         if (data?.success) {
           form.reset();
-          toast({
-            title: `${data.success}`,
-          });
+          toast.success(`${data.success}`);
         }
       });
     });

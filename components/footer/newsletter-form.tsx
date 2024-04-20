@@ -20,7 +20,7 @@ import { NewsletterFormSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { newsletter } from "@/actions/newsletter";
 
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { MdEmail } from "react-icons/md";
 import { IoMailOutline } from "react-icons/io5";
@@ -40,16 +40,11 @@ export const NewsletterForm = () => {
     setTransition(() => {
       newsletter(value).then((data) => {
         if (data && data.error) {
-          toast({
-            variant: "destructive",
-            title: `${data.error}`,
-          });
+          toast.error(`${data.error}`);
         }
 
         if (data && data.success) {
-          toast({
-            title: `${data.success}`,
-          });
+          toast.success(`${data.success}`);
         }
       });
     });

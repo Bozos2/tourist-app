@@ -24,7 +24,7 @@ import { Input } from "@/components/ui/input";
 import { FormError } from "../form-error";
 import { register } from "@/actions/register";
 import { Social } from "./social";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 import logo from "@/assets/images/trip-teasers-logo.png";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
@@ -51,10 +51,7 @@ const RegisterForm = () => {
 
         if (data?.success) {
           form.reset();
-          toast({
-            title: "Successfully registered!",
-            description: `${data.success}`,
-          });
+          toast.success(`${data.success}`);
         }
       });
     });

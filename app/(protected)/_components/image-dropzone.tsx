@@ -11,7 +11,7 @@ import { IoImagesOutline } from "react-icons/io5";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 export const ImageDropzone = () => {
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
@@ -69,26 +69,16 @@ export const ImageDropzone = () => {
       })
         .then((data) => {
           if (data && data.error) {
-            toast({
-              variant: "destructive",
-              title: `${data.error}`,
-            });
+            toast.error(`${data.error}`);
           }
 
           if (data && data.success) {
-            toast({
-              title: `${data.success}`,
-            });
+            toast.success(`${data.success}`);
             update();
             setPreview(null);
           }
         })
-        .catch(() =>
-          toast({
-            variant: "destructive",
-            title: `Something went wrong!`,
-          }),
-        );
+        .catch(() => toast.error(`Something went wrong!`));
     });
   }
 

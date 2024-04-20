@@ -26,15 +26,11 @@ export const location = async (values: z.infer<typeof Schema>) => {
 
   const validateInputs = AddLocationFormSchema.safeParse(values);
 
-  console.log(validateInputs);
-
   if (!validateInputs.success) {
     return { error: "Invalid fields!" };
   }
 
   const { files, ...rest } = values;
-
-  console.log(rest);
 
   await db.locations.create({
     data: {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useTransition } from "react";
+import { useState, useEffect, useCallback, useTransition, useRef } from "react";
 import { motion } from "framer-motion";
 
 import { z } from "zod";
@@ -147,6 +147,8 @@ export default function AddLocationForm() {
   const [isPending, setTransition] = useTransition();
   const [isSuccess, setSuccess] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isCountrySelected, setIsCountrySelected] = useState<boolean>(false);
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const {
     uploadFiles,
@@ -204,7 +206,6 @@ export default function AddLocationForm() {
       shouldFocus: true,
     });
 
-    console.log(fields);
     if (!output) return;
 
     if (currentStepIndex < steps.length - 1) {
@@ -214,6 +215,8 @@ export default function AddLocationForm() {
       setPreviousStepIndex(currentStepIndex);
       setCurrentStepIndex((step) => step + 1);
     }
+
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const prev = () => {
@@ -221,11 +224,13 @@ export default function AddLocationForm() {
       setPreviousStepIndex(currentStepIndex);
       setCurrentStepIndex((step) => step - 1);
     }
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   let country = form.watch("country");
 
   const handleCountryChange = useCallback(async () => {
+    setIsCountrySelected(false);
     const selectedCountry = form.getValues("country");
     try {
       const response = await fetch(
@@ -248,6 +253,7 @@ export default function AddLocationForm() {
       const cities = data.data;
 
       setCities(cities);
+      setIsCountrySelected(true);
 
       return cities;
     } catch (error) {
@@ -264,20 +270,21 @@ export default function AddLocationForm() {
   }, [handleCountryChange]);
 
   useEffect(() => {
-    console.log("test", uploadedFilesUrl);
-
     form.setValue("images", uploadedFilesUrl);
   }, [uploadedFilesUrl]);
 
   return (
-    <section className="flex w-full max-w-[1000px] flex-col  p-8 font-poppins sm:p-12 md:p-24">
+    <section
+      className="flex w-full max-w-[1000px] flex-col  p-8 font-poppins sm:p-12 md:p-24"
+      ref={formRef}
+    >
       <nav aria-label="Progress">
         <ol role="list" className="space-y-4 md:flex md:space-x-8 md:space-y-0">
           {steps.map((step, index) => (
             <li key={step.name} className="md:flex-1">
               {currentStepIndex > index ? (
                 <div className="group flex w-full flex-col border-l-4 border-primary py-2 pl-4 transition-colors md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4">
-                  <span className="text-sm font-medium text-primary transition-colors ">
+                  <span className="text-sm font-medium text-primary transition-colors dark:text-secondary">
                     {step.id}
                   </span>
                   <span className="text-sm font-medium">{step.name}</span>
@@ -287,7 +294,7 @@ export default function AddLocationForm() {
                   className="flex w-full flex-col border-l-4 border-primary py-2 pl-4 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4"
                   aria-current="step"
                 >
-                  <span className="text-sm font-medium text-primary">
+                  <span className="text-sm font-medium text-primary dark:text-secondary">
                     {step.id}
                   </span>
                   <span className="text-sm font-medium">{step.name}</span>
@@ -308,7 +315,7 @@ export default function AddLocationForm() {
       {/* Form */}
       <Form {...form}>
         <form
-          className="mt-12 py-12"
+          className="py-12 md:mt-12"
           onSubmit={form.handleSubmit(submitFormHandler)}
         >
           {currentStepIndex === 0 && (
@@ -317,10 +324,10 @@ export default function AddLocationForm() {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <h2 className="text-base font-semibold leading-7 text-gray-900">
+              <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white">
                 Personal Information
               </h2>
-              <p className="mt-1 text-sm leading-6 text-gray-600">
+              <p className="mt-1 text-sm leading-6 text-muted-foreground">
                 Provide essential details about the location, such as its name,
                 country, city, category, and a brief story about location.
               </p>
@@ -418,13 +425,13 @@ export default function AddLocationForm() {
                     control={form.control}
                     name="city"
                     render={({ field }) => (
-                      <FormItem className="flex flex-col">
+                      <FormItem>
                         <FormLabel>City/Town</FormLabel>
                         <Popover>
                           <PopoverTrigger
                             asChild
                             className="bg-transparent"
-                            disabled={true}
+                            disabled={!isCountrySelected}
                           >
                             <FormControl>
                               <Button
@@ -554,12 +561,12 @@ export default function AddLocationForm() {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <h2 className="text-base font-semibold leading-7 text-gray-900">
+              <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white">
                 Additional Information and Features
               </h2>
-              <p className="mt-1 text-sm leading-6 text-gray-600">
-                After entering basic location information, it's time to provide
-                additional details and features to enrich your content.
+              <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                After entering basic location information, it&apos;s time to
+                provide additional details and features to enrich your content.
               </p>
 
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -623,10 +630,10 @@ export default function AddLocationForm() {
                           <Input {...field} placeholder="Enter Address" />
                         </FormControl>
                         <FormDescription>
-                          The Address field allows you to specify the location's
-                          physical address. Please provide the complete address,
-                          including street name and number to accurately mark
-                          the location on the map.
+                          The Address field allows you to specify the
+                          location&apos;s physical address. Please provide the
+                          complete address, including street name and number to
+                          accurately mark the location on the map.
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -868,10 +875,10 @@ export default function AddLocationForm() {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <h2 className="text-base font-semibold leading-7 text-gray-900">
+              <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white">
                 Media and Additional Content
               </h2>
-              <p className="mt-1 text-sm leading-6 text-gray-600">
+              <p className="mt-1 text-sm leading-6 text-muted-foreground">
                 Add media and additional content to help others.
               </p>
 
@@ -941,7 +948,7 @@ export default function AddLocationForm() {
             >
               {isLoading ? (
                 <>
-                  <h1 className="inline-block text-3xl font-semibold tracking-wide  text-gray-900">
+                  <h1 className="inline-block text-3xl font-semibold tracking-wide  text-gray-900 dark:text-white">
                     Processing...
                   </h1>
                   <div className="mt-4 flex w-full items-center justify-center">
@@ -950,32 +957,32 @@ export default function AddLocationForm() {
                 </>
               ) : isSuccess ? (
                 <>
-                  <h1 className="inline-block text-3xl font-semibold tracking-wide  text-gray-900">
+                  <h1 className="inline-block text-3xl font-semibold tracking-wide  text-gray-900 dark:text-white">
                     Form Completed
                   </h1>
 
                   <div className="mt-4 text-muted-foreground">
-                    Congratulations! You've successfully completed all the steps
-                    of the form. Your submission is now pending review by our
-                    team. While we carefully evaluate your submission, you can
-                    track the status of your form in your profile under{" "}
-                    <span className="inline font-semibold text-black">
+                    Congratulations! You&apos;ve successfully completed all the
+                    steps of the form. Your submission is now pending review by
+                    our team. While we carefully evaluate your submission, you
+                    can track the status of your form in your profile under{" "}
+                    <span className="inline font-semibold text-black dark:text-white">
                       My Profile &#x203A; Status
                     </span>{" "}
                     Thank you for providing us with the necessary information.
-                    We'll notify you once the review process is complete.
+                    We&apos;ll notify you once the review process is complete.
                   </div>
                 </>
               ) : (
                 <>
                   {" "}
-                  <h1 className="inline-block text-3xl font-semibold tracking-wide  text-gray-900">
+                  <h1 className="inline-block text-3xl font-semibold tracking-wide  text-gray-900 dark:text-white">
                     Form Submission Failed
                   </h1>{" "}
                   <div className="mt-4 text-muted-foreground">
-                    We're sorry, but there was an issue with submitting your
-                    form. Please review the information you provided and try
-                    again. If the problem persists, feel free to contact our
+                    We&apos;re sorry, but there was an issue with submitting
+                    your form. Please review the information you provided and
+                    try again. If the problem persists, feel free to contact our
                     support team for assistance.
                   </div>
                 </>

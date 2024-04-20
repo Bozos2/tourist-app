@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { FormError } from "../form-error";
 
 import mail from "@/assets/images/enter-mail.png";
@@ -47,9 +47,7 @@ const ResetPasswordForm = () => {
         }
         if (data?.success) {
           form.reset();
-          toast({
-            title: `${data.success}`,
-          });
+          toast.success(`${data.success}`);
         }
       });
     });

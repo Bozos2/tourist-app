@@ -45,7 +45,7 @@ import {
 } from "@/components/ui/select";
 
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { Calendar } from "@/components/ui/calendar";
 
 import { profileFormSchema } from "@/schemas";
@@ -94,22 +94,15 @@ export function ProfileForm() {
       profileSettings(values)
         .then((data) => {
           if (data && data.error) {
-            toast({ title: `${data.error}`, variant: "destructive" });
+            toast.error(`${data.error}`);
           }
 
           if (data && data.success) {
-            toast({
-              title: `${data.success}`,
-            });
+            toast.success(`${data.success}`);
             update();
           }
         })
-        .catch(() =>
-          toast({
-            variant: "destructive",
-            title: `Something went wrong!`,
-          }),
-        );
+        .catch(() => toast.error(`Something went wrong!`));
     });
   }
 
