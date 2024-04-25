@@ -129,7 +129,7 @@ export const ContactForm = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 rounded-md border border-input px-12 pb-4 pt-8 dark:border-0 dark:bg-transparent/40 xl:w-1/2 xl:rounded-l-none xl:rounded-r-md"
+            className="space-y-4 rounded-md border border-input px-6 pb-4 pt-8 dark:border-0 dark:bg-transparent/40 sm:px-12 xl:w-1/2 xl:rounded-l-none xl:rounded-r-md"
           >
             <div className="space-y-2 xl:hidden">
               <h1 className="text-center text-3xl font-bold sm:text-5xl">

@@ -68,3 +68,16 @@
 .mobile-navbar-height {
   height: 100dvh;
 }
+
+.swiper-pagination-bullet {
+  width: 9px !important;
+  height: 9px !important;
+  background: rgba(255, 255, 255, 0.4);
+  scale: 0.9 !important;
+}
+
+.swiper-pagination-bullet-active {
+  color: #fff;
+  background: white !important;
+  scale: 1 !important ;
+}
