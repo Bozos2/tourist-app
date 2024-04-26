@@ -121,7 +121,7 @@ const ExplorePage = () => {
   return (
     <main className="mx-6 flex min-h-screen flex-col items-center font-poppins sm:mx-24 xl:mx-32">
       <div className="mt-6 flex flex-col items-center justify-center xl:relative">
-        <h1 className="font-base mt-12 max-w-[620px] text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl sm:leading-[1.12] xl:hidden">
+        <h1 className="mt-12 max-w-[620px] text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl sm:leading-[1.12] xl:hidden">
           Explore perfect <span className="font-bold text-primary">places</span>{" "}
           to visit.
         </h1>

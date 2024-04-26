@@ -61,7 +61,7 @@ export const MobileNavbar = () => {
           </div>
           <Separator />
           <div className="w-full">
-            <div className="flex w-full flex-col gap-4 py-8">
+            <div className="flex w-full flex-col gap-3 py-6">
               <Link
                 href="/home"
                 className={cn(
@@ -107,7 +107,7 @@ export const MobileNavbar = () => {
           <div>
             <Separator />
             {user ? (
-              <div className="flex w-full flex-col gap-4 py-8">
+              <div className="flex w-full flex-col gap-3 py-6">
                 <Link
                   href="/settings"
                   className={cn(

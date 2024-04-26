@@ -11,20 +11,23 @@ import svgimg from "@/assets/svgs/landing-image.svg";
 export const LandingPage = () => {
   return (
     <section className="flex min-h-[calc(100vh-64px)] flex-col  justify-center sm:justify-between">
-      <div className="3xl:pt-0 flex flex-row justify-between sm:pt-32 md:pt-40 lg:justify-center  xl:gap-6 xl:pt-20 2xl:justify-between">
+      <div className="flex flex-row justify-between sm:pt-32 md:pt-40 lg:justify-center xl:gap-6  xl:pt-20 2xl:justify-between 3xl:pt-0">
         <div className="mx-6 flex flex-col gap-8  font-poppins sm:mx-24 sm:max-w-[600px] lg:mx-0 lg:ml-24  lg:max-w-[600px] xl:ml-32 xl:max-w-[520px] 2xl:max-w-[710px]">
-          <div className="3xl:pt-48 xl:pt-32 2xl:pt-32">
-            <h1 className="inline text-4xl sm:text-5xl xl:text-4xl 2xl:text-5xl">
+          <div className="xl:pt-32 2xl:pt-32 3xl:pt-48">
+            <h1 className="inline text-4xl font-bold text-gray-900  dark:text-white sm:text-5xl xl:text-4xl 2xl:text-5xl">
               Embark on an Adventure to Discover the Best{" "}
             </h1>
-            <span className="inline-block text-4xl text-primary sm:text-5xl xl:text-4xl 2xl:text-5xl">
+            <span className="hidden text-4xl font-bold tracking-tight text-primary sm:text-5xl md:inline-block xl:text-4xl 2xl:text-5xl">
               <TypewriterComponent
                 options={{
-                  strings: ["Countries.", "Cities.", "Museums.", "Parks."],
+                  strings: ["Countries.", "Cities.", "Beaches.", "Parks."],
                   autoStart: true,
                   loop: true,
                 }}
               />
+            </span>
+            <span className="inline-block text-4xl font-bold tracking-tight text-primary sm:text-5xl md:hidden">
+              Countries.
             </span>
           </div>
           <p className="max-w-[600px] text-xl lg:text-2xl xl:max-w-[450px] xl:text-xl 2xl:max-w-[600px]">

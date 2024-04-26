@@ -127,7 +127,9 @@ const CategoryList = ({ href, icon, name }: CategoryListProps) => {
     <div className="group flex w-16 flex-col">
       <Link href={href}>
         {icon}
-        <p className="text-center text-sm group-hover:text-primary">{name}</p>
+        <p className="text-center text-sm text-zinc-700 group-hover:text-primary dark:text-muted-foreground">
+          {name}
+        </p>
       </Link>
     </div>
   );
@@ -138,61 +140,63 @@ const CategoryData = [
     href: "",
     name: "Historical",
     icon: (
-      <HistoricalSites className="h-12 w-16 text-zinc-700 group-hover:text-primary" />
+      <HistoricalSites className="h-12 w-16 text-zinc-700 group-hover:text-primary dark:text-muted-foreground" />
     ),
   },
   {
     href: "",
     name: "Urban",
     icon: (
-      <UrbanArea className="h-12 w-16 text-zinc-700 group-hover:text-primary" />
+      <UrbanArea className="h-12 w-16 text-zinc-700 group-hover:text-primary dark:text-muted-foreground" />
     ),
   },
   {
     href: "",
     name: "Parks",
     icon: (
-      <PiParkLight className="h-12 w-16 text-gray-700 group-hover:text-primary" />
+      <PiParkLight className="h-12 w-16 text-zinc-700 group-hover:text-primary dark:text-muted-foreground" />
     ),
   },
   {
     href: "",
     name: "Lakes",
     icon: (
-      <MdOutlineWater className="h-12 w-16 text-zinc-700 group-hover:text-primary" />
+      <MdOutlineWater className="h-12 w-16 text-zinc-700 group-hover:text-primary dark:text-muted-foreground" />
     ),
   },
   {
     href: "",
     name: "Caves",
-    icon: <Cave className="h-12 w-16 text-zinc-700 group-hover:text-primary" />,
+    icon: (
+      <Cave className="h-12 w-16 text-zinc-700 group-hover:text-primary dark:text-muted-foreground" />
+    ),
   },
   {
     href: "",
     name: "Mountains",
     icon: (
-      <PiMountains className="h-12 w-16 text-zinc-700 group-hover:text-primary" />
+      <PiMountains className="h-12 w-16 text-zinc-700 group-hover:text-primary dark:text-muted-foreground" />
     ),
   },
   {
     href: "",
     name: "Waterfalls",
     icon: (
-      <GiWaterfall className="h-12 w-16 p-1 text-zinc-700 group-hover:text-primary" />
+      <GiWaterfall className="h-12 w-16 p-1 text-zinc-700 group-hover:text-primary dark:text-muted-foreground" />
     ),
   },
   {
     href: "",
     name: "Beaches",
     icon: (
-      <LuPalmtree className="h-12 w-16 p-1 text-zinc-700 group-hover:text-primary" />
+      <LuPalmtree className="h-12 w-16 p-1 text-zinc-700 group-hover:text-primary dark:text-muted-foreground" />
     ),
   },
   {
     href: "",
     name: "Others",
     icon: (
-      <PiDotsThreeBold className="h-12 w-16 text-zinc-700 group-hover:text-primary" />
+      <PiDotsThreeBold className="h-12 w-16 text-zinc-700 group-hover:text-primary dark:text-muted-foreground" />
     ),
   },
 ];
