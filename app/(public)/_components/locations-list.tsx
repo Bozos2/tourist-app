@@ -68,7 +68,7 @@ export const LocationsList = ({ locations }: LocationsProps) => {
             swiper?.slidePrev();
           }}
           className={cn(
-            "cursor-pointer rounded-full border border-primary bg-background p-2 hover:bg-gray-100 dark:bg-transparent dark:hover:bg-primary/40",
+            "hidden cursor-pointer rounded-full border border-primary bg-background p-2 hover:bg-gray-100 dark:bg-transparent dark:hover:bg-primary/40 sm:block",
             {
               "cursor-not-allowed opacity-40": slideConfig.isBeginning,
             },
@@ -82,7 +82,7 @@ export const LocationsList = ({ locations }: LocationsProps) => {
             swiper?.slideNext();
           }}
           className={cn(
-            "cursor-pointer rounded-full border border-primary bg-background p-2 hover:bg-gray-100 dark:bg-transparent dark:hover:bg-primary/40",
+            "hidden cursor-pointer rounded-full border border-primary bg-background p-2 hover:bg-gray-100 dark:bg-transparent dark:hover:bg-primary/40 sm:block",
             {
               "cursor-not-allowed opacity-40": slideConfig.isEnd,
             },

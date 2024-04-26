@@ -1,3 +1,5 @@
+import dynamic from "next/dynamic";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { PlusIcon } from "@radix-ui/react-icons";
@@ -8,6 +10,13 @@ import { LocationsList } from "../_components/locations-list";
 import { LocationCard } from "../_components/location-card";
 import img3 from "@/assets/images/explore-image.png";
 import { PostmarkSwiper } from "../_components/postmark-swiper";
+
+const CategoryFilterDynamic = dynamic(
+  () => import("../_components/category-filter"),
+  {
+    ssr: false,
+  },
+);
 
 const data = [
   {
@@ -149,6 +158,22 @@ const ExplorePage = () => {
         </h1>
         <p className="pt-2 text-muted-foreground">Ten most visited cities</p>
         <PostmarkSwiper />
+      </div>
+      <div className="w-full pt-12">
+        <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">
+          Filter categories
+        </h1>
+        <CategoryFilterDynamic />
+        <LocationsList locations={data} />
+      </div>
+      <div className="w-full pt-12">
+        <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">
+          Locations near you
+        </h1>
+        <p className="pt-2 text-muted-foreground">
+          Top destinations near your place
+        </p>
+        <LocationsList locations={data} />
       </div>
     </main>
   );
