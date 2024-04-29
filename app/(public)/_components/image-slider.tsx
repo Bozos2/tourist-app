@@ -12,6 +12,7 @@ import type SwiperType from "swiper";
 import { Pagination } from "swiper/modules";
 
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
+import Heart from "@/assets/svgs/favorite-svg";
 
 interface ImageSliderProps {
   urls: string[];
@@ -72,7 +73,9 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
           <IoChevronBack className="h-4 w-4 text-zinc-700" />{" "}
         </button>
       </div>
-
+      <button className="absolute  right-2 top-2 z-10">
+        <Heart className="h-7 w-7   transition duration-500 ease-out hover:scale-110" />
+      </button>
       <Swiper
         pagination={{
           renderBullet: (_, className) => {
