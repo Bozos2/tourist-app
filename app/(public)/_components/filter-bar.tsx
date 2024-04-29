@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 import {
   Form,
@@ -40,10 +41,18 @@ import { IoSearch } from "react-icons/io5";
 
 type Cities = string[] | undefined;
 
+interface SearchParams {
+  query?: string;
+  country?: string;
+  city?: string;
+}
+
 export const FilterBar = () => {
   const [initialRender, setInitialRender] = useState<boolean>(true);
   const [isCountrySelected, setIsCountrySelected] = useState<boolean>(false);
   const [cities, setCities] = useState<Cities>([]);
+  const [isSearching, startTransition] = useTransition();
+  const router = useRouter();
 
   const form = useForm({
     defaultValues: {
@@ -95,6 +104,36 @@ export const FilterBar = () => {
     handleCountryChange();
   }, [handleCountryChange]);
 
+  //filter logic
+
+  const search = () => {
+    const query = form.getValues("search");
+    const country = form.getValues("country");
+    const city = form.getValues("city");
+
+    const queryParams: SearchParams = {};
+
+    if (query) {
+      queryParams.query = query;
+    }
+
+    if (country) {
+      queryParams.country = country;
+    }
+
+    if (city) {
+      queryParams.city = city;
+    }
+
+    const queryString = new URLSearchParams(
+      queryParams as Record<string, string>,
+    ).toString();
+
+    startTransition(() => {
+      router.push(`/explore/search?${queryString}`);
+    });
+  };
+
   return (
     <section className="flex  flex-col gap-4 gap-x-4 rounded-lg border border-input bg-background  p-4 font-poppins dark:border-0 dark:bg-[#12131F] lg:flex-row">
       <Form {...form}>
@@ -108,6 +147,7 @@ export const FilterBar = () => {
                 <PopoverTrigger
                   asChild
                   className="border-0 bg-transparent py-2 pr-2 shadow-none lg:py-6"
+                  disabled={isSearching}
                 >
                   <FormControl>
                     <Button
@@ -172,7 +212,7 @@ export const FilterBar = () => {
                 <PopoverTrigger
                   asChild
                   className="border-0 bg-transparent py-2 pr-2 shadow-none lg:py-6"
-                  disabled={!isCountrySelected}
+                  disabled={!isCountrySelected || isSearching}
                 >
                   <FormControl>
                     <Button
@@ -234,6 +274,12 @@ export const FilterBar = () => {
               <FormControl>
                 <Input
                   {...field}
+                  disabled={isSearching}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      search();
+                    }
+                  }}
                   placeholder="Name of location"
                   className="rounded-[3px] border-0 border-b-2 py-2 shadow-none focus:border-b-primary focus-visible:ring-0 lg:py-6"
                 />
@@ -244,6 +290,8 @@ export const FilterBar = () => {
         />
         <Button
           type="submit"
+          onClick={form.handleSubmit(search)}
+          disabled={isSearching}
           className="text-md mt-[25px] py-2 tracking-widest lg:py-6"
         >
           <IoSearch className="mr-2 h-5 w-5 lg:h-7 lg:w-7" />

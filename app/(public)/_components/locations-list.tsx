@@ -33,7 +33,7 @@ export const LocationsList = ({ locations }: LocationsProps) => {
         isEnd: swiper.isEnd,
       });
     });
-  }, [swiper, locations]);
+  }, [swiper]);
 
   return (
     <div className="relative flex flex-col  pt-12">
