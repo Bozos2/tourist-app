@@ -5,6 +5,7 @@ export const publicRoutes = [
   "/contact",
   "/api/uploadthing",
   "/explore",
+  "/explore/search",
 ];
 
 export const authRoutes = [

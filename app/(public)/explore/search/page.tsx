@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
+import { FilterBar } from "../../_components/filter-bar";
 
 interface SearchPageProps {
   searchParams: {
@@ -26,7 +27,13 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
   });
 
   console.log(product);
-  return <div className="min-h-screen"></div>;
+  return (
+    <div className="mt-12 flex min-h-screen  justify-center">
+      <div className="w-fit">
+        <FilterBar />
+      </div>
+    </div>
+  );
 };
 
 export default SearchPage;

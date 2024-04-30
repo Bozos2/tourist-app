@@ -13,7 +13,7 @@ const Heart = (props: SVGProps<SVGSVGElement>) => (
       opacity={0.4}
     />
     <path
-      stroke="currentColor"
+      stroke="#fff"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}

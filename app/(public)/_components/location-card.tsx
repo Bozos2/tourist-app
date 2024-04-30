@@ -64,7 +64,7 @@ export const LocationCard = ({ location, index }: LocationCardProps) => {
   }
 };
 
-const LocationLoadingSkeleton = () => {
+export const LocationLoadingSkeleton = () => {
   return (
     <div className="flex w-full flex-col">
       <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-zinc-100">
