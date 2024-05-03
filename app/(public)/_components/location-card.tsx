@@ -8,8 +8,8 @@ import ImageSlider from "./image-slider";
 import { LocationsTypes } from "@/types";
 
 import { FaMapMarkerAlt } from "react-icons/fa";
-import RatingIcon from "@/assets/svgs/rating-icon";
 import { Skeleton } from "@/components/ui/skeleton";
+import { StarIcon } from "@/assets/svgs/rating-icon";
 
 interface LocationCardProps {
   location: LocationsTypes | null;
@@ -54,7 +54,7 @@ export const LocationCard = ({ location, index }: LocationCardProps) => {
               </div>
             </div>
             <div className="flex flex-row gap-0.5">
-              <RatingIcon className="h-6 w-6" />{" "}
+              <StarIcon className="fill-primary stroke-primary" />{" "}
               <p className="pt-0.5">{location.rating}</p>
             </div>
           </div>

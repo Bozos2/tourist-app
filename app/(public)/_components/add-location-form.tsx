@@ -72,9 +72,12 @@ const checkboxFeatures = [
   { id: "outdoorseating", label: "Outdoor seating" },
   { id: "fitnessarea", label: "Fitness area" },
   { id: "childcareservice", label: "Childcare service" },
-  { id: "bicyclerental", label: "Bicycle Rental" },
-  { id: "conciergeservice", label: "Concierge service" },
+  { id: "bicyclerental", label: "Bicycle rental" },
   { id: "loungearea", label: "Loungue area" },
+  { id: "guidedtours", label: "Guided tours" },
+  { id: "giftshops", label: "Gift shops" },
+  { id: "swimmingareas", label: "Swimming Areas" },
+  { id: "boating", label: "Boating" },
 ] as const;
 
 const checkboxIdealFor = [

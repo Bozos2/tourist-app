@@ -76,6 +76,7 @@ const config = {
         poppins: ["var(--font-poppins)"],
       },
       screens: {
+        mdp: "870px",
         "3xl": "1700px",
         scrollScreen: "480px",
       },

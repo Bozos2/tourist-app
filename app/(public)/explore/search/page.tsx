@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { FilterBar } from "../../_components/filter-bar";
+import SearchLocationsCard from "../../_components/search-locations-card";
 
 interface SearchPageProps {
   searchParams: {
@@ -28,9 +29,12 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
 
   console.log(product);
   return (
-    <div className="mt-12 flex min-h-screen  justify-center">
+    <div className="mx-6 mt-12 flex min-h-screen  flex-col items-center font-poppins sm:mx-24 xl:mx-32">
       <div className="w-fit">
         <FilterBar />
+      </div>
+      <div className="mt-12 md:w-full">
+        <SearchLocationsCard />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { type SVGProps } from "react";
 
-export function StarIcon(props: SVGProps<SVGSVGElement>) {
+export function HalfStarIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="24"
@@ -14,9 +14,9 @@ export function StarIcon(props: SVGProps<SVGSVGElement>) {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <path d="M12 3L14.781 8.59516L21 9.4979L16.5 13.8507L17.562 20L12 17.0952L6.438 20L7.5 13.8507L3 9.4979L9.219 8.59516L12 3Z" />
+      <path d="M6.438 20L12 17.0952V3L9.219 8.59516L3 9.4979L7.5 13.8507L6.438 20Z" />
     </svg>
   );
 }
 
-StarIcon.displayName = "StarIcon";
+HalfStarIcon.displayName = "HalfStarIcon";
