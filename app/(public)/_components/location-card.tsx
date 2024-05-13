@@ -36,7 +36,7 @@ export const LocationCard = ({ location, index }: LocationCardProps) => {
           className={cn("invisible h-full w-full cursor-pointer", {
             "visible animate-in fade-in-5": isVisible,
           })}
-          href={`/explore/${location.id}`}
+          href={`/explore/${location.title.toLocaleLowerCase()}-${location.id}`}
         >
           <div>
             <ImageSlider urls={location.urls} />
@@ -67,7 +67,7 @@ export const LocationCard = ({ location, index }: LocationCardProps) => {
 export const LocationLoadingSkeleton = () => {
   return (
     <div className="flex w-full flex-col">
-      <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-zinc-100">
+      <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-zinc-200">
         <Skeleton className="h-full w-full" />
       </div>
       <div className="flex flex-row justify-between">

@@ -17,16 +17,22 @@ import images from "@/assets/images/postmarks";
 import { Button } from "@/components/ui/button";
 
 const postmarkData = [
-  { href: "/explore/", image: images.paris },
-  { href: "/explore/", image: images.peking },
-  { href: "/explore/", image: images.newyork },
-  { href: "/explore/", image: images.berlin },
-  { href: "/explore/", image: images.rome },
-  { href: "/explore/", image: images.giza },
-  { href: "/explore/", image: images.athena },
-  { href: "/explore/", image: images.agra },
-  { href: "/explore/", image: images.tokyo },
-  { href: "/explore/", image: images.london },
+  { href: "/explore/search?country=France&city=Paris", image: images.paris },
+  { href: "/explore/search?country=China&city=Bejing", image: images.peking },
+  {
+    href: "/explore/search?country=United+States&city=New+York",
+    image: images.newyork,
+  },
+  { href: "/explore/search?country=Germany&city=Berlin", image: images.berlin },
+  { href: "/explore/search?country=Italy&city=Rome", image: images.rome },
+  { href: "/explore/search?country=Egypt&city=Giza", image: images.giza },
+  { href: "/explore/search?country=Greece&city=Athena", image: images.athena },
+  { href: "/explore/search?country=India&city=Agra", image: images.agra },
+  { href: "/explore/search?country=Japan&city=Tokyo", image: images.tokyo },
+  {
+    href: "/explore/search?country=United+Kingdon&city=London",
+    image: images.london,
+  },
 ];
 
 export const PostmarkSwiper = () => {

@@ -73,8 +73,13 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
           <IoChevronBack className="h-4 w-4 text-zinc-700" />{" "}
         </button>
       </div>
-      <button className="absolute  right-2 top-2 z-10">
-        <Heart className="h-7 w-7   transition duration-500 ease-out hover:scale-110" />
+      <button
+        className="absolute  right-2 top-2 z-10"
+        onClick={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <Heart className="h-7 w-7  transition duration-500 ease-out hover:scale-110" />
       </button>
       <Swiper
         pagination={{

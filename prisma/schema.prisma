@@ -111,6 +111,18 @@ model Locations {
   price Int?
   specialFeatures String[]
   idealFor String[]
+  rating    Int @default(0)
+  createdAt  DateTime   @default(now())
+  comments Comment[]
 
   user User @relation(fields: [locationId], references: [id], onDelete: Cascade)
+}
+
+
+model Comment {
+  id     String @id @default(cuid())
+  locationId String?
+  title String
+  rating Int
+  locations   Locations? @relation(fields: [locationId], references: [id]) 
 }
