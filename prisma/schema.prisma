@@ -111,7 +111,7 @@ model Locations {
   price Int?
   specialFeatures String[]
   idealFor String[]
-  rating    Int @default(0)
+  rating    Float @default(0)
   createdAt  DateTime   @default(now())
   comments Comment[]
 

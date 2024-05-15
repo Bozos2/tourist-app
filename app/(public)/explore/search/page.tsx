@@ -48,8 +48,6 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
     });
   }
 
-  console.log(location);
-
   return (
     <div className="mx-6 mt-12 flex min-h-screen  flex-col items-center font-poppins sm:mx-24 xl:mx-32">
       <div className="w-fit">
@@ -71,7 +69,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
               username={location.user?.name || ""}
               role={location.user.role}
               profileImage={location.user.image || ""}
-              dateArrived={location.user.emailVerified || " "}
+              verified={location.user.emailVerified || " "}
             />
           ))}
         </div>

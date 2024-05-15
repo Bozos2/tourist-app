@@ -1,11 +1,9 @@
-export const publicRoutes = [
-  "/",
-  "/home",
-  "/auth/new-verification",
-  "/contact",
-  "/api/uploadthing",
-  "/explore",
-  "/explore/search",
+export const privateRoutes = [
+  "/explore/new-location",
+  "/settings",
+  "/settings/profile",
+  "/settings/account",
+  "/settings/image",
 ];
 
 export const authRoutes = [
@@ -15,8 +13,6 @@ export const authRoutes = [
   "/auth/reset-password",
   "/auth/new-password",
 ];
-
-export const isLoggedUser = ["/explore/new-location"];
 
 export const apiAuthPrefix = "/api/auth";
 

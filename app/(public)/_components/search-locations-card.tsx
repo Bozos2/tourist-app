@@ -2,7 +2,6 @@
 
 import ImageSlider from "./image-slider";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 import { Rate } from "./ratings";
 import { Separator } from "@/components/ui/separator";
@@ -18,6 +17,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { FaRegCalendarAlt } from "react-icons/fa";
@@ -34,7 +34,7 @@ export interface LocationProps {
   idealFor: string[];
   username: string;
   role: string;
-  dateArrived: string | Date;
+  verified: string | Date;
 }
 
 const SearchLocationsCard: React.FC<LocationProps> = (props) => {
@@ -50,7 +50,7 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
     username,
     profileImage,
     role,
-    dateArrived,
+    verified,
   } = props;
 
   return (
@@ -60,7 +60,7 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
         className="flex flex-col md:flex-row"
       >
         <div className="w-72 scrollScreen:w-80 md:w-72 xl:w-80">
-          <ImageSlider urls={urls} />
+          <ImageSlider urls={urls} aspectRatio="aspect-square" />
         </div>
         <div className="w-72 px-3 py-3 scrollScreen:w-80 md:w-full md:px-4">
           <div className="flex flex-row justify-between">
@@ -112,7 +112,7 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
                       <div className="flex items-center pt-2">
                         <FaRegCalendarAlt className="mr-2 h-4 w-4 opacity-70" />{" "}
                         <span className="text-xs text-muted-foreground">
-                          Joined {format(new Date(dateArrived), "PP")}
+                          Joined {format(new Date(verified), "PP")}
                         </span>
                       </div>
                     </div>

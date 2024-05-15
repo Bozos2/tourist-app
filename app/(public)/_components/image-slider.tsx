@@ -16,9 +16,10 @@ import Heart from "@/assets/svgs/favorite-svg";
 
 interface ImageSliderProps {
   urls: string[];
+  aspectRatio: string;
 }
 
-const ImageSlider = ({ urls }: ImageSliderProps) => {
+const ImageSlider = ({ urls, aspectRatio }: ImageSliderProps) => {
   const [swiper, setSwiper] = useState<null | SwiperType>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -42,7 +43,12 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
   const inactiveStyles = "hidden text-gray-400";
 
   return (
-    <div className="group relative aspect-square overflow-hidden rounded-xl bg-zinc-100">
+    <div
+      className={cn(
+        "group relative overflow-hidden rounded-xl bg-zinc-100",
+        aspectRatio,
+      )}
+    >
       <div className="absolute inset-0 z-10 opacity-0 transition group-hover:opacity-100">
         <button
           onClick={(e) => {
@@ -73,14 +79,18 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
           <IoChevronBack className="h-4 w-4 text-zinc-700" />{" "}
         </button>
       </div>
-      <button
-        className="absolute  right-2 top-2 z-10"
-        onClick={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <Heart className="h-7 w-7  transition duration-500 ease-out hover:scale-110" />
-      </button>
+      {aspectRatio === "aspect-square" ? (
+        <button
+          className="absolute  right-2 top-2 z-10"
+          onClick={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <Heart className="h-7 w-7  transition duration-500 ease-out hover:scale-110" />
+        </button>
+      ) : (
+        ""
+      )}
       <Swiper
         pagination={{
           renderBullet: (_, className) => {

@@ -13,6 +13,7 @@ export const getLocation = async (id: string) => {
           name: true,
           role: true,
           image: true,
+          emailVerified: true,
         },
       },
     },

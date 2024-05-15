@@ -39,7 +39,7 @@ export const LocationCard = ({ location, index }: LocationCardProps) => {
           href={`/explore/${location.title.toLocaleLowerCase()}-${location.id}`}
         >
           <div>
-            <ImageSlider urls={location.urls} />
+            <ImageSlider urls={location.urls} aspectRatio="aspect-square" />
           </div>
           <div className="flex flex-row justify-between pt-2">
             <div className="flex flex-col gap-4">
