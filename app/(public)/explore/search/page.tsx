@@ -1,11 +1,18 @@
 import { db } from "@/lib/db";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { FilterBar } from "../../_components/filter-bar";
-import SearchLocationsCard from "../../_components/search-locations-card";
 import img from "@/assets/images/location-illustration.png";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { IoArrowBack } from "react-icons/io5";
+
+const SearchLocationsCard = dynamic(
+  () => import("../../_components/search-locations-card"),
+  {
+    ssr: false,
+  },
+);
 
 interface SearchPageProps {
   searchParams: {

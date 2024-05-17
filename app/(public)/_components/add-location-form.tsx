@@ -167,8 +167,8 @@ export default function AddLocationForm() {
       description: "",
       dateArrived: new Date(),
       address: "",
-      openingTime: undefined,
-      closingTime: undefined,
+      openingTime: "",
+      closingTime: "",
       price: undefined,
       specialFeatures: [],
       idealFor: [],
@@ -652,7 +652,7 @@ export default function AddLocationForm() {
                         <FormItem>
                           <FormLabel>
                             Working Time{" "}
-                            <span className="hidden font-light text-muted-foreground sm:inline-block">
+                            <span className="hidden font-light text-muted-foreground">
                               (optional)
                             </span>
                           </FormLabel>
@@ -660,7 +660,7 @@ export default function AddLocationForm() {
                             <Input
                               {...field}
                               placeholder="Opening time"
-                              type="number"
+                              type="time"
                             />
                           </FormControl>
                           <FormMessage />
@@ -677,7 +677,7 @@ export default function AddLocationForm() {
                             <Input
                               {...field}
                               placeholder="Closing time"
-                              type="number"
+                              type="time"
                             />
                           </FormControl>
                           <FormMessage />

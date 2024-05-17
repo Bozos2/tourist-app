@@ -4,24 +4,26 @@ import { getLocation } from "@/actions/get-detail-location";
 import { DeatilTopbar } from "../../_components/detail-topbar";
 import ImageSlider from "../../_components/image-slider";
 import { DetailPageInfo } from "../../_components/detail-page-info";
+import { Separator } from "@/components/ui/separator";
+
+import { ControlledRate } from "../../_components/controlled-rating";
 
 interface LoocationDetailProps {
   params: {
-    loctionId: string;
+    locationId: string;
   };
 }
 
-const urls = [
-  "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
-  "https://utfs.io/f/53a05a6c-5875-464c-bf28-b0462b70b72b-mkb0or.jpg",
-  "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
-  "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
-  "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
-];
-
 const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
-  const location = await getLocation(params.loctionId);
+  const locationId = params.locationId.split("-").pop();
 
+  if (!locationId) {
+    return;
+  }
+
+  const location = await getLocation(locationId);
+
+  const embedUrl = location?.video?.replace("watch?v=", "embed/");
   console.log(location);
 
   return (
@@ -39,16 +41,20 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
       </div>
       <div className="flex  justify-center text-center">
         <div className="h-full w-full max-w-[1200px]">
-          <ImageSlider urls={urls} aspectRatio="aspect-video" />
+          {location && location.images ? (
+            <ImageSlider urls={location.images} aspectRatio="aspect-video" />
+          ) : (
+            " "
+          )}
         </div>
       </div>
       <div>
         {location ? (
           <DetailPageInfo
-            profileImage={location.user.image || " "}
-            username={location.user.name || " "}
-            role={location.user.role}
-            verified={location.user.emailVerified || " "}
+            profileImage={location.user?.image || " "}
+            username={location.user?.name || " "}
+            role={location.user?.role}
+            verified={location.user?.emailVerified || " "}
             rating={location.rating}
             description={location.description}
             specialFeatures={location.specialFeatures}
@@ -58,10 +64,21 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
             category={location.category}
             address={location.address}
             dateArrived={location.dateArrived}
+            openingTime={location.openingTime || " "}
+            closingTime={location.closingTime || " "}
+            price={location.price || 0}
+            video={embedUrl}
           />
         ) : (
           ""
         )}
+      </div>
+      <div className="my-6">
+        <Separator />
+        <div className="my-2">
+          <h1 className="mb-2 text-lg font-semibold">Location</h1>
+          <ControlledRate />
+        </div>
       </div>
     </div>
   );

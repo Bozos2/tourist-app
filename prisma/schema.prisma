@@ -34,6 +34,7 @@ model User {
   bio String?
   urls Json?
   locations Locations[]
+  comments Comment[]
 }
 
 model Account {
@@ -96,7 +97,7 @@ model TwoFactorConfirmation {
 
 model Locations {
   id String @id @default(cuid())
-  locationId String
+  userId String 
   name String
   country String
   city String
@@ -106,23 +107,27 @@ model Locations {
   images String[]
   video String?
   address String
-  openingTime Int?
-  closingTime Int?
-  price Int?
+  openingTime String?
+  closingTime String?
+  price Float?
   specialFeatures String[]
   idealFor String[]
   rating    Float @default(0)
   createdAt  DateTime   @default(now())
   comments Comment[]
 
-  user User @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade,onUpdate: Cascade)
 }
 
 
 model Comment {
   id     String @id @default(cuid())
   locationId String?
+  userId String?
+  createdAt  DateTime   @default(now())
   title String
   rating Int
-  locations   Locations? @relation(fields: [locationId], references: [id]) 
+  
+  locations   Locations? @relation(fields: [locationId], references: [id],onDelete: Cascade,onUpdate: Cascade) 
+  user      User? @relation(fields: [userId], references: [id],onDelete: Cascade,onUpdate: Cascade)
 }

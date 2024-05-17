@@ -19,7 +19,11 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaRegClock } from "react-icons/fa6";
 import { BiCategory } from "react-icons/bi";
-import { IoHomeOutline } from "react-icons/io5";
+import {
+  IoHomeOutline,
+  IoCalendarNumberOutline,
+  IoCashOutline,
+} from "react-icons/io5";
 import { Button } from "@/components/ui/button";
 
 interface DetailPageProps {
@@ -36,6 +40,10 @@ interface DetailPageProps {
   description: string;
   category: string;
   address: string;
+  video?: string;
+  price?: number;
+  openingTime?: string;
+  closingTime?: string;
 }
 
 export const DetailPageInfo: React.FC<DetailPageProps> = ({
@@ -52,9 +60,13 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
   dateArrived,
   category,
   address,
+  video,
+  price,
+  openingTime,
+  closingTime,
 }) => {
   return (
-    <section className="mt-4 flex flex-col md:flex-row">
+    <section className="mt-4 flex flex-col lg:flex-row">
       <div className="flex flex-col">
         <div className="flex flex-col space-y-2">
           <div>
@@ -109,7 +121,7 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
           </div>
         </div>
         <div className="mt-6">
-          <p>{description}</p>
+          <p className="text-sm sm:text-base">{description}</p>
         </div>
         <div className="mt-6 flex flex-row flex-wrap gap-4">
           {specialFeatures ? (
@@ -128,34 +140,69 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
             <DisplayIcons iconData={idealForData} features={idealFor} />
           </div>
         </div>
+        <div className="mt-2 flex flex-col">
+          <h1 className="mb-2 text-lg font-semibold">Video</h1>
+          <div>
+            <iframe
+              className="aspect-square h-64 w-full self-stretch rounded-xl scrollScreen:aspect-video lg:h-96"
+              src={video}
+              loading="eager"
+              title="Product Overview Video"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
       </div>
-      <div className="pl-6">
-        <div className="sticky w-full space-y-4">
-          <div className="max-w-[290px] space-y-3  rounded-xl border border-input bg-background px-6 py-4 dark:border-0 dark:bg-transparent/40">
-            <h1 className="text-center text-xl font-semibold">Key Details</h1>
-            <div className="mr-2 flex flex-row items-center gap-4">
-              <FaMapMarkerAlt className="h-6 w-6 text-primary" />{" "}
-              <p className="font-medium text-muted-foreground">
-                {city}, {country}
-              </p>
-            </div>
-            <div className="mr-2 flex flex-row items-center gap-4">
-              <BiCategory className="h-6 w-6 text-primary" />{" "}
-              <p className="font-medium text-muted-foreground">{category}</p>
-            </div>
-            <div className="mr-2 flex flex-row items-center gap-4">
-              <FaRegClock className="h-6 w-6 text-primary" />{" "}
-              <p className="font-medium text-muted-foreground">
-                {" "}
-                {format(new Date(dateArrived), "PP")}
-              </p>
-            </div>
-            <div className="mr-2 flex flex-row items-center gap-4">
-              <IoHomeOutline className="h-6 w-6 text-primary" />{" "}
-              <p className="font-medium text-muted-foreground">{address}</p>
+      <div className="mt-4 lg:mt-0 lg:pl-6">
+        <div className="sticky top-3  space-y-4 scrollScreen:w-full lg:w-[280px]">
+          <div className="rounded-xl border border-input bg-background px-6 py-4 dark:border-0 dark:bg-transparent/40">
+            <h1 className="mb-2 text-center text-xl font-semibold">
+              Key Details
+            </h1>
+            <div className="flex flex-col flex-wrap justify-center  gap-3 scrollScreen:items-center sm:flex-row lg:block lg:space-y-3">
+              <div className="mr-2 flex flex-row items-center gap-4">
+                <FaMapMarkerAlt className="h-6 w-6 text-primary" />{" "}
+                <p className="font-medium text-muted-foreground">
+                  {city}, {country}
+                </p>
+              </div>
+              <div className="mr-2 flex flex-row items-center gap-4">
+                <BiCategory className="h-6 w-6 text-primary" />{" "}
+                <p className="font-medium text-muted-foreground">{category}</p>
+              </div>
+              <div className="mr-2 flex flex-row items-center gap-4">
+                <IoCalendarNumberOutline className="h-6 w-6 text-primary" />{" "}
+                <p className="font-medium text-muted-foreground">
+                  {" "}
+                  {format(new Date(dateArrived), "PP")}
+                </p>
+              </div>
+              <div className="mr-2 flex flex-row items-center gap-4">
+                <IoHomeOutline className="h-6 w-6 text-primary" />{" "}
+                <p className="font-medium text-muted-foreground">{address}</p>
+              </div>
+              {openingTime &&
+              closingTime &&
+              openingTime.trim() !== "" &&
+              closingTime.trim() !== "" ? (
+                <div className="mr-2 flex flex-row items-center gap-4">
+                  <FaRegClock className="h-6 w-6 text-primary" />{" "}
+                  <p className="font-medium text-muted-foreground">
+                    {openingTime} - {closingTime}
+                  </p>
+                </div>
+              ) : null}
+              {price ? (
+                <div className="mr-2 flex flex-row items-center gap-4">
+                  <IoCashOutline className="h-6 w-6 text-primary" />{" "}
+                  <p className="font-medium text-muted-foreground">{price} €</p>
+                </div>
+              ) : (
+                " "
+              )}
             </div>
           </div>
-          <div className="space-y-3">
+          <div className="flex flex-row items-center gap-2 lg:block lg:space-y-3">
             <Button variant="default" className="w-full" asChild>
               <Link href="/explore/new-location">Add Location</Link>
             </Button>
