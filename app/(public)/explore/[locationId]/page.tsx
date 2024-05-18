@@ -5,8 +5,24 @@ import { DeatilTopbar } from "../../_components/detail-topbar";
 import ImageSlider from "../../_components/image-slider";
 import { DetailPageInfo } from "../../_components/detail-page-info";
 import { Separator } from "@/components/ui/separator";
+import CommentForm from "../../_components/comment-form";
 
-import { ControlledRate } from "../../_components/controlled-rating";
+import {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogTrigger,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+
+import { FaPlus } from "react-icons/fa";
+import CommentsSection from "../../_components/comments-section";
 
 interface LoocationDetailProps {
   params: {
@@ -51,6 +67,7 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
       <div>
         {location ? (
           <DetailPageInfo
+            id={locationId}
             profileImage={location.user?.image || " "}
             username={location.user?.name || " "}
             role={location.user?.role}
@@ -77,7 +94,37 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
         <Separator />
         <div className="my-2">
           <h1 className="mb-2 text-lg font-semibold">Location</h1>
-          <ControlledRate />
+        </div>
+      </div>
+      <div className="my-6">
+        <Separator />
+        <div className="my-2">
+          <h1 className="mb-2 text-lg font-semibold">User ratings</h1>
+          <CommentsSection locationId={locationId} />
+          <div className="flex flex-row items-center justify-between sm:justify-start">
+            <h1 className="mr-3 text-sm font-light sm:text-base">
+              Wanna help other users with your experience?
+            </h1>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="border-primary text-primary hover:text-primary dark:text-white"
+                >
+                  <FaPlus className="mr-2 h-4 w-4" /> Add Comment
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="space-y-4">
+                <DialogHeader>
+                  <DialogTitle>Add your review</DialogTitle>
+                  <DialogDescription>
+                    Tell us your experience and opinion about this place
+                  </DialogDescription>
+                </DialogHeader>
+                <CommentForm id={locationId} />
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
       </div>
     </div>

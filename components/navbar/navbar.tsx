@@ -23,10 +23,6 @@ export const Navbar = () => {
     pathname.includes("-") &&
     pathname.length > 35;
 
-  if (isDetailPage) {
-    console.log("je", pathname);
-  }
-
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 0;
@@ -39,8 +35,6 @@ export const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const detailStyle = "px-96";
 
   return (
     <header className="sticky left-0 top-0 z-50 w-full">

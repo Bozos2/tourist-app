@@ -5,6 +5,7 @@ import { format } from "date-fns";
 
 import { specialFeaturesData, idealForData } from "@/helpers/card-icons-data";
 import DisplayIcons from "@/helpers/detail-icons-display";
+import CommentForm from "./comment-form";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Rate } from "./ratings";
@@ -25,8 +26,21 @@ import {
   IoCashOutline,
 } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogTrigger,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 interface DetailPageProps {
+  id: string;
   country: string;
   city: string;
   rating: number;
@@ -64,6 +78,7 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
   price,
   openingTime,
   closingTime,
+  id,
 }) => {
   return (
     <section className="mt-4 flex flex-col lg:flex-row">
@@ -206,9 +221,22 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
             <Button variant="default" className="w-full" asChild>
               <Link href="/explore/new-location">Add Location</Link>
             </Button>
-            <Button variant="outline" className="w-full">
-              Review Place
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline" className="w-full">
+                  Review Place
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="space-y-4">
+                <DialogHeader>
+                  <DialogTitle>Add your review</DialogTitle>
+                  <DialogDescription>
+                    Tell us your experience and opinion about this place
+                  </DialogDescription>
+                </DialogHeader>
+                <CommentForm id={id} />
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>

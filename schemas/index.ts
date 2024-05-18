@@ -125,3 +125,11 @@ export const AddLocationFormSchema = z.object({
     message: "You have to select at least one item.",
   }),
 });
+
+export const AddCommentFormSchema = z.object({
+  rating: z.number().min(1).max(5),
+  title: z
+    .string()
+    .min(5, "Message must be at least 5 characters long")
+    .max(220),
+});

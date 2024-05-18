@@ -1,19 +1,49 @@
 "use server";
 
+import * as z from "zod";
+
 import { db } from "@/lib/db";
+import { AddCommentFormSchema } from "@/schemas";
+import { getUserById } from "@/user/find-user";
+import { currentUser } from "@/lib/auth";
 
 export const addComment = async (
+  values: z.infer<typeof AddCommentFormSchema>,
   locationId: string,
-  userId: string,
-  title: string,
-  rating: number,
 ) => {
-  const newComment = await db.comment.create({
-    data: {
-      locationId,
+  const user = await currentUser();
+
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
+  const userId = user?.id;
+  if (!userId) return false;
+
+  const dbUser = await getUserById(userId);
+
+  if (!dbUser) {
+    return { error: "Unauthorized" };
+  }
+
+  const existingComment = await db.comment.findFirst({
+    where: {
       userId,
-      title,
-      rating,
+      locationId,
+    },
+  });
+
+  if (existingComment) {
+    return {
+      error: "You have already reviewed this location.",
+    };
+  }
+
+  await db.comment.create({
+    data: {
+      ...values,
+      userId,
+      locationId,
     },
   });
 
@@ -36,5 +66,5 @@ export const addComment = async (
     },
   });
 
-  return newComment;
+  return { success: "Your review is successfully added!" };
 };
