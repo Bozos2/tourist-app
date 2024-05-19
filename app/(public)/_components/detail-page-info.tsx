@@ -91,7 +91,11 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
                   <Avatar>
                     <AvatarImage src={profileImage || " "} />
                     <AvatarFallback className="bg-primary">
-                      <FaUser className="text-white" />
+                      <div className="bg-primary text-white">
+                        <h1 className="text-xl font-medium">
+                          {username.slice(0, 1)}
+                        </h1>
+                      </div>
                     </AvatarFallback>
                   </Avatar>
                   <Link
@@ -107,7 +111,11 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
                   <Avatar>
                     <AvatarImage src={profileImage || " "} />
                     <AvatarFallback className="bg-primary">
-                      <FaUser className="text-white" />
+                      <div className="bg-primary text-white">
+                        <h1 className="text-xl font-medium">
+                          {username.slice(0, 1)}
+                        </h1>
+                      </div>
                     </AvatarFallback>
                   </Avatar>
                   <div className="space-y-1">
@@ -131,7 +139,7 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
           </div>
           <div className="flex flex-row items-center gap-3">
             <Rate value={rating} />{" "}
-            <p className="text-lg font-medium">{rating}</p>{" "}
+            <p className="text-lg font-medium">{rating.toFixed(1)}</p>{" "}
             <p className="text-muted-foreground">1,286 reviews</p>
           </div>
         </div>

@@ -12,25 +12,16 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 
+import CommentsCard from "./comments-card";
+import CommentsSwiper from "./comments-swiper";
+import { CommentsPropsData } from "./comments-swiper";
+
 interface CommentsProp {
   locationId: string;
 }
 
-interface User {
-  name: string;
-  image: string;
-}
-
-interface Comment {
-  id: string;
-  title: string;
-  rating: number;
-  createdAt: Date;
-  user: User;
-}
-
 const CommentsSection: React.FC<CommentsProp> = ({ locationId }) => {
-  const [comments, setComments] = useState<Comment[]>([]);
+  const [comments, setComments] = useState<CommentsPropsData[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchComments = async (tab: string) => {
@@ -76,27 +67,9 @@ const CommentsSection: React.FC<CommentsProp> = ({ locationId }) => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
-          {comments.map((comment) => (
-            <li key={comment.id}>
-              <div>
-                <Avatar />
-                <Avatar>
-                  <AvatarImage src={comment.user.image || " "} />
-                  <AvatarFallback className="bg-primary">
-                    <FaUser className="text-white" />
-                  </AvatarFallback>
-                </Avatar>
-                <p>{comment.user.name}</p>
-              </div>
-              <p>{comment.title}</p>
-              <p>Rating: {comment.rating}</p>
-              <p>
-                Posted on: {new Date(comment.createdAt).toLocaleDateString()}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <div className="my-6 w-full">
+          <CommentsSwiper comments={comments} />
+        </div>
       )}
     </div>
   );

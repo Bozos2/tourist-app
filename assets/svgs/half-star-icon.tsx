@@ -1,10 +1,21 @@
 import { type SVGProps } from "react";
 
-export function HalfStarIcon(props: SVGProps<SVGSVGElement>) {
+export interface HalfStarIconProps extends SVGProps<SVGSVGElement> {
+  size?: "sm" | "md" | "lg";
+}
+
+export function HalfStarIcon({ size = "md", ...props }: HalfStarIconProps) {
+  const sizes = {
+    sm: 16,
+    md: 24,
+    lg: 32,
+  };
+  const dimension = sizes[size];
+
   return (
     <svg
-      width="24"
-      height="24"
+      width={dimension}
+      height={dimension}
       viewBox="0 0 24 24"
       fill="currentColor"
       stroke="currentColor"

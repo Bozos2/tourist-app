@@ -89,7 +89,11 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
                   <Avatar>
                     <AvatarImage src={profileImage || " "} />
                     <AvatarFallback className="bg-primary">
-                      <FaUser className="text-white" />
+                      <div className="bg-primary text-white">
+                        <h1 className="text-xl font-medium">
+                          {username.slice(0, 1)}
+                        </h1>
+                      </div>
                     </AvatarFallback>
                   </Avatar>
                 </HoverCardTrigger>
@@ -98,7 +102,11 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
                     <Avatar>
                       <AvatarImage src={profileImage || " "} />
                       <AvatarFallback className="bg-primary">
-                        <FaUser className="text-white" />
+                        <div className="bg-primary text-white">
+                          <h1 className="text-xl font-medium">
+                            {username.slice(0, 1)}
+                          </h1>
+                        </div>
                       </AvatarFallback>
                     </Avatar>
                     <div className="space-y-1">
