@@ -13,9 +13,9 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 import CommentsCard from "./comments-card";
 
-interface User {
-  name: string;
-  image: string;
+export interface User {
+  name: string | null;
+  image: string | null;
 }
 
 export interface CommentsPropsData {
@@ -23,7 +23,7 @@ export interface CommentsPropsData {
   title: string;
   rating: number;
   createdAt: Date;
-  user: User;
+  user: User | null;
 }
 
 interface CommentProp {
@@ -57,17 +57,19 @@ const CommentsSwiper = ({ comments }: CommentProp) => {
 
       <div className="flex flex-row">
         <Swiper
-          spaceBetween={50}
+          spaceBetween={40}
           onSwiper={(swiper) => setSwiper(swiper)}
+          centerInsufficientSlides={true}
           slidesPerView="auto"
           className="h-full w-full"
         >
-          {comments.map((data) => (
+          {comments.map((data, i) => (
             <SwiperSlide key={data.id} className="!w-auto">
               <CommentsCard
+                index={i}
                 id={data.id}
-                username={data.user.name}
-                image={data.user.image}
+                username={data.user?.name || ""}
+                image={data.user?.image || ""}
                 title={data.title}
                 rating={data.rating}
                 createdAt={data.createdAt}

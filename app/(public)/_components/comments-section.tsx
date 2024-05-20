@@ -3,18 +3,16 @@
 import React, { useEffect, useState } from "react";
 import CommentTabs from "./comment-tabs";
 import {
-  getAllComments,
+  getComments,
   getTopRatedComments,
   getBadRatedComments,
   getNewestComments,
 } from "@/actions/reviews";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaUser } from "react-icons/fa";
-
-import CommentsCard from "./comments-card";
+import { CommentsCardSkeleton } from "./comments-card";
 import CommentsSwiper from "./comments-swiper";
 import { CommentsPropsData } from "./comments-swiper";
+import CommentsSheet from "./comments-sheet";
 
 interface CommentsProp {
   locationId: string;
@@ -38,7 +36,7 @@ const CommentsSection: React.FC<CommentsProp> = ({ locationId }) => {
         fetchedComments = await getNewestComments(locationId);
         break;
       default:
-        fetchedComments = await getAllComments(locationId);
+        fetchedComments = await getComments(locationId);
         break;
     }
     setComments(fetchedComments);
@@ -63,9 +61,14 @@ const CommentsSection: React.FC<CommentsProp> = ({ locationId }) => {
 
   return (
     <div>
-      <CommentTabs onTabChange={handleTabChange} />
+      <div className="flex flex-row items-center justify-between">
+        <CommentTabs onTabChange={handleTabChange} />
+        <CommentsSheet locationId={locationId} />
+      </div>
       {loading ? (
-        <p>Loading...</p>
+        <div className="my-6">
+          <CommentsCardSkeleton />
+        </div>
       ) : (
         <div className="my-6 w-full">
           <CommentsSwiper comments={comments} />

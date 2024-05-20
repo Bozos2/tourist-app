@@ -19,5 +19,14 @@ export const getLocation = async (id: string) => {
     },
   });
 
-  return data;
+  const commentsCount = await db.comment.count({
+    where: {
+      locationId: id,
+    },
+  });
+
+  return {
+    ...data,
+    commentsCount,
+  };
 };

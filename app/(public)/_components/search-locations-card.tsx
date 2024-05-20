@@ -75,7 +75,8 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
                 </p>
               </div>
               <div className="flex flex-row items-center xl:pt-4">
-                <Rate value={rating} /> <p className="ml-1">{rating}</p>
+                <Rate value={rating} />{" "}
+                <p className="ml-1">{rating.toFixed(1)}</p>
               </div>
             </div>
             <div
@@ -129,17 +130,20 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
               </HoverCard>
             </div>
           </div>
-
           <div className="flex flex-col md:mt-4">
-            <div className="hidden flex-col gap-2 md:flex">
-              <p className="font-medium  text-gray-900 dark:text-white">
-                Special features
-              </p>
-              <SpecialFeatures
-                iconData={specialFeaturesData}
-                features={specialFeatures}
-              />
-            </div>
+            {specialFeatures.length >= 1 ? (
+              <div className="hidden flex-col gap-2 md:flex">
+                <p className="font-medium  text-gray-900 dark:text-white">
+                  Special features
+                </p>
+                <SpecialFeatures
+                  iconData={specialFeaturesData}
+                  features={specialFeatures}
+                />
+              </div>
+            ) : (
+              " "
+            )}
             <div className="mt-4 flex  flex-col gap-2">
               <p className="font-medium  text-gray-900 dark:text-white">
                 Ideal for

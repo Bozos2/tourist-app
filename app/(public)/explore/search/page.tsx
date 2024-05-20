@@ -61,7 +61,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
         <FilterBar />
       </div>
       {location.length > 0 ? (
-        <div className="mt-12 md:w-full">
+        <div className="mt-12 space-y-6 md:w-full">
           {location.map((location: any) => (
             <SearchLocationsCard
               key={location.id}

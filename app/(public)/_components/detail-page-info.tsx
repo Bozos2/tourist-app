@@ -45,7 +45,7 @@ interface DetailPageProps {
   city: string;
   rating: number;
   profileImage?: string;
-  specialFeatures: string[];
+  specialFeatures: string[] | undefined;
   idealFor: string[];
   username: string;
   role: string;
@@ -58,6 +58,7 @@ interface DetailPageProps {
   price?: number;
   openingTime?: string;
   closingTime?: string;
+  ratingNumber: number;
 }
 
 export const DetailPageInfo: React.FC<DetailPageProps> = ({
@@ -79,6 +80,7 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
   openingTime,
   closingTime,
   id,
+  ratingNumber,
 }) => {
   return (
     <section className="mt-4 flex flex-col lg:flex-row">
@@ -140,14 +142,14 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
           <div className="flex flex-row items-center gap-3">
             <Rate value={rating} />{" "}
             <p className="text-lg font-medium">{rating.toFixed(1)}</p>{" "}
-            <p className="text-muted-foreground">1,286 reviews</p>
+            <p className="text-muted-foreground">{ratingNumber} reviews</p>
           </div>
         </div>
         <div className="mt-6">
           <p className="text-sm sm:text-base">{description}</p>
         </div>
         <div className="mt-6 flex flex-row flex-wrap gap-4">
-          {specialFeatures ? (
+          {specialFeatures && specialFeatures?.length >= 1 ? (
             <div>
               <h1 className="mb-2 text-lg font-semibold">Special features</h1>
               <DisplayIcons
@@ -163,7 +165,7 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
             <DisplayIcons iconData={idealForData} features={idealFor} />
           </div>
         </div>
-        <div className="mt-2 flex flex-col">
+        <div className="mt-3 flex flex-col">
           <h1 className="mb-2 text-lg font-semibold">Video</h1>
           <div>
             <iframe

@@ -18,6 +18,23 @@ export async function getAllComments(locationId: string) {
   });
 }
 
+export async function getComments(locationId: string) {
+  return db.comment.findMany({
+    take: 10,
+    where: {
+      locationId,
+    },
+    include: {
+      user: {
+        select: {
+          name: true,
+          image: true,
+        },
+      },
+    },
+  });
+}
+
 export async function getTopRatedComments(locationId: string) {
   return db.comment.findMany({
     take: 10,

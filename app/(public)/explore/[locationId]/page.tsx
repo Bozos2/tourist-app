@@ -70,21 +70,22 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
             id={locationId}
             profileImage={location.user?.image || " "}
             username={location.user?.name || " "}
-            role={location.user?.role}
+            role={location.user?.role || " "}
             verified={location.user?.emailVerified || " "}
-            rating={location.rating}
-            description={location.description}
+            rating={location.rating || 0}
+            description={location.description!}
             specialFeatures={location.specialFeatures}
-            idealFor={location.idealFor}
-            city={location.city}
-            country={location.country}
-            category={location.category}
-            address={location.address}
-            dateArrived={location.dateArrived}
+            idealFor={location.idealFor!}
+            city={location.city!}
+            country={location.country!}
+            category={location.category!}
+            address={location.address!}
+            dateArrived={location.dateArrived!}
             openingTime={location.openingTime || " "}
             closingTime={location.closingTime || " "}
             price={location.price || 0}
             video={embedUrl}
+            ratingNumber={location.commentsCount}
           />
         ) : (
           ""

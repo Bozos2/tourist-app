@@ -56,8 +56,8 @@ export const MobileNavbar = () => {
         }
       >
         <div className="flex flex-grow flex-col px-6 py-2">
-          <div className="pt-4">
-            <Image src={logo} width={170} height={170} alt="logo" />
+          <div className="py-2">
+            <Image src={logo} width={120} height={120} alt="logo" />
           </div>
           <Separator />
           <div className="w-full">
