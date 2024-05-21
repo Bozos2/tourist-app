@@ -40,18 +40,22 @@ const ExplorePage = () => {
           <FilterBar />
         </div>
       </div>
-      <Button asChild variant="outline" className="mt-24">
-        <Link href="/explore/new-location" className="space-x-2">
-          <PlusIcon className="mr-2 h-5 w-5" /> Add Location
-        </Link>
-      </Button>
-      <div className="w-full pt-12">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white sm:text-4xl">
-          Popular Locations
-        </h1>
-        <p className="pt-2 text-sm text-muted-foreground sm:text-base">
-          Most popular locations on world
-        </p>
+      <div className="mt-36 w-full">
+        <div className="flex flex-row items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white sm:text-4xl">
+              Popular Locations
+            </h1>
+            <p className="pt-2 text-sm text-muted-foreground sm:text-base">
+              Most popular locations on world
+            </p>
+          </div>
+          <Button asChild variant="ghost">
+            <Link href="/explore/new-location" className="space-x-2">
+              Add Location
+            </Link>
+          </Button>
+        </div>
         <LocationsList locations={data} />
       </div>
       <div className="w-full pt-12">
