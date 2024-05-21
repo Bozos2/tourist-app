@@ -8,8 +8,8 @@ export default function loading() {
     <div className="flex min-h-screen flex-col items-center justify-center gap-12">
       <Image
         src={logo}
-        width={220}
-        height={220}
+        width={180}
+        height={180}
         alt="logo image"
         className="flex items-center justify-center"
       />

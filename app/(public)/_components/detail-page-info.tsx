@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { specialFeaturesData, idealForData } from "@/helpers/card-icons-data";
 import DisplayIcons from "@/helpers/detail-icons-display";
 import CommentForm from "./comment-form";
+import { DrawerDialog } from "./dialog-drawer-review";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Rate } from "./ratings";
@@ -15,7 +16,6 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 
-import { FaUser } from "react-icons/fa";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaRegClock } from "react-icons/fa6";
@@ -231,22 +231,7 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
             <Button variant="default" className="w-full" asChild>
               <Link href="/explore/new-location">Add Location</Link>
             </Button>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="outline" className="w-full">
-                  Review Place
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="space-y-4">
-                <DialogHeader>
-                  <DialogTitle>Add your review</DialogTitle>
-                  <DialogDescription>
-                    Tell us your experience and opinion about this place
-                  </DialogDescription>
-                </DialogHeader>
-                <CommentForm id={id} />
-              </DialogContent>
-            </Dialog>
+            <DrawerDialog id={id} />
           </div>
         </div>
       </div>

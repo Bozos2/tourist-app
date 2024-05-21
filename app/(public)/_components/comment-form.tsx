@@ -19,7 +19,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { FormError } from "@/components/form-error";
 
@@ -93,18 +92,14 @@ const CommentForm: React.FC<CommentFormProps> = ({ id }) => {
           ) : (
             ""
           )}
-          <DialogFooter>
-            <div className="pt-2">
-              <Button
-                type="submit"
-                className="w-full text-white"
-                variant="default"
-                disabled={isPending}
-              >
-                Submit Review
-              </Button>
-            </div>
-          </DialogFooter>
+          <Button
+            type="submit"
+            variant="default"
+            disabled={isPending}
+            className="mt-3 w-full"
+          >
+            Submit Review
+          </Button>
         </>
       </form>
     </Form>

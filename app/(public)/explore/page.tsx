@@ -40,7 +40,7 @@ const ExplorePage = () => {
           <FilterBar />
         </div>
       </div>
-      <div className="mt-36 w-full">
+      <div className="mt-12 w-full sm:mt-20 xl:mt-36">
         <div className="flex flex-row items-center justify-between">
           <div>
             <h1 className="text-2xl font-semibold text-gray-900 dark:text-white sm:text-4xl">
