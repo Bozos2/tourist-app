@@ -1,15 +1,13 @@
 import Link from "next/link";
+import Image from "next/image";
+
+import logo from "@/assets/svgs/trip-teasers-logo.svg";
 
 export const FooterLinks = () => {
   return (
-    <div className="mt-7 hidden md:block  lg:pr-0 xl:mt-14 2xl:mt-16 3xl:mt-24">
-      <div className="flex flex-col items-center">
-        <h1 className="text-lg font-medium tracking-wide xl:text-black/70">
-          Links
-        </h1>
-        <div className="h-1 w-20 bg-primary pt-1"></div>
-      </div>
-      <div className="flex flex-col items-center gap-1.5 pt-1 2xl:gap-3 2xl:pt-4">
+    <div className="mt-7 hidden flex-col items-center justify-center gap-6 sm:flex">
+      <Image alt="footer logo" width={90} height={90} src={logo} />
+      <div className="flex flex-row items-center gap-6 text-lg">
         <Link href="/home" className="hover:text-primary">
           Home
         </Link>
@@ -18,6 +16,12 @@ export const FooterLinks = () => {
         </Link>
         <Link href="/contact" className="hover:text-primary">
           Contact
+        </Link>
+        <Link href="/privacy" className="hover:text-primary">
+          Privacy
+        </Link>
+        <Link href="/faq" className="hover:text-primary">
+          Faq
         </Link>
       </div>
     </div>

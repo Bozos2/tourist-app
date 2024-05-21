@@ -5,10 +5,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Separator } from "../ui/separator";
 
 const MobileLinks = () => {
   return (
-    <div className="flex w-full px-12 pt-2 sm:px-24 md:hidden">
+    <div className="flex w-full flex-col px-12 pt-2 sm:hidden sm:px-24">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1" className="border-b-2">
           <AccordionTrigger className="text-md pr-1">Links</AccordionTrigger>

@@ -22,9 +22,7 @@ import { newsletter } from "@/actions/newsletter";
 
 import { toast } from "sonner";
 import { Button } from "../ui/button";
-import { MdEmail } from "react-icons/md";
 import { IoMailOutline } from "react-icons/io5";
-import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 export const NewsletterForm = () => {
   const [isPending, setTransition] = useTransition();
@@ -51,46 +49,47 @@ export const NewsletterForm = () => {
   };
 
   return (
-    <section className="mt-12 flex w-64 flex-col pb-3 md:pb-0 2xl:mt-20 3xl:mt-24">
-      <div className="flex flex-col items-center">
-        <h1 className="text-lg font-medium tracking-wide xl:text-black/70">
-          Newsletter
+    <section className="flex w-full flex-col justify-between sm:mt-24 lg:flex-row">
+      <div className="flex flex-col gap-3">
+        <h1 className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">
+          Let's stay in touch!
         </h1>
-        <div className="h-1 w-20 bg-primary pt-1"></div>
+        <p className="text-sm text-muted-foreground sm:text-base">
+          We&apos;ll send you a nice letter sometimes. Without spam.
+        </p>
       </div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="relative mt-4 flex  flex-row"
+          className="mt-4 flex flex-row justify-center  lg:items-start"
         >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    {...field}
-                    disabled={isPending}
-                    placeholder="Enter your email..."
-                    type="email"
-                    className="h-10  w-64 rounded-3xl bg-[#3E438E]/40 pl-9  placeholder:text-white/50"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="absolute left-0.5 top-2">
-            <IoMailOutline className="absolute ml-1.5 h-6 w-6 text-white/50" />
-          </div>
-          <div className="absolute right-0.5 top-0.5 ">
+          <div className="relative flex  items-center lg:w-auto">
+            <IoMailOutline className="absolute ml-2 h-6 w-6 text-primary" />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="Enter your email..."
+                      type="email"
+                      className="h-11 w-72 rounded-xl border border-input bg-white pl-10 pr-28 text-primary shadow-sm sm:w-96 lg:pr-40"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <Button
               type="submit"
               disabled={isPending}
-              className="h-9 w-9 rounded-full bg-primary text-white"
+              variant="default"
+              className="absolute inset-y-1 right-1 rounded-xl"
             >
-              <ArrowRightIcon className="absolute" />
+              Subscribe
             </Button>
           </div>
         </form>

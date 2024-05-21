@@ -46,32 +46,34 @@ const ExplorePage = () => {
         </Link>
       </Button>
       <div className="w-full pt-12">
-        <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white sm:text-4xl">
           Popular Locations
         </h1>
-        <p className="pt-2 text-muted-foreground">
+        <p className="pt-2 text-sm text-muted-foreground sm:text-base">
           Most popular locations on world
         </p>
         <LocationsList locations={data} />
       </div>
       <div className="w-full pt-12">
-        <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white sm:text-4xl">
           Popular Cities
         </h1>
-        <p className="pt-2 text-muted-foreground">Ten most visited cities</p>
+        <p className="pt-2 text-sm text-muted-foreground sm:text-base">
+          Ten most visited cities
+        </p>
         <PostmarkSwiper />
       </div>
       <div className="w-full pt-12">
-        <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white sm:text-4xl">
           Filter categories
         </h1>
         <CategoryFilterDynamic />
       </div>
       <div className="w-full pt-12">
-        <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white sm:text-4xl">
           Locations near you
         </h1>
-        <p className="pt-2 text-muted-foreground">
+        <p className="pt-2 text-sm text-muted-foreground sm:text-base">
           Top destinations near your place
         </p>
         <LocationsList locations={data} />
