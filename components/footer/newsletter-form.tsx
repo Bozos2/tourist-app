@@ -52,7 +52,7 @@ export const NewsletterForm = () => {
     <section className="flex w-full flex-col justify-between sm:mt-24 lg:flex-row">
       <div className="flex flex-col gap-3">
         <h1 className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">
-          Let's stay in touch!
+          Let&apos;s stay in touch!
         </h1>
         <p className="text-sm text-muted-foreground sm:text-base">
           We&apos;ll send you a nice letter sometimes. Without spam.
