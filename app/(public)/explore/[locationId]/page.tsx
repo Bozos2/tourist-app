@@ -5,23 +5,7 @@ import { DeatilTopbar } from "../../_components/detail-topbar";
 import ImageSlider from "../../_components/image-slider";
 import { DetailPageInfo } from "../../_components/detail-page-info";
 import { Separator } from "@/components/ui/separator";
-import CommentForm from "../../_components/comment-form";
-
-import {
-  Dialog,
-  DialogPortal,
-  DialogOverlay,
-  DialogTrigger,
-  DialogClose,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-
-import { FaPlus } from "react-icons/fa";
+import { DrawerDialog } from "../../_components/dialog-drawer-review";
 import CommentsSection from "../../_components/comments-section";
 
 interface LoocationDetailProps {
@@ -106,25 +90,7 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
             <h1 className="mr-3 text-sm font-light sm:text-base">
               Wanna help other users with your experience?
             </h1>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="border-primary text-primary hover:text-primary dark:text-white"
-                >
-                  <FaPlus className="mr-2 h-4 w-4" /> Add Comment
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="space-y-4">
-                <DialogHeader>
-                  <DialogTitle>Add your review</DialogTitle>
-                  <DialogDescription>
-                    Tell us your experience and opinion about this place
-                  </DialogDescription>
-                </DialogHeader>
-                <CommentForm id={locationId} />
-              </DialogContent>
-            </Dialog>
+            <DrawerDialog id={locationId} title="Add Review" />
           </div>
         </div>
       </div>

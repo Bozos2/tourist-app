@@ -5,7 +5,6 @@ import { format } from "date-fns";
 
 import { specialFeaturesData, idealForData } from "@/helpers/card-icons-data";
 import DisplayIcons from "@/helpers/detail-icons-display";
-import CommentForm from "./comment-form";
 import { DrawerDialog } from "./dialog-drawer-review";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -26,18 +25,6 @@ import {
   IoCashOutline,
 } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogPortal,
-  DialogOverlay,
-  DialogTrigger,
-  DialogClose,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
 
 interface DetailPageProps {
   id: string;
@@ -231,7 +218,7 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
             <Button variant="default" className="w-full" asChild>
               <Link href="/explore/new-location">Add Location</Link>
             </Button>
-            <DrawerDialog id={id} />
+            <DrawerDialog id={id} title="Review place" className="w-full" />
           </div>
         </div>
       </div>

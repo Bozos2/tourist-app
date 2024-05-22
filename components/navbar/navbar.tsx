@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 import { MobileNavbar } from "./mobile-navbar";
 import { NavbarAuth } from "./navbar-auth";
@@ -10,11 +11,13 @@ import { NavbarLinks } from "./navbar-links";
 import { Logo } from "./navbar-logo";
 import { ThemeToggle } from "../theme-toggle";
 import { FloatingNav } from "./floating-navbar";
+import { Favorites } from "../favorites-sheet";
 
 import { usePathname } from "next/navigation";
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const user = useCurrentUser();
 
   const pathname = usePathname();
 
@@ -51,7 +54,10 @@ export const Navbar = () => {
         <Logo />
         <NavbarLinks />
         <div className="flex flex-row items-center gap-4 lg:gap-0">
-          <ThemeToggle />
+          <div className="space-x-2">
+            {user ? <Favorites /> : " "}
+            <ThemeToggle />
+          </div>
           <NavbarAuth />
           <MobileNavbar />
         </div>

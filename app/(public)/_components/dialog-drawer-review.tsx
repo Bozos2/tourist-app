@@ -1,5 +1,8 @@
+"use client";
+
 import * as React from "react";
 
+import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,7 +26,13 @@ import {
 
 import CommentForm from "./comment-form";
 
-export function DrawerDialog({ id }: { id: string }) {
+interface DrawerDialogProps {
+  id: string;
+  className?: string;
+  title: string;
+}
+
+export function DrawerDialog({ id, className, title }: DrawerDialogProps) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -31,8 +40,8 @@ export function DrawerDialog({ id }: { id: string }) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline" className="w-full">
-            Review Place
+          <Button variant="outline" className={cn(className)}>
+            {title}
           </Button>
         </DialogTrigger>
         <DialogContent className="space-y-4 sm:max-w-[425px]">
