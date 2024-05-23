@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { addFavorites } from "@/actions/favorites";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -13,15 +14,18 @@ import { Pagination } from "swiper/modules";
 
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import Heart from "@/assets/svgs/favorite-svg";
+import { toast } from "sonner";
 
 interface ImageSliderProps {
   urls: string[];
   aspectRatio: string;
+  id?: string;
 }
 
-const ImageSlider = ({ urls, aspectRatio }: ImageSliderProps) => {
+const ImageSlider = ({ urls, aspectRatio, id }: ImageSliderProps) => {
   const [swiper, setSwiper] = useState<null | SwiperType>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPending, setTransition] = useTransition();
 
   const [slideConfig, setSlideConfig] = useState({
     isBeginning: true,
@@ -37,6 +41,21 @@ const ImageSlider = ({ urls, aspectRatio }: ImageSliderProps) => {
       });
     });
   }, [swiper, urls]);
+
+  const favoritesHandler = (id: string) => {
+    setTransition(() => {
+      addFavorites(id)
+        .then((data) => {
+          if (data?.error) {
+            toast.error(data.error);
+          }
+          if (data?.success) {
+            toast.success(data.success);
+          }
+        })
+        .catch(() => toast.error("Something went wrong"));
+    });
+  };
 
   const activeStyles =
     "active:scale-[0.97] grid opacity-100 hover:scale-105 absolute top-1/2 -translate-y-1/2 aspect-square h-8 w-8 z-50 place-items-center rounded-full border-2 bg-white border-zinc-300";
@@ -84,7 +103,9 @@ const ImageSlider = ({ urls, aspectRatio }: ImageSliderProps) => {
           className="absolute  right-2 top-2 z-10"
           onClick={(e) => {
             e.preventDefault();
+            favoritesHandler(id!);
           }}
+          disabled={isPending}
         >
           <Heart className="h-7 w-7  transition duration-500 ease-out hover:scale-110" />
         </button>

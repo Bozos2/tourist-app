@@ -60,7 +60,7 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
         className="flex flex-col md:flex-row"
       >
         <div className="w-72 scrollScreen:w-80 md:w-72 xl:w-80">
-          <ImageSlider urls={urls} aspectRatio="aspect-square" />
+          <ImageSlider urls={urls} aspectRatio="aspect-square" id={id} />
         </div>
         <div className="w-72 px-3 py-3 scrollScreen:w-80 md:w-full md:px-4">
           <div className="flex flex-row justify-between">

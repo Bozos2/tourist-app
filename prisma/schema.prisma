@@ -35,6 +35,7 @@ model User {
   urls Json?
   locations Locations[]
   comments Comment[]
+  favorites Favorites[]
 }
 
 model Account {
@@ -117,6 +118,8 @@ model Locations {
   comments Comment[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade,onUpdate: Cascade)
+
+  favorites Favorites[]
 }
 
 
@@ -130,4 +133,16 @@ model Comment {
   
   locations   Locations? @relation(fields: [locationId], references: [id],onDelete: Cascade,onUpdate: Cascade) 
   user      User? @relation(fields: [userId], references: [id],onDelete: Cascade,onUpdate: Cascade)
+}
+
+model Favorites {
+  id         String    @id @default(cuid())
+  userId     String
+  locationId String
+  createdAt  DateTime  @default(now())
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  location Locations @relation(fields: [locationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, locationId]) 
 }

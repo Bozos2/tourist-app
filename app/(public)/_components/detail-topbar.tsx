@@ -1,6 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { addFavorites } from "@/actions/favorites";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,9 +14,27 @@ import {
 
 import { ArrowLeftIcon, HeartIcon } from "@radix-ui/react-icons";
 import { Share2Icon } from "@radix-ui/react-icons";
+import { toast } from "sonner";
 
-export const DeatilTopbar = () => {
+export const DeatilTopbar = ({ id }: { id: string }) => {
+  const [isPending, setTransition] = useTransition();
   const router = useRouter();
+
+  const favoritesHandler = (id: string) => {
+    setTransition(() => {
+      addFavorites(id)
+        .then((data) => {
+          if (data?.error) {
+            toast.error(data.error);
+          }
+          if (data?.success) {
+            toast.success(data.success);
+          }
+        })
+        .catch(() => toast.error("Something went wrong"));
+    });
+  };
+
   return (
     <div className="flex flex-row items-center justify-between">
       <TooltipProvider>
@@ -46,7 +66,11 @@ export const DeatilTopbar = () => {
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-        <Button variant="outline">
+        <Button
+          variant="outline"
+          onClick={() => favoritesHandler(id)}
+          disabled={isPending}
+        >
           <HeartIcon className="mr-2 h-7 w-7 text-rose-400" />{" "}
           <p className="font-normal tracking-widest">Save</p>
         </Button>

@@ -29,7 +29,7 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
   return (
     <div className="mt-14 flex min-h-screen flex-col px-6 font-poppins sm:px-24 lg:px-32 xl:px-56 2xl:px-96">
       <div>
-        <DeatilTopbar />
+        <DeatilTopbar id={locationId} />
       </div>
       <div className="flex flex-row items-center justify-between py-2">
         <h1 className="mr-4 max-w-[600px] truncate text-lg font-semibold text-gray-900 dark:text-white md:text-2xl">
