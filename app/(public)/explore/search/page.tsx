@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { db } from "@/lib/db";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -6,6 +7,7 @@ import img from "@/assets/images/location-illustration.png";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { IoArrowBack } from "react-icons/io5";
+import { SearchLocationsCardSkeleton } from "../../_components/search-locations-card";
 
 const SearchLocationsCard = dynamic(
   () => import("../../_components/search-locations-card"),
@@ -63,21 +65,23 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
       {location.length > 0 ? (
         <div className="mt-12 space-y-6 md:w-full">
           {location.map((location: any) => (
-            <SearchLocationsCard
-              key={location.id}
-              id={location.id}
-              urls={location.images}
-              title={location.name}
-              country={location.country}
-              city={location.city}
-              rating={location.rating}
-              specialFeatures={location.specialFeatures}
-              idealFor={location.idealFor}
-              username={location.user?.name || ""}
-              role={location.user.role}
-              profileImage={location.user.image || ""}
-              verified={location.user.emailVerified || " "}
-            />
+            <Suspense fallback={<SearchLocationsCardSkeleton />}>
+              <SearchLocationsCard
+                key={location.id}
+                id={location.id}
+                urls={location.images}
+                title={location.name}
+                country={location.country}
+                city={location.city}
+                rating={location.rating}
+                specialFeatures={location.specialFeatures}
+                idealFor={location.idealFor}
+                username={location.user?.name || ""}
+                role={location.user.role}
+                profileImage={location.user.image || ""}
+                verified={location.user.emailVerified || " "}
+              />
+            </Suspense>
           ))}
         </div>
       ) : (

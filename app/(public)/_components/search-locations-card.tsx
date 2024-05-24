@@ -1,6 +1,7 @@
 "use client";
 
 import ImageSlider from "./image-slider";
+import { useRouter } from "next/navigation";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { Rate } from "./ratings";
@@ -38,6 +39,7 @@ export interface LocationProps {
 }
 
 const SearchLocationsCard: React.FC<LocationProps> = (props) => {
+  const router = useRouter();
   const {
     id,
     urls,
@@ -52,6 +54,10 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
     role,
     verified,
   } = props;
+
+  const profileHandler = () => {
+    router.push("/profile");
+  };
 
   return (
     <div className="max-w-[800px] rounded-xl border border-input bg-background dark:border-0  dark:bg-transparent/40 xl:max-w-[900px]">
@@ -111,12 +117,12 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
                       </AvatarFallback>
                     </Avatar>
                     <div className="space-y-1">
-                      <Link
-                        href="/"
+                      <div
                         className="text-sm font-semibold hover:underline"
+                        onClick={() => profileHandler()}
                       >
                         @{username}
-                      </Link>
+                      </div>
                       <p className="text-sm">{role}</p>
                       <div className="flex items-center pt-2">
                         <FaRegCalendarAlt className="mr-2 h-4 w-4 opacity-70" />{" "}
@@ -158,7 +164,10 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
               e.preventDefault();
             }}
           >
-            <Link className="flex w-fit flex-row" href="/">
+            <div
+              className="flex w-fit flex-row"
+              onClick={() => profileHandler()}
+            >
               <Avatar>
                 <AvatarImage src={profileImage || " "} />
                 <AvatarFallback className="bg-primary">
@@ -169,7 +178,7 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
                 <h1 className="text-sm font-semibold">{username}</h1>
                 <p className="text-xs opacity-70">{role}</p>
               </div>
-            </Link>
+            </div>
           </div>
         </div>
       </Link>
@@ -178,3 +187,53 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
 };
 
 export default SearchLocationsCard;
+
+export const SearchLocationsCardSkeleton = () => {
+  return (
+    <div className="max-w-[800px] rounded-xl border border-input bg-background dark:border-0 dark:bg-transparent/40 xl:max-w-[900px]">
+      <div className="flex animate-pulse flex-col md:flex-row">
+        <div className="w-72 scrollScreen:w-80 md:w-72 xl:w-80">
+          <Skeleton className="aspect-square h-full w-full bg-zinc-200 dark:bg-zinc-500" />
+        </div>
+        <div className="w-72 px-3 py-3 scrollScreen:w-80 md:w-full md:px-4">
+          <div className="flex flex-row justify-between">
+            <div className="flex flex-col gap-1 xl:w-full">
+              <Skeleton className="h-6 w-64 truncate bg-zinc-200 pr-2 dark:bg-zinc-500 scrollScreen:w-72 md:w-52 mdp:w-72 lg:w-96 xl:h-8 xl:w-[450px]" />
+              <div className="flex flex-row items-center">
+                <Skeleton className="mr-1 h-5 w-5 bg-zinc-200 dark:bg-zinc-500" />
+                <Skeleton className="h-4 w-36 bg-zinc-200 dark:bg-zinc-500" />
+              </div>
+              <div className="flex flex-row items-center xl:pt-4">
+                <Skeleton className="h-5 w-24 bg-zinc-200 dark:bg-zinc-500" />
+                <Skeleton className="ml-1 h-5 w-8 bg-zinc-200 dark:bg-zinc-500" />
+              </div>
+            </div>
+            <div className="hidden md:block">
+              <Skeleton className="h-10 w-10 rounded-full bg-zinc-200 dark:bg-zinc-500" />
+            </div>
+          </div>
+          <div className="flex flex-col md:mt-4">
+            <div className="hidden flex-col gap-2 md:flex">
+              <Skeleton className="h-5 w-24 bg-zinc-200 dark:bg-zinc-500" />
+              <Skeleton className="h-5 w-72 bg-zinc-200 dark:bg-zinc-500" />
+            </div>
+            <div className="mt-4 flex flex-col gap-2">
+              <Skeleton className="h-5 w-24 bg-zinc-200 dark:bg-zinc-500" />
+              <Skeleton className="h-5 w-72 bg-zinc-200 dark:bg-zinc-500" />
+            </div>
+          </div>
+          <Separator className="my-3 block md:hidden" />
+          <div className="block md:hidden">
+            <div className="flex w-fit flex-row">
+              <Skeleton className="h-10 w-10 rounded-full bg-zinc-200 dark:bg-zinc-500" />
+              <div className="ml-2 flex max-w-56 flex-col gap-0.5 truncate">
+                <Skeleton className="h-4 w-32 bg-zinc-200 dark:bg-zinc-500" />
+                <Skeleton className="h-4 w-24 bg-zinc-200 dark:bg-zinc-500" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

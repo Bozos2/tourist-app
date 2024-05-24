@@ -55,7 +55,9 @@ const CommentsSheet: React.FC<CommentsLocationIdProp> = ({ locationId }) => {
         <ScrollArea className="h-full w-full">
           <ul className="mt-6 flex flex-col">
             {loading ? (
-              <div>Loading...</div>
+              <div className="mt-12 flex justify-center">
+                <h1 className="text-lg font-medium">Loading...</h1>
+              </div>
             ) : (
               comments.map((data) => (
                 <li key={data.id}>
