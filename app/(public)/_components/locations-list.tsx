@@ -36,27 +36,15 @@ export const LocationsList = ({ locations }: LocationsProps) => {
   }, [swiper]);
 
   return (
-    <div className="relative flex flex-col  pt-12">
+    <div className="flex w-full flex-col pt-12">
       <Swiper
         spaceBetween={40}
-        breakpoints={{
-          320: { slidesPerView: 1 },
-          350: { slidesPerView: 1.2 },
-          410: { slidesPerView: 1.4 },
-          460: { slidesPerView: 1.55 },
-          500: { slidesPerView: 1.7 },
-          640: { slidesPerView: 1.5 },
-          680: { slidesPerView: 1.7 },
-          880: { slidesPerView: 2.2 },
-          1024: { slidesPerView: 2.6 },
-          1280: { slidesPerView: 4 },
-          1716: { slidesPerView: 5 },
-        }}
+        slidesPerView="auto"
         onSwiper={(swiper) => setSwiper(swiper)}
         className="h-full w-full"
       >
         {locations.map((data, i) => (
-          <SwiperSlide key={i} className="!relative">
+          <SwiperSlide key={i} className="!w-fit">
             <LocationCard key={data.id} location={data} index={i} />
           </SwiperSlide>
         ))}

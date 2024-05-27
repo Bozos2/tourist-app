@@ -27,74 +27,77 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
   console.log(location);
 
   return (
-    <div className="mt-14 flex min-h-screen flex-col px-6 font-poppins sm:px-24 lg:px-32 xl:px-56 2xl:px-96">
-      <div>
-        <DeatilTopbar id={locationId} />
-      </div>
-      <div className="flex flex-row items-center justify-between py-2">
-        <h1 className="mr-4 max-w-[600px] truncate text-lg font-semibold text-gray-900 dark:text-white md:text-2xl">
-          {location?.name}
-        </h1>
-        <p className="text-xs text-muted-foreground md:text-sm">
-          Created {format(new Date(location?.dateArrived!), "PP")}
-        </p>
-      </div>
-      <div className="flex  justify-center text-center">
-        <div className="h-full w-full max-w-[1200px]">
-          {location && location.images ? (
-            <ImageSlider urls={location.images} aspectRatio="aspect-video" />
+    <main className="flex w-full justify-center overflow-hidden">
+      <div className="mt-14 flex w-full max-w-[1135px] flex-col px-6 font-poppins  2xl:px-0">
+        <div>
+          <DeatilTopbar id={locationId} />
+        </div>
+        <div className="flex flex-row items-center justify-between py-2">
+          <h1 className="mr-4 max-w-[600px] truncate text-lg font-semibold text-gray-900 dark:text-white md:text-2xl">
+            {location?.name}
+          </h1>
+          <p className="text-xs text-muted-foreground md:text-sm">
+            Created {format(new Date(location?.dateArrived!), "PP")}
+          </p>
+        </div>
+        <div className="flex  justify-center text-center">
+          <div className="h-full w-full max-w-[1200px]">
+            {location && location.images ? (
+              <ImageSlider urls={location.images} aspectRatio="aspect-video" />
+            ) : (
+              " "
+            )}
+          </div>
+        </div>
+        <div>
+          {location ? (
+            <DetailPageInfo
+              id={locationId}
+              profileImage={location.user?.image || " "}
+              username={location.user?.name || " "}
+              role={location.user?.role || " "}
+              verified={location.user?.emailVerified || " "}
+              rating={location.rating || 0}
+              description={location.description!}
+              specialFeatures={location.specialFeatures}
+              idealFor={location.idealFor!}
+              city={location.city!}
+              country={location.country!}
+              category={location.category!}
+              address={location.address!}
+              dateArrived={location.dateArrived!}
+              openingTime={location.openingTime || " "}
+              closingTime={location.closingTime || " "}
+              price={location.price || 0}
+              video={embedUrl}
+              ratingNumber={location.commentsCount}
+              userid={location.user?.id || " "}
+            />
           ) : (
-            " "
+            ""
           )}
         </div>
-      </div>
-      <div>
-        {location ? (
-          <DetailPageInfo
-            id={locationId}
-            profileImage={location.user?.image || " "}
-            username={location.user?.name || " "}
-            role={location.user?.role || " "}
-            verified={location.user?.emailVerified || " "}
-            rating={location.rating || 0}
-            description={location.description!}
-            specialFeatures={location.specialFeatures}
-            idealFor={location.idealFor!}
-            city={location.city!}
-            country={location.country!}
-            category={location.category!}
-            address={location.address!}
-            dateArrived={location.dateArrived!}
-            openingTime={location.openingTime || " "}
-            closingTime={location.closingTime || " "}
-            price={location.price || 0}
-            video={embedUrl}
-            ratingNumber={location.commentsCount}
-          />
-        ) : (
-          ""
-        )}
-      </div>
-      <div className="my-6">
-        <Separator />
-        <div className="my-2">
-          <h1 className="mb-2 text-lg font-semibold">Location</h1>
+        <div className="my-6">
+          <Separator />
+          <div className="my-2">
+            <h1 className="mb-2 text-lg font-semibold">Location</h1>
+          </div>
         </div>
-      </div>
-      <div className="my-6">
-        <Separator />
-        <div className="my-2">
-          <h1 className="mb-2 text-lg font-semibold">User ratings</h1>
-          <CommentsSection locationId={locationId} />
-          <div className="flex flex-row items-center justify-between sm:justify-start">
-            <h1 className="mr-3 text-sm font-light sm:text-base">
-              Wanna help other users with your experience?
-            </h1>
-            <DrawerDialog id={locationId} title="Add Review" />
+        <div className="my-6">
+          <Separator />
+          <div className="my-2">
+            <h1 className="mb-2 text-lg font-semibold">User ratings</h1>
+            <CommentsSection locationId={locationId} />
+            <div className="flex flex-row items-center justify-between sm:justify-start">
+              <h1 className="mr-3 text-sm font-light sm:text-base">
+                Wanna help other users with your experience?
+              </h1>
+              <DrawerDialog id={locationId} title="Add Review" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

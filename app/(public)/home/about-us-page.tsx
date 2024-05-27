@@ -2,13 +2,13 @@ import ProgrammingSvg from "@/assets/svgs/programming-team-svg";
 
 export const AboutUs = () => {
   return (
-    <main>
-      <section className="mx-6 flex flex-col py-16 sm:mx-24 xl:mx-32">
+    <main className="flex justify-center">
+      <section className="mx-6 flex w-full  max-w-[1500px] flex-col items-center justify-center py-16 sm:mx-12">
         <div className="flex flex-col items-center">
           <h1 className=" text-3xl font-medium tracking-wide">About us </h1>
           <div className="h-1 w-20 bg-primary pt-1"></div>
         </div>
-        <div className="flex w-full flex-col items-center justify-center pt-16 sm:pt-0 lg:flex-row lg:gap-16 lg:pt-24">
+        <div className="flex w-full flex-col items-center justify-center pt-16 sm:pt-0 lg:flex-row lg:gap-16 lg:pt-16">
           <ProgrammingSvg className="hidden transform sm:block sm:scale-75 lg:scale-100" />
           <div className="flex max-w-[300px] flex-col gap-4 sm:max-w-[440px] lg:max-w-[360px] xl:max-w-[500px] 2xl:max-w-[620px]">
             <h1 className="text-3xl font-semibold tracking-wider sm:text-5xl">

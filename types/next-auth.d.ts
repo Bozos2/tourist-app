@@ -12,6 +12,7 @@ declare module "next-auth" {
       country: string | null;
       bio: string | null;
       urls: Json;
+      emailVerified: Date;
     } & DefaultSession["user"];
   }
 }

@@ -53,7 +53,7 @@ export const PostmarkSwiper = () => {
   }, [swiper]);
 
   return (
-    <div className="relative flex flex-col  pt-12">
+    <div className="relative flex  flex-col pt-12">
       <Swiper
         spaceBetween={40}
         breakpoints={{

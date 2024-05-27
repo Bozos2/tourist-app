@@ -10,6 +10,7 @@ export const getLocation = async (id: string) => {
     include: {
       user: {
         select: {
+          id: true,
           name: true,
           role: true,
           image: true,

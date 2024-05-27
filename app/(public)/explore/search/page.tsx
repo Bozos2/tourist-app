@@ -47,6 +47,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
       include: {
         user: {
           select: {
+            id: true,
             name: true,
             role: true,
             image: true,
@@ -80,6 +81,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
                 role={location.user.role}
                 profileImage={location.user.image || ""}
                 verified={location.user.emailVerified || " "}
+                userid={location.user.id}
               />
             </Suspense>
           ))}

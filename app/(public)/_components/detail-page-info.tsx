@@ -46,6 +46,7 @@ interface DetailPageProps {
   openingTime?: string;
   closingTime?: string;
   ratingNumber: number;
+  userid: string;
 }
 
 export const DetailPageInfo: React.FC<DetailPageProps> = ({
@@ -68,6 +69,7 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
   closingTime,
   id,
   ratingNumber,
+  userid,
 }) => {
   return (
     <section className="mt-4 flex flex-col lg:flex-row">
@@ -88,7 +90,7 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
                     </AvatarFallback>
                   </Avatar>
                   <Link
-                    href="/"
+                    href={`/profile/${username}-${userid}`}
                     className="text-lg font-semibold hover:underline"
                   >
                     {username}

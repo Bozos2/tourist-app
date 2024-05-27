@@ -36,6 +36,7 @@ export interface LocationProps {
   username: string;
   role: string;
   verified: string | Date;
+  userid: string;
 }
 
 const SearchLocationsCard: React.FC<LocationProps> = (props) => {
@@ -53,10 +54,11 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
     profileImage,
     role,
     verified,
+    userid,
   } = props;
 
   const profileHandler = () => {
-    router.push("/profile");
+    router.push(`/profile/${username}-${userid}`);
   };
 
   return (

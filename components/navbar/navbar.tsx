@@ -22,9 +22,12 @@ export const Navbar = () => {
   const pathname = usePathname();
 
   const isDetailPage =
-    pathname.startsWith("/explore/") &&
-    pathname.includes("-") &&
-    pathname.length > 35;
+    (pathname.startsWith("/explore/") &&
+      pathname.includes("-") &&
+      pathname.length > 35) ||
+    (pathname.startsWith("/profile/") &&
+      pathname.includes("-") &&
+      pathname.length > 35);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,15 +43,15 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <header className="sticky left-0 top-0 z-50 w-full">
+    <header className="sticky left-0 top-0 z-50 flex w-full justify-center">
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: scrolled ? 0 : 1, y: scrolled ? 0 : 1 }}
         transition={{ duration: 0.3 }}
         className={cn(
-          { "px-6 sm:px-24 lg:px-32 xl:px-56 2xl:px-96": isDetailPage },
-          "flex h-16 flex-row  items-center justify-between gap-4 py-3 font-poppins",
-          { "px-6 sm:px-24 xl:px-32": !isDetailPage },
+          { "w-full max-w-[1135px] 2xl:px-0": isDetailPage },
+          "flex h-16 flex-row  items-center justify-between gap-4 px-6 py-3 font-poppins",
+          { "w-full max-w-[1500px] sm:px-12": !isDetailPage },
         )}
       >
         <Logo />

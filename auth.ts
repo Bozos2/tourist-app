@@ -78,6 +78,7 @@ export const {
         session.user.country = token.country as string;
         session.user.bio = token.bio as string;
         session.user.urls = token.urls as string[];
+        session.user.emailVerified = token.emailVerified as Date;
       }
 
       return session;
@@ -101,6 +102,7 @@ export const {
       token.country = existingUser.country;
       token.bio = existingUser.bio;
       token.urls = existingUser.urls;
+      token.emailVerified = existingUser.emailVerified;
 
       return token;
     },

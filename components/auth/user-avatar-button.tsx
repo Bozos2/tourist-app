@@ -36,7 +36,7 @@ export const UserAvatarButton = () => {
         <p className="mb-2 text-sm opacity-70">{user?.email}</p>
         <DropdownMenuItem>
           <Link
-            href="/profile"
+            href={`/profile/${user?.name}-${user?.id}`}
             className="flex flex-row items-center text-base"
           >
             <PersonIcon className="mr-2 h-4 w-4" />
