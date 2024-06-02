@@ -87,6 +87,7 @@ const ProfileReviewsTab = ({ reviews, isOwnUser }: ReviewsData) => {
         {!showAll
           ? InitialReviews.map((data) => (
               <ReviewsCard
+                key={data.id}
                 id={data.id}
                 locationId={data.locationId}
                 rating={data.rating}
@@ -99,6 +100,7 @@ const ProfileReviewsTab = ({ reviews, isOwnUser }: ReviewsData) => {
             ))
           : reviews.map((data) => (
               <ReviewsCard
+                key={data.id}
                 id={data.id}
                 locationId={data.locationId}
                 rating={data.rating}

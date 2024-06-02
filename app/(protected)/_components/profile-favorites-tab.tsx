@@ -54,6 +54,7 @@ const ProfileFavoriteTabs = ({
         {!showAll
           ? InitialFavorites.map((data) => (
               <ProfileFavoritesCard
+                key={data.id}
                 id={data.id}
                 images={data.images}
                 name={data.name}
@@ -66,6 +67,7 @@ const ProfileFavoriteTabs = ({
             ))
           : favorites.map((data) => (
               <ProfileFavoritesCard
+                key={data.id}
                 id={data.id}
                 images={data.images}
                 name={data.name}

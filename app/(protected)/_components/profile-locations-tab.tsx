@@ -53,6 +53,7 @@ const ProfileLocationsTab = ({ locations, isOwnUser }: LocationsProps) => {
         {!showAll
           ? InitialLocations.map((data) => (
               <ProfileLocationsCard
+                key={data.id}
                 id={data.id}
                 images={data.images}
                 name={data.name}
@@ -65,6 +66,7 @@ const ProfileLocationsTab = ({ locations, isOwnUser }: LocationsProps) => {
             ))
           : locations.map((data) => (
               <ProfileLocationsCard
+                key={data.id}
                 id={data.id}
                 images={data.images}
                 name={data.name}
