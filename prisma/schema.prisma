@@ -22,6 +22,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  coverImage    String?
   password      String?
   role          UserRole @default(USER)
   accounts      Account[]
@@ -96,6 +97,12 @@ model TwoFactorConfirmation {
   @@unique([userId])
 }
 
+enum LocationStatus {
+  Pending
+  Accepted
+  Rejected
+}
+
 model Locations {
   id String @id @default(cuid())
   userId String 
@@ -116,6 +123,7 @@ model Locations {
   rating    Float @default(0)
   createdAt  DateTime   @default(now())
   comments Comment[]
+  status    LocationStatus @default(Pending)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade,onUpdate: Cascade)
 

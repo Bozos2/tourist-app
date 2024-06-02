@@ -20,7 +20,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { HiOutlineHeart } from "react-icons/hi2";
 import { IoHeartOutline } from "react-icons/io5";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Rate } from "@/app/(public)/_components/ratings";
@@ -29,8 +28,6 @@ import { toast } from "sonner";
 import { getFavorites, removeFavorites } from "@/actions/favorites";
 import { Separator } from "./ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
-import { useSession } from "next-auth/react";
 
 export const Favorites = () => {
   const [locations, setLocations] = useState<FavoritesData[]>([]);

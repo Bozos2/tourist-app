@@ -59,54 +59,59 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
   }
 
   return (
-    <div className="mx-6 mt-12 flex min-h-screen  flex-col items-center font-poppins sm:mx-24 xl:mx-32">
-      <div className="w-fit">
-        <FilterBar />
-      </div>
-      {location.length > 0 ? (
-        <div className="mt-12 space-y-6 md:w-full">
-          {location.map((location: any) => (
-            <Suspense fallback={<SearchLocationsCardSkeleton />}>
-              <SearchLocationsCard
+    <section className="flex justify-center">
+      <div className="mx-6 mt-12 flex min-h-screen  max-w-[1500px] flex-col items-center font-poppins sm:mx-12">
+        <div className="w-fit">
+          <FilterBar />
+        </div>
+        {location.length > 0 ? (
+          <div className="mt-12 space-y-6 md:w-full">
+            {location.map((location: any) => (
+              <Suspense
+                fallback={<SearchLocationsCardSkeleton />}
                 key={location.id}
-                id={location.id}
-                urls={location.images}
-                title={location.name}
-                country={location.country}
-                city={location.city}
-                rating={location.rating}
-                specialFeatures={location.specialFeatures}
-                idealFor={location.idealFor}
-                username={location.user?.name || ""}
-                role={location.user.role}
-                profileImage={location.user.image || ""}
-                verified={location.user.emailVerified || " "}
-                userid={location.user.id}
-              />
-            </Suspense>
-          ))}
-        </div>
-      ) : (
-        <div className="mt-12 flex flex-col items-center">
-          <Image
-            alt="no-location image"
-            src={img}
-            width={600}
-            height={400}
-            quality={100}
-          />
-          <p className="pt-4 text-center text-xl font-semibold text-muted-foreground dark:text-white">
-            Location Not Found for the Searched Area. Try Another Location.
-          </p>
-          <Button variant="default" className="mt-4 w-fit px-10" asChild>
-            <Link href="/explore">
-              <IoArrowBack className="mr-1 h-5 w-5" />
-              Back
-            </Link>
-          </Button>
-        </div>
-      )}
-    </div>
+              >
+                <SearchLocationsCard
+                  key={location.id}
+                  id={location.id}
+                  urls={location.images}
+                  title={location.name}
+                  country={location.country}
+                  city={location.city}
+                  rating={location.rating}
+                  specialFeatures={location.specialFeatures}
+                  idealFor={location.idealFor}
+                  username={location.user?.name || ""}
+                  role={location.user.role}
+                  profileImage={location.user.image || ""}
+                  verified={location.user.emailVerified || " "}
+                  userid={location.user.id}
+                />
+              </Suspense>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-12 flex flex-col items-center">
+            <Image
+              alt="no-location image"
+              src={img}
+              width={600}
+              height={400}
+              quality={100}
+            />
+            <p className="pt-4 text-center text-xl font-semibold text-muted-foreground dark:text-white">
+              Location Not Found for the Searched Area. Try Another Location.
+            </p>
+            <Button variant="default" className="mt-4 w-fit px-10" asChild>
+              <Link href="/explore">
+                <IoArrowBack className="mr-1 h-5 w-5" />
+                Back
+              </Link>
+            </Button>
+          </div>
+        )}
+      </div>
+    </section>
   );
 };
 

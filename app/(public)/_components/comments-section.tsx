@@ -24,7 +24,7 @@ const CommentsSection: React.FC<CommentsProp> = ({ locationId }) => {
 
   const fetchComments = async (tab: string) => {
     setLoading(true);
-    let fetchedComments: any = [];
+    let fetchedComments: CommentsPropsData[] = [];
     switch (tab) {
       case "top":
         fetchedComments = await getTopRatedComments(locationId);
@@ -54,7 +54,7 @@ const CommentsSection: React.FC<CommentsProp> = ({ locationId }) => {
   if (comments.length === 0) {
     return (
       <div className="flex h-48 items-center justify-center">
-        <h1>No one rated this place yet. Be the first one!</h1>
+        <h1>There is no reviews to display!</h1>
       </div>
     );
   }

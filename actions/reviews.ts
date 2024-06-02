@@ -88,3 +88,18 @@ export async function getNewestComments(locationId: string) {
     },
   });
 }
+
+export async function getUserComments(userId: string) {
+  return db.comment.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      locations: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+}

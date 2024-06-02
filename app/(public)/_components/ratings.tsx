@@ -24,10 +24,7 @@ export function Rate({
   const { className: labelClassName, ...labelRest } = labelProps;
 
   return (
-    <div
-      className={cn("flex items-center justify-center gap-0.5", className)}
-      {...rest}
-    >
+    <div className={cn("flex items-center  gap-0.5", className)} {...rest}>
       {[...Array(stars)].map((_, index) => (
         <div key={index} className="relative">
           {value >= index + 1 ? (

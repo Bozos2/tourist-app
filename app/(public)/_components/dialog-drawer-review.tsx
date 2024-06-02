@@ -36,6 +36,10 @@ export function DrawerDialog({ id, className, title }: DrawerDialogProps) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
+  const handleSuccess = () => {
+    setOpen(false);
+  };
+
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
@@ -51,7 +55,7 @@ export function DrawerDialog({ id, className, title }: DrawerDialogProps) {
               Tell us your experience and opinion about this place
             </DialogDescription>
           </DialogHeader>
-          <CommentForm id={id} />
+          <CommentForm locationId={id} onSuccess={handleSuccess} />
         </DialogContent>
       </Dialog>
     );
@@ -61,7 +65,7 @@ export function DrawerDialog({ id, className, title }: DrawerDialogProps) {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button variant="outline" className="w-full">
-          Review Place
+          {title}
         </Button>
       </DrawerTrigger>
       <DrawerContent>
@@ -72,7 +76,7 @@ export function DrawerDialog({ id, className, title }: DrawerDialogProps) {
           </DrawerDescription>
         </DrawerHeader>
         <div className="px-4">
-          <CommentForm id={id} />
+          <CommentForm locationId={id} onSuccess={handleSuccess} />
         </div>
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>

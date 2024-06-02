@@ -13,6 +13,7 @@ declare module "next-auth" {
       bio: string | null;
       urls: Json;
       emailVerified: Date;
+      coverImage: string | null;
     } & DefaultSession["user"];
   }
 }

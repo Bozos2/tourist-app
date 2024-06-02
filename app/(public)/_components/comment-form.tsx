@@ -1,12 +1,13 @@
 "use client";
 
-import { useTransition, useState } from "react";
+import { useTransition, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ControlledRate } from "./controlled-rating";
 import * as z from "zod";
 import { AddCommentFormSchema } from "@/schemas";
-import { addComment } from "@/actions/add-comment";
+import { addComment, updateComment } from "@/actions/add-comment";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -23,30 +24,56 @@ import { toast } from "sonner";
 import { FormError } from "@/components/form-error";
 
 interface CommentFormProps {
-  id: string;
+  locationId?: string;
+  commentId?: string;
+  comment?: { id: string; title: string; rating: number };
+  onSuccess: () => void;
 }
 
-const CommentForm: React.FC<CommentFormProps> = ({ id }) => {
+const CommentForm: React.FC<CommentFormProps> = ({
+  commentId,
+  locationId,
+  comment,
+  onSuccess,
+}) => {
   const [error, setError] = useState<string | undefined>("");
   const [isPending, setTransition] = useTransition();
+  const isEditing = Boolean(comment);
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof AddCommentFormSchema>>({
     resolver: zodResolver(AddCommentFormSchema),
     defaultValues: {
-      rating: 0,
-      title: "",
+      rating: comment ? comment.rating : 0,
+      title: comment ? comment.title : "",
     },
   });
+
+  useEffect(() => {
+    if (comment) {
+      form.setValue("rating", comment.rating);
+      form.setValue("title", comment.title);
+    }
+  }, [comment, form]);
 
   const onSubmit = (values: z.infer<typeof AddCommentFormSchema>) => {
     setError(" ");
 
     setTransition(() => {
-      addComment(values, id).then((data) => {
+      const action = isEditing ? updateComment : addComment;
+      const id = isEditing ? commentId : locationId;
+      action(values, id!).then((data) => {
         if (data && data.error) {
           setError(data?.error);
         } else {
           form.reset();
-          toast.success("Successfully added review!");
+          toast.success(
+            isEditing
+              ? "Successfully updated review!"
+              : "Successfully added review!",
+          );
+          router.refresh();
+          onSuccess();
         }
       });
     });
@@ -98,7 +125,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ id }) => {
             disabled={isPending}
             className="mt-3 w-full"
           >
-            Submit Review
+            {isEditing ? "Update Review" : "Submit Review"}
           </Button>
         </>
       </form>

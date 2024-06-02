@@ -24,7 +24,6 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
   const location = await getLocation(locationId);
 
   const embedUrl = location?.video?.replace("watch?v=", "embed/");
-  console.log(location);
 
   return (
     <main className="flex w-full justify-center overflow-hidden">

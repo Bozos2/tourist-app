@@ -41,3 +41,18 @@ export const location = async (values: z.infer<typeof Schema>) => {
 
   return { success: "Settings Updated!" };
 };
+
+export async function getUserLocations(userId: string) {
+  return db.locations.findMany({
+    where: { userId },
+  });
+}
+
+export async function getPublicLocations(userId: string) {
+  return db.locations.findMany({
+    where: {
+      userId,
+      status: "Accepted",
+    },
+  });
+}

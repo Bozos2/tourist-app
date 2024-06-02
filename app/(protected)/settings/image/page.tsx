@@ -5,9 +5,9 @@ export default function ImagePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium">Image</h3>
+        <h3 className="text-lg font-medium">Profile and Cover image</h3>
         <p className="text-sm text-muted-foreground">
-          Update your Profile image. Help others to meet you.
+          Update your Profile and Cover image. Help others to meet you.
         </p>
       </div>
       <Separator />

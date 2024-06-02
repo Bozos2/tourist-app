@@ -126,7 +126,37 @@ export const getFavorites = async () => {
     },
   });
 
-  const favoriteLocations = favorites.map((favorite) => favorite.location);
+  const favoriteLocations = favorites.map((favorite) => ({
+    ...favorite.location,
+    createdAt: favorite.createdAt,
+  }));
+
+  return favoriteLocations;
+};
+
+export const getPublicFavorites = async (userId: string) => {
+  const favorites = await db.favorites.findMany({
+    where: {
+      userId: userId,
+    },
+    include: {
+      location: {
+        select: {
+          id: true,
+          images: true,
+          name: true,
+          rating: true,
+          city: true,
+          country: true,
+        },
+      },
+    },
+  });
+
+  const favoriteLocations = favorites.map((favorite) => ({
+    ...favorite.location,
+    createdAt: favorite.createdAt,
+  }));
 
   return favoriteLocations;
 };
