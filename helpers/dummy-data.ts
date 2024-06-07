@@ -1,11 +1,11 @@
 export const data = [
   {
     id: "1",
-    title: "Machu Picchu",
+    name: "Machu Picchu",
     city: "Huayna Picchu",
     country: "Peru",
     rating: 4.9,
-    urls: [
+    images: [
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
       "https://utfs.io/f/53a05a6c-5875-464c-bf28-b0462b70b72b-mkb0or.jpg",
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
@@ -15,11 +15,11 @@ export const data = [
   },
   {
     id: "2",
-    title: "El Nido sea",
+    name: "El Nido sea",
     city: "Palawan island",
     country: "Philippines",
     rating: 4.7,
-    urls: [
+    images: [
       "https://utfs.io/f/deaaabb2-b833-41ac-a3ad-c9721f7ffb50-a9d9bm.jpg",
       "https://utfs.io/f/53a05a6c-5875-464c-bf28-b0462b70b72b-mkb0or.jpg",
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
@@ -29,11 +29,11 @@ export const data = [
   },
   {
     id: "3",
-    title: "Sfinga pyramid",
+    name: "Sfinga pyramid",
     city: "Giza",
     country: "Egypt",
     rating: 4.5,
-    urls: [
+    images: [
       "https://utfs.io/f/2ecfe2aa-78c3-4784-8430-8dc6a7b41645-ami1nv.jpg",
       "https://utfs.io/f/53a05a6c-5875-464c-bf28-b0462b70b72b-mkb0or.jpg",
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
@@ -43,11 +43,11 @@ export const data = [
   },
   {
     id: "4",
-    title: "Bahamas sea",
+    name: "Bahamas sea",
     city: "Dummy city bahamas",
     country: "Bahamas",
     rating: 4.5,
-    urls: [
+    images: [
       "https://utfs.io/f/4a0556fe-7687-4c31-aece-d5cfbb8f8632-9hmpfa.jpg",
       "https://utfs.io/f/53a05a6c-5875-464c-bf28-b0462b70b72b-mkb0or.jpg",
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
@@ -57,11 +57,11 @@ export const data = [
   },
   {
     id: "5",
-    title: "Cappadocia balloons",
+    name: "Cappadocia balloons",
     city: "Cappadocia",
     country: "Turkey",
     rating: 4.8,
-    urls: [
+    images: [
       "https://utfs.io/f/53a05a6c-5875-464c-bf28-b0462b70b72b-mkb0or.jpg",
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
@@ -71,11 +71,11 @@ export const data = [
   },
   {
     id: "6",
-    title: "Test title",
+    name: "Test title",
     city: "Test city",
     country: "Test country",
     rating: 4.5,
-    urls: [
+    images: [
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
@@ -85,11 +85,11 @@ export const data = [
   },
   {
     id: "7",
-    title: "Test title",
+    name: "Test title",
     city: "Test city",
     country: "Test country",
     rating: 4.5,
-    urls: [
+    images: [
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",
       "https://utfs.io/f/d4a32994-2de7-4b93-95bb-e77bdeac804b-hbozi.jpg",

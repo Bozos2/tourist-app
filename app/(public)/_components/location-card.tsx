@@ -36,11 +36,11 @@ export const LocationCard = ({ location, index }: LocationCardProps) => {
           className={cn("invisible h-full w-full cursor-pointer", {
             "visible animate-in fade-in-5": isVisible,
           })}
-          href={`/explore/${location.title.toLocaleLowerCase()}-${location.id}`}
+          href={`/explore/${location.name.toLocaleLowerCase()}-${location.id}`}
         >
           <div>
             <ImageSlider
-              urls={location.urls}
+              urls={location.images}
               aspectRatio="aspect-square"
               id={location.id}
             />
@@ -48,7 +48,7 @@ export const LocationCard = ({ location, index }: LocationCardProps) => {
           <div className="flex flex-row justify-between pt-2">
             <div className="flex flex-col gap-4">
               <h1 className="w-48 truncate font-medium xl:w-36 2xl:w-48">
-                {location.title}
+                {location.name}
               </h1>
               <div className="flex flex-row">
                 <FaMapMarkerAlt className="mr-1 h-5 w-5 text-primary" />{" "}
@@ -59,7 +59,7 @@ export const LocationCard = ({ location, index }: LocationCardProps) => {
             </div>
             <div className="flex flex-row gap-0.5">
               <StarIcon className="fill-primary stroke-primary" />{" "}
-              <p className="pt-0.5">{location.rating}</p>
+              <p className="pt-0.5">{location.rating.toFixed(1)}</p>
             </div>
           </div>
         </Link>

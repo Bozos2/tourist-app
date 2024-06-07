@@ -81,3 +81,31 @@
   background: white !important;
   scale: 1 !important ;
 }
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.leaflet-popup-content {
+  width: 150px;
+  height: 130px;
+  margin: 0px !important;
+}
+
+.leaflet-popup-content-wrapper {
+  padding: 0px !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: white !important;
+  font:
+    20px / 28px Tahoma,
+    Verdana,
+    sans-serif !important;
+}
+
+.detail-popup {
+  height: 40px !important;
+}

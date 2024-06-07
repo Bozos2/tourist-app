@@ -56,8 +56,8 @@ const CategoryFilter = () => {
     category(name).then((data) => {
       const mappedData: LocationsTypes[] = data.map((item) => ({
         id: item.id,
-        urls: item.images,
-        title: item.name,
+        images: item.images,
+        name: item.name,
         country: item.country,
         city: item.city,
         rating: 5,
@@ -123,7 +123,7 @@ const CategoryFilter = () => {
             )}
           </div>
         </div>
-        <div>
+        <div className="pt-12">
           <LocationsList locations={locations} />
         </div>
       </>
@@ -147,7 +147,7 @@ const CategoryFilter = () => {
           </div>
         ))}
       </div>
-      <div>
+      <div className="pt-12">
         <LocationsList locations={locations} />
       </div>
     </div>

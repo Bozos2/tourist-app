@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import dynamic from "next/dynamic";
 
 import { getLocation } from "@/actions/get-detail-location";
 import { DeatilTopbar } from "../../_components/detail-topbar";
@@ -7,6 +8,17 @@ import { DetailPageInfo } from "../../_components/detail-page-info";
 import { Separator } from "@/components/ui/separator";
 import { DrawerDialog } from "../../_components/dialog-drawer-review";
 import CommentsSection from "../../_components/comments-section";
+import { convertCoordinates } from "@/helpers/convert-prisma-coordinates";
+import { LocationsList } from "../../_components/locations-list";
+import {
+  getSameCategoryLocations,
+  getDetailNearLocations,
+} from "@/actions/location";
+
+const Map = dynamic(() => import("@/app/(public)/_components/map-detail"), {
+  loading: () => <p>A map is loading</p>,
+  ssr: false,
+});
 
 interface LoocationDetailProps {
   params: {
@@ -23,7 +35,19 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
 
   const location = await getLocation(locationId);
 
+  const coordinates = convertCoordinates(location.coordinates);
+
   const embedUrl = location?.video?.replace("watch?v=", "embed/");
+
+  const sameCategoryLocations = await getSameCategoryLocations(
+    location.category,
+    location.id,
+  );
+
+  const nearLocations = await getDetailNearLocations(
+    location.country,
+    location.id,
+  );
 
   return (
     <main className="flex w-full justify-center overflow-hidden">
@@ -76,16 +100,25 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
             ""
           )}
         </div>
-        <div className="my-6">
+        <div className="mt-6">
           <Separator />
-          <div className="my-2">
-            <h1 className="mb-2 text-lg font-semibold">Location</h1>
+          <div className="mt-3">
+            <h1 className="mb-2 text-xl font-semibold">Location</h1>
+            {coordinates ? (
+              <div className="h-[400px] w-full">
+                <Map position={coordinates} title={location.name} />
+              </div>
+            ) : (
+              <h1 className="pt-2 text-center text-lg text-muted-foreground">
+                User didn&apos;t marked location!
+              </h1>
+            )}
           </div>
         </div>
-        <div className="my-6">
+        <div className="mt-6">
           <Separator />
-          <div className="my-2">
-            <h1 className="mb-2 text-lg font-semibold">User ratings</h1>
+          <div className="mt-3">
+            <h1 className="mb-2 text-xl font-semibold">User ratings</h1>
             <CommentsSection locationId={locationId} />
             <div className="flex flex-row items-center justify-between sm:justify-start">
               <h1 className="mr-3 text-sm font-light sm:text-base">
@@ -94,6 +127,19 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
               <DrawerDialog id={locationId} title="Add Review" />
             </div>
           </div>
+        </div>
+
+        <div className="mt-12">
+          <h1 className="pb-4 text-xl font-semibold">
+            Locations near this place
+          </h1>
+          <LocationsList locations={nearLocations} />
+        </div>
+        <div className="sm:mt-3">
+          <h1 className="pb-4 text-xl font-semibold">
+            Same category locations
+          </h1>
+          <LocationsList locations={sameCategoryLocations} />
         </div>
       </div>
     </main>

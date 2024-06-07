@@ -114,7 +114,8 @@ model Locations {
   dateArrived DateTime
   images String[]
   video String?
-  address String
+  address String?
+  coordinates String[]
   openingTime String?
   closingTime String?
   price Float?

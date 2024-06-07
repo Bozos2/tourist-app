@@ -2,29 +2,33 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import type SwiperType from "swiper";
-
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { LocationCard } from "./location-card";
 import { LocationsTypes } from "@/types";
 import { Button } from "@/components/ui/button";
+import { getNearLocations } from "@/actions/location";
 
-interface LocationsProps {
-  locations: LocationsTypes[];
-}
-
-export const LocationsList = ({ locations }: LocationsProps) => {
+export const PromiseLocationsList = () => {
   const [swiper, setSwiper] = useState<null | SwiperType>(null);
-
   const [slideConfig, setSlideConfig] = useState({
     isBeginning: true,
     isEnd: false,
   });
+  const [nearLocations, setNearLocations] = useState<LocationsTypes[]>([]);
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      const locations = await getNearLocations();
+      setNearLocations(locations);
+    };
+
+    fetchLocations();
+  }, []);
 
   useEffect(() => {
     swiper?.on("slideChange", ({ activeIndex }) => {
@@ -36,20 +40,20 @@ export const LocationsList = ({ locations }: LocationsProps) => {
   }, [swiper]);
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full flex-col pt-12">
       <Swiper
         spaceBetween={40}
         slidesPerView="auto"
         onSwiper={(swiper) => setSwiper(swiper)}
         className="h-full w-full"
       >
-        {locations.map((data, i) => (
+        {nearLocations.map((data, i) => (
           <SwiperSlide key={i} className="!w-fit">
             <LocationCard key={data.id} location={data} index={i} />
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="mt-10 flex flex-row justify-center  gap-6">
+      <div className="mt-10 flex flex-row justify-center gap-6">
         <Button
           onClick={(e) => {
             e.preventDefault();

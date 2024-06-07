@@ -40,7 +40,7 @@ interface DetailPageProps {
   dateArrived: string | Date;
   description: string;
   category: string;
-  address: string;
+  address?: string;
   video?: string;
   price?: number;
   openingTime?: string;
@@ -191,10 +191,12 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
                   {format(new Date(dateArrived), "PP")}
                 </p>
               </div>
-              <div className="mr-2 flex flex-row items-center gap-4">
-                <IoHomeOutline className="h-6 w-6 text-primary" />{" "}
-                <p className="font-medium text-muted-foreground">{address}</p>
-              </div>
+              {address ? (
+                <div className="mr-2 flex flex-row items-center gap-4">
+                  <IoHomeOutline className="h-6 w-6 text-primary" />{" "}
+                  <p className="font-medium text-muted-foreground">{address}</p>
+                </div>
+              ) : null}
               {openingTime &&
               closingTime &&
               openingTime.trim() !== "" &&

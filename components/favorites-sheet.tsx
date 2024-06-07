@@ -59,9 +59,9 @@ export const Favorites = () => {
         <SheetHeader>
           <SheetTitle>Saved locations</SheetTitle>
           <SheetDescription>
-            There is list of your saved locations. If you want to edit some of
-            them you should go on your{" "}
-            <span className="font-bold">Profile &#8250; Saved</span>.
+            There is list of your saved locations. You can also check all
+            favorites locations by going on your{" "}
+            <span className="font-bold">Profile &#8250; Favorites</span>.
           </SheetDescription>
         </SheetHeader>
         <ScrollArea className="h-full w-full">

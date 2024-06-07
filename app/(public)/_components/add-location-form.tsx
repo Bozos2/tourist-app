@@ -2,11 +2,13 @@
 
 import { useState, useEffect, useCallback, useTransition, useRef } from "react";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 
 import { z } from "zod";
 import { AddLocationFormSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Virtuoso } from "react-virtuoso";
 
 import {
   Form,
@@ -25,14 +27,10 @@ import {
 } from "@/components/ui/popover";
 import {
   Command,
-  CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
 import {
@@ -57,6 +55,8 @@ import { useUploadFile } from "@/hooks/use-upload-file";
 import { FileUploader } from "@/components/file-uploader";
 import { UploadedFilesCard } from "./uploaded-files-card";
 import { BeatLoader } from "react-spinners";
+
+import { MapDrawerDialog } from "./map-dialog";
 
 const fileValidation = z.object({
   files: z.array(z.instanceof(File)),
@@ -149,6 +149,8 @@ export default function AddLocationForm() {
   const [isSuccess, setSuccess] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isCountrySelected, setIsCountrySelected] = useState<boolean>(false);
+  const [coordinates, setCoordinates] = useState<[number, number]>([0, 0]);
+  const [centeredCoord, setCenteredCoord] = useState<[number, number]>([0, 0]);
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const {
@@ -180,7 +182,7 @@ export default function AddLocationForm() {
     setIsLoading(true);
 
     setTransition(() => {
-      location(values)
+      location(values, coordinates)
         .then((data) => {
           if (data && data.error) {
             toast.error("Something went wrong!");
@@ -229,10 +231,10 @@ export default function AddLocationForm() {
   };
 
   let country = form.watch("country");
+  let city = form.watch("city");
 
-  const handleCountryChange = useCallback(async () => {
+  const handleCountryChange = useCallback(async (selectedCountry: string) => {
     setIsCountrySelected(false);
-    const selectedCountry = form.getValues("country");
     try {
       const response = await fetch(
         "https://countriesnow.space/api/v0.1/countries/cities",
@@ -250,7 +252,6 @@ export default function AddLocationForm() {
       }
 
       const data = await response.json();
-
       const cities = data.data;
 
       setCities(cities);
@@ -260,19 +261,44 @@ export default function AddLocationForm() {
     } catch (error) {
       console.error("Error fetching cities:", error);
     }
-  }, [country]);
+  }, []);
 
   useEffect(() => {
     if (initialRender) {
       setInitialRender(false);
       return;
     }
-    handleCountryChange();
-  }, [handleCountryChange]);
+    handleCountryChange(country);
+  }, [handleCountryChange, country]);
 
   useEffect(() => {
     form.setValue("images", uploadedFilesUrl);
   }, [uploadedFilesUrl]);
+
+  useEffect(() => {
+    const fetchCoordinates = async (city: string) => {
+      try {
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/search?q=${city}&format=json`,
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch coordinates");
+        }
+
+        const data = await response.json();
+        if (data && data.length > 0) {
+          const { lat, lon } = data[0];
+          setCenteredCoord([lat, lon]);
+        }
+      } catch (error) {
+        console.error("Error fetching coordinates:", error);
+      }
+    };
+
+    if (city) {
+      fetchCoordinates(city);
+    }
+  }, [city]);
 
   return (
     <section
@@ -456,26 +482,30 @@ export default function AddLocationForm() {
                             <Command>
                               <CommandInput placeholder="Search city..." />
                               <CommandEmpty>No city found.</CommandEmpty>
-                              <CommandGroup className="max-h-[200px] overflow-y-auto">
-                                {cities?.map((country, index) => (
-                                  <CommandItem
-                                    value={country}
-                                    key={index}
-                                    onSelect={() => {
-                                      form.setValue("city", country);
-                                    }}
-                                  >
-                                    <CheckIcon
-                                      className={cn(
-                                        "mr-2 h-4 w-4",
-                                        country === field.value
-                                          ? "opacity-100"
-                                          : "opacity-0",
-                                      )}
-                                    />
-                                    {country}
-                                  </CommandItem>
-                                ))}
+                              <CommandGroup className="max-h-[200px]">
+                                <Virtuoso
+                                  style={{ height: "200px" }}
+                                  data={cities}
+                                  itemContent={(index, city) => (
+                                    <CommandItem
+                                      value={city}
+                                      key={index}
+                                      onSelect={() => {
+                                        form.setValue("city", city);
+                                      }}
+                                    >
+                                      <CheckIcon
+                                        className={cn(
+                                          "mr-2 h-4 w-4",
+                                          city === field.value
+                                            ? "opacity-100"
+                                            : "opacity-0",
+                                        )}
+                                      />
+                                      {city}
+                                    </CommandItem>
+                                  )}
+                                />
                               </CommandGroup>
                             </Command>
                           </PopoverContent>
@@ -538,7 +568,7 @@ export default function AddLocationForm() {
                       <FormControl>
                         <Textarea
                           placeholder="Tell us about that place..."
-                          className="resize-none"
+                          className="h-24"
                           {...field}
                         />
                       </FormControl>
@@ -571,7 +601,7 @@ export default function AddLocationForm() {
               </p>
 
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <div className="max-w-[392px] sm:col-span-3 sm:col-start-1">
+                <div className="max-w-[250px] sm:col-span-2 sm:col-start-1">
                   <FormField
                     control={form.control}
                     name="dateArrived"
@@ -620,74 +650,94 @@ export default function AddLocationForm() {
                     )}
                   />
                 </div>
-                <div className="max-w-[392px] sm:col-span-3">
+                <div className="max-w-[392px] sm:col-span-2">
                   <FormField
                     control={form.control}
                     name="address"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Address</FormLabel>
+                        <FormLabel>
+                          Address{" "}
+                          <span className="font-light text-muted-foreground">
+                            (optional)
+                          </span>
+                        </FormLabel>
                         <FormControl>
                           <Input {...field} placeholder="Enter Address" />
                         </FormControl>
                         <FormDescription>
                           The Address field allows you to specify the
-                          location&apos;s physical address. Please provide the
-                          complete address, including street name and number to
-                          accurately mark the location on the map.
+                          location&apos;s physical address.
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
                 </div>
-              </div>
-              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-2">
-                <div className="col-span-1 flex flex-col">
-                  <div className="flex flex-row">
-                    <FormField
-                      control={form.control}
-                      name="openingTime"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>
-                            Working Time{" "}
-                            <span className="hidden font-light text-muted-foreground">
-                              (optional)
-                            </span>
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              placeholder="Opening time"
-                              type="time"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+                <div className="sm:col-span-2">
+                  <div className="space-y-3">
+                    <h1 className="text-sm font-medium">Mark Location</h1>
+                    <MapDrawerDialog
+                      position={centeredCoord}
+                      zoom={14}
+                      setCoordinates={setCoordinates}
                     />
-                    <span className="mx-2 mt-12 flex h-0.5 w-3 items-center justify-center bg-gray-900 dark:bg-primary"></span>
-                    <FormField
-                      control={form.control}
-                      name="closingTime"
-                      render={({ field }) => (
-                        <FormItem className="mt-8">
-                          <FormControl>
-                            <Input
-                              {...field}
-                              placeholder="Closing time"
-                              type="time"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                    <FormDescription>
+                      Please provide the mark of the location also to help
+                      others to find this place.
+                    </FormDescription>
                   </div>
-                  <FormDescription className="pt-1.5">
-                    Specify the hours during which the location is open.
-                  </FormDescription>
+                </div>
+              </div>
+              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
+                <div className="col-span-1 flex flex-col">
+                  <div className="flex flex-col">
+                    <FormItem>
+                      <FormLabel>
+                        Working Time{" "}
+                        <span className="font-light text-muted-foreground">
+                          (optional)
+                        </span>
+                      </FormLabel>
+                      <div className="flex space-x-2">
+                        <FormField
+                          control={form.control}
+                          name="openingTime"
+                          render={({ field }) => (
+                            <FormControl>
+                              <Input
+                                {...field}
+                                placeholder="Opening time"
+                                type="time"
+                                className="w-24"
+                              />
+                            </FormControl>
+                          )}
+                        />
+                        <span className="flex items-center justify-center">
+                          -
+                        </span>
+                        <FormField
+                          control={form.control}
+                          name="closingTime"
+                          render={({ field }) => (
+                            <FormControl>
+                              <Input
+                                {...field}
+                                placeholder="Closing time"
+                                type="time"
+                                className="w-24"
+                              />
+                            </FormControl>
+                          )}
+                        />
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                    <FormDescription className="pt-1.5">
+                      Specify the hours during which the location is open.
+                    </FormDescription>
+                  </div>
                 </div>
 
                 <div className="col-span-1 max-w-[392px]">
@@ -707,6 +757,7 @@ export default function AddLocationForm() {
                             {...field}
                             placeholder="Add price"
                             type="number"
+                            className="w-44"
                           />
                         </FormControl>
                         <FormDescription>
@@ -968,7 +1019,7 @@ export default function AddLocationForm() {
                     our team. While we carefully evaluate your submission, you
                     can track the status of your form in your profile under{" "}
                     <span className="inline font-semibold text-black dark:text-white">
-                      My Profile &#x203A; Status
+                      My Profile &#x203A; Locations
                     </span>{" "}
                     Thank you for providing us with the necessary information.
                     We&apos;ll notify you once the review process is complete.

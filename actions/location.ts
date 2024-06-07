@@ -1,6 +1,7 @@
 "use server";
 
 import * as z from "zod";
+import { getIp } from "@/app/api/geo/route";
 
 import { db } from "@/lib/db";
 import { AddLocationFormSchema } from "@/schemas";
@@ -8,7 +9,10 @@ import { Schema } from "@/app/(public)/_components/add-location-form";
 import { getUserById } from "@/user/find-user";
 import { currentUser } from "@/lib/auth";
 
-export const location = async (values: z.infer<typeof Schema>) => {
+export const location = async (
+  values: z.infer<typeof Schema>,
+  coordinates: [number, number],
+) => {
   const user = await currentUser();
 
   if (!user) {
@@ -32,14 +36,17 @@ export const location = async (values: z.infer<typeof Schema>) => {
 
   const { files, ...rest } = values;
 
+  const coordinatesStringArray = coordinates.map((coord) => coord.toString());
+
   await db.locations.create({
     data: {
       ...rest,
+      coordinates: coordinatesStringArray,
       user: { connect: { id: userId } },
     },
   });
 
-  return { success: "Settings Updated!" };
+  return { success: "Location Added!" };
 };
 
 export async function getUserLocations(userId: string) {
@@ -56,3 +63,67 @@ export async function getPublicLocations(userId: string) {
     },
   });
 }
+
+export const getNearLocations = async () => {
+  let req = await fetch(`http://ip-api.com/json/${getIp()}`);
+  let { country } = await req.json();
+
+  return db.locations.findMany({
+    take: 8,
+    where: { country },
+    select: {
+      id: true,
+      name: true,
+      country: true,
+      city: true,
+      rating: true,
+      images: true,
+    },
+  });
+};
+
+export const getSameCategoryLocations = (
+  category: string | undefined,
+  currentLocationId: string | undefined,
+) => {
+  return db.locations.findMany({
+    take: 8,
+    where: {
+      category: category,
+      id: {
+        not: currentLocationId,
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      country: true,
+      city: true,
+      rating: true,
+      images: true,
+    },
+  });
+};
+
+export const getDetailNearLocations = (
+  country: string | undefined,
+  currentLocationId: string | undefined,
+) => {
+  return db.locations.findMany({
+    take: 8,
+    where: {
+      country: country,
+      id: {
+        not: currentLocationId,
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      country: true,
+      city: true,
+      rating: true,
+      images: true,
+    },
+  });
+};

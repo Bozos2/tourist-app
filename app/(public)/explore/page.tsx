@@ -6,6 +6,7 @@ import { FilterBar } from "../_components/filter-bar";
 import { LocationsList } from "../_components/locations-list";
 import { Button } from "@/components/ui/button";
 import { PostmarkSwiper } from "../_components/postmark-swiper";
+import { PromiseLocationsList } from "../_components/promise-location-list";
 
 import { data } from "@/helpers/dummy-data";
 
@@ -56,7 +57,7 @@ const ExplorePage = () => {
               </Link>
             </Button>
           </div>
-          <div className="w-full">
+          <div className="w-full pt-12">
             <LocationsList locations={data} />
           </div>
         </div>
@@ -85,7 +86,7 @@ const ExplorePage = () => {
             Top destinations near your place
           </p>
           <div className="w-full">
-            <LocationsList locations={data} />
+            <PromiseLocationsList />
           </div>
         </div>
       </div>

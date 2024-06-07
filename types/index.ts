@@ -4,8 +4,8 @@ export interface UploadedFile<T = unknown> extends ClientUploadedFileData<T> {}
 
 export interface LocationsTypes {
   id: string;
-  urls: string[];
-  title: string;
+  images: string[];
+  name: string;
   country: string;
   city: string;
   rating: number;

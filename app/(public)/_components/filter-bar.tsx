@@ -47,7 +47,7 @@ interface SearchParams {
   city?: string;
 }
 
-export const FilterBar = () => {
+export const FilterBar = ({ query, country, city }: SearchParams) => {
   const [initialRender, setInitialRender] = useState<boolean>(true);
   const [isCountrySelected, setIsCountrySelected] = useState<boolean>(false);
   const [cities, setCities] = useState<Cities>([]);
@@ -56,13 +56,13 @@ export const FilterBar = () => {
 
   const form = useForm({
     defaultValues: {
-      country: "",
-      city: "",
-      search: "",
+      country: country || "",
+      city: city || "",
+      search: query || "",
     },
   });
 
-  let country = form.watch("country");
+  let countrySelected = form.watch("country");
 
   const handleCountryChange = useCallback(async () => {
     setIsCountrySelected(false);
@@ -94,7 +94,7 @@ export const FilterBar = () => {
     } catch (error) {
       console.error("Error fetching cities:", error);
     }
-  }, [country]);
+  }, [countrySelected]);
 
   useEffect(() => {
     if (initialRender) {

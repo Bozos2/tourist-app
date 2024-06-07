@@ -37,7 +37,7 @@ export const UserAvatarButton = () => {
         <DropdownMenuItem className="cursor-pointer">
           <Link
             href={`/profile/${user?.name}-${user?.id}`}
-            className="flex flex-row items-center text-base"
+            className="flex w-full flex-row items-center text-base"
           >
             <PersonIcon className="mr-2 h-4 w-4" />
             Profile
@@ -46,7 +46,7 @@ export const UserAvatarButton = () => {
         <DropdownMenuItem className="cursor-pointer">
           <Link
             href="/settings"
-            className="flex flex-row items-center text-base"
+            className="flex w-full flex-row items-center text-base"
           >
             <GearIcon className="mr-2 h-4 w-4" />
             Settings
