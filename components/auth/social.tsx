@@ -2,7 +2,7 @@
 
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
+import { FaDiscord } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
 import { useSearchParams } from "next/navigation";
 
@@ -13,7 +13,7 @@ export const Social = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
 
-  const onClick = (provider: "google" | "facebook" | "twitter") => {
+  const onClick = (provider: "google" | "discord" | "twitter") => {
     signIn(provider, {
       callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT,
     });
@@ -33,9 +33,9 @@ export const Social = () => {
         size="lg"
         className="w-full bg-transparent"
         variant="outline"
-        onClick={() => onClick("facebook")}
+        onClick={() => onClick("discord")}
       >
-        <FaFacebook className="h-5 w-5" />
+        <FaDiscord className="h-5 w-5" />
       </Button>
       <Button
         size="lg"

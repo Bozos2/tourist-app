@@ -3,7 +3,7 @@ import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 import Google from "next-auth/providers/google";
-import Facebook from "next-auth/providers/facebook";
+import Discord from "next-auth/providers/discord";
 import Twitter from "next-auth/providers/twitter";
 
 import { LoginSchema } from "./schemas";
@@ -16,9 +16,9 @@ export default {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       allowDangerousEmailAccountLinking: true,
     }),
-    Facebook({
-      clientId: process.env.FACEBOOK_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    Discord({
+      clientId: process.env.DISCORD_CLIENT_ID,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET,
     }),
     Twitter({
       clientId: process.env.TWITTER_CLIENT_ID,

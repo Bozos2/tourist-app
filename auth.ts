@@ -28,7 +28,7 @@ export const {
     async signIn({ user, account }) {
       if (
         account?.provider === "google" ||
-        account?.provider === "facebook" ||
+        account?.provider === "discord" ||
         account?.provider === "twitter"
       )
         return true;

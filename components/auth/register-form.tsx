@@ -74,7 +74,7 @@ const RegisterForm = () => {
               variant="link"
               className="flex items-center justify-center text-muted-foreground"
             >
-              <Link href="/login">
+              <Link href="/auth/login">
                 Already have an account? Sign-in
                 <ArrowRightIcon className="ml-1 h-4 w-4" />
               </Link>

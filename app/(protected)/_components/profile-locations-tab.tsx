@@ -37,7 +37,7 @@ const ProfileLocationsTab = ({ locations, isOwnUser }: LocationsProps) => {
     setShowAll((prev) => !prev);
   };
 
-  if (!locations) {
+  if (locations.length < 1) {
     return (
       <div className="flex items-center justify-center pt-12">
         <h1 className="text-muted-foreground">

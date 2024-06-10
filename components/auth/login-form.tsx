@@ -130,7 +130,7 @@ const LoginForm = () => {
                   variant="link"
                   className="flex items-center justify-center text-muted-foreground"
                 >
-                  <Link href="/register">
+                  <Link href="/auth/register">
                     Don&apos;t have an account?
                     <ArrowRightIcon className="h-4 w-4" />
                   </Link>
