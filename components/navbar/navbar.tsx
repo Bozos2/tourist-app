@@ -15,7 +15,9 @@ import { Favorites } from "../favorites-sheet";
 
 import { usePathname } from "next/navigation";
 
-export const Navbar = () => {
+import type { Session } from "next-auth";
+
+export const Navbar = ({ session }: { session: Session | null }) => {
   const [scrolled, setScrolled] = useState(false);
   const user = useCurrentUser();
 
@@ -61,7 +63,7 @@ export const Navbar = () => {
             {user ? <Favorites /> : " "}
             <ThemeToggle />
           </div>
-          <NavbarAuth />
+          <NavbarAuth session={session} />
           <MobileNavbar />
         </div>
       </motion.nav>

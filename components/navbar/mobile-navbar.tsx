@@ -56,8 +56,8 @@ export const MobileNavbar = () => {
         }
       >
         <div className="flex flex-grow flex-col px-6 py-2">
-          <div className="py-2">
-            <Image src={logo} width={120} height={120} alt="logo" />
+          <div className="py-4">
+            <Image src={logo} width={100} height={100} alt="logo" />
           </div>
           <Separator />
           <div className="w-full">
@@ -81,17 +81,17 @@ export const MobileNavbar = () => {
                 <MdOutlineExplore size={28} /> Explore
               </Link>
               <Link
-                href="/contact-us"
+                href="/contact"
                 className={cn(
                   "flex  flex-row items-center gap-4 rounded-lg py-1 pl-2 text-lg ",
-                  pathname === "/contact-us" ? "bg-secondary" : "",
+                  pathname === "/contact" ? "bg-secondary" : "",
                 )}
               >
                 <IoCallOutline size={28} /> Contact us
               </Link>
               {user ? (
                 <Link
-                  href="/profile"
+                  href={`/profile/${user?.name}-${user?.id}`}
                   className={cn(
                     "flex  flex-row items-center gap-4 rounded-lg py-1 pl-2 text-lg ",
                     pathname === "/profile" ? "bg-secondary" : "",

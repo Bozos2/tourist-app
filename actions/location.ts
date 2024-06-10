@@ -1,7 +1,6 @@
 "use server";
 
 import * as z from "zod";
-import { getIp } from "@/app/api/geo/route";
 
 import { db } from "@/lib/db";
 import { AddLocationFormSchema } from "@/schemas";
@@ -65,12 +64,15 @@ export async function getPublicLocations(userId: string) {
 }
 
 export const getNearLocations = async () => {
-  let req = await fetch(`http://ip-api.com/json/${getIp()}`);
+  const ipResponse = await fetch(`${process.env.NEXT_APP_URL}/api/geo`);
+  const { ip } = await ipResponse.json();
+
+  let req = await fetch(`http://ip-api.com/json/${ip}`);
   let { country } = await req.json();
 
   return db.locations.findMany({
     take: 8,
-    where: { country },
+    where: { country, status: "Accepted" },
     select: {
       id: true,
       name: true,
@@ -90,6 +92,7 @@ export const getSameCategoryLocations = (
     take: 8,
     where: {
       category: category,
+      status: "Accepted",
       id: {
         not: currentLocationId,
       },
@@ -113,6 +116,7 @@ export const getDetailNearLocations = (
     take: 8,
     where: {
       country: country,
+      status: "Accepted",
       id: {
         not: currentLocationId,
       },

@@ -11,8 +11,12 @@ import { useUploadFile } from "@/hooks/use-upload-file";
 import { FileUploader } from "@/components/file-uploader";
 import { saveProfileCoverImages } from "@/actions/profile-image";
 
+import { useSession } from "next-auth/react";
+
 export const ImageDropzone = () => {
   const [isPending, startTransition] = useTransition();
+
+  const { update } = useSession();
 
   const {
     uploadFiles: uploadProfileFiles,
@@ -37,7 +41,10 @@ export const ImageDropzone = () => {
         }).then((data) => {
           if (data && data.error) {
             toast.error("Something went wrong!");
+          }
+          if (data && data.success) {
             toast.success("Successfully updated profile!");
+            update();
           }
         }),
       );
@@ -54,6 +61,7 @@ export const ImageDropzone = () => {
           }
           if (data && data.success) {
             toast.success("Successfully updated profile!");
+            update();
           }
         }),
       );

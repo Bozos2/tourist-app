@@ -1,18 +1,16 @@
-"use client";
-
 import Link from "next/link";
 
 import { Button } from "../ui/button";
 import { UserAvatarButton } from "../auth/user-avatar-button";
 
-import { useCurrentUser } from "@/hooks/use-current-user";
+import type { Session } from "next-auth";
 
-export const NavbarAuth = () => {
-  const user = useCurrentUser();
-
+export const NavbarAuth = ({ session }: { session: Session | null }) => {
   return (
     <section className="ml-6 hidden flex-row gap-2 lg:flex">
-      {!user ? (
+      {session?.user ? (
+        <UserAvatarButton />
+      ) : (
         <>
           <Button
             variant="outline"
@@ -25,8 +23,6 @@ export const NavbarAuth = () => {
             <Link href="/auth/register">Sign up</Link>
           </Button>
         </>
-      ) : (
-        <UserAvatarButton />
       )}
     </section>
   );

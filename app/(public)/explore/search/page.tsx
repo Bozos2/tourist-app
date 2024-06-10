@@ -49,6 +49,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
         },
         country: { contains: country },
         city: { contains: city },
+        status: "Accepted",
       },
       include: {
         user: {

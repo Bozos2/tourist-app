@@ -43,7 +43,7 @@ const ProfileBanner = ({
 }: ProfileBannerProps) => {
   const [copied, setCopied] = useState<boolean>(false);
   const pathname = usePathname();
-  const baseUrl = `${process.env.NEXT_APP_URL}` as const;
+  const baseUrl = "https://tourist-app-ten.vercel.app";
   const link = `${baseUrl}${pathname}`;
 
   const linkPlaceholder = pathname.slice(9);
@@ -144,7 +144,7 @@ const ProfileBanner = ({
       </div>
       <div className="absolute -bottom-[105px] left-1/2 flex  -translate-x-1/2 transform flex-col items-center scrollScreen:-bottom-[122px] sm:-bottom-24 sm:left-[25%] sm:-translate-x-[25%]  sm:flex-row sm:items-end lg:hidden">
         <div className="relative">
-          <Avatar className="h-36 w-36 scrollScreen:h-44 scrollScreen:w-44 sm:h-52 sm:w-52">
+          <Avatar className="h-36 w-36 border-4 border-white dark:border-[#12131F] scrollScreen:h-44 scrollScreen:w-44 sm:h-52 sm:w-52">
             <AvatarImage src={image || " "} />
             <AvatarFallback className="bg-primary">
               <div className="bg-primary text-white">

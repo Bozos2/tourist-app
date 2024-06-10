@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import {
   motion,
@@ -76,7 +77,7 @@ export const FloatingNav = ({ className }: { className?: string }) => {
   const loggedInNavItems: NavItems[] = [
     {
       name: "Profile",
-      link: "/profile",
+      link: `/profile/${user?.name}-${user?.id}`,
       icon: <FaRegUser className="h-4 w-4 text-neutral-500 dark:text-white" />,
     },
     {

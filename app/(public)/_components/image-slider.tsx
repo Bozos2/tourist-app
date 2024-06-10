@@ -134,6 +134,7 @@ const ImageSlider = ({ urls, aspectRatio, id }: ImageSliderProps) => {
               alt="Product image"
               quality={100}
               priority
+              sizes="auto"
             />
           </SwiperSlide>
         ))}

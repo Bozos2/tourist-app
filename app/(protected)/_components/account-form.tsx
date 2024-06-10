@@ -164,7 +164,7 @@ const AccountForm = () => {
           )}
         </div>
         <FormError message={error} />
-        <p>{success}</p>
+        <p className="font-bold">{success}</p>
         <Button disabled={isPending} type="submit">
           Save
         </Button>

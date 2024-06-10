@@ -132,6 +132,7 @@ const ProfileLocationsCard = ({
           className="h-1/2 w-full rounded-t-xl object-cover object-center"
           src={images[0]}
           fill
+          sizes="auto"
         />
       </div>
       <div className="flex flex-col justify-between gap-12 px-2.5">

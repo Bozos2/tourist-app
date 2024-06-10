@@ -54,7 +54,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <Progress />
-            <Navbar />
+            <Navbar session={session} />
             {children}
             <Footer />
             <ScrollToTop />

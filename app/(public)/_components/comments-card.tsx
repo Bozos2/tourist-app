@@ -65,7 +65,7 @@ const CommentsCard: React.FC<CommentCardProps> = ({
         </span>
       </div>
       <div className="mt-4 h-28 content-center">
-        <p className="text-sm opacity-85">{title}</p>
+        <p className="overflow-hidden text-sm opacity-85">{title}</p>
       </div>
     </div>
   );
