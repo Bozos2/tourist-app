@@ -20,6 +20,8 @@ interface LocationCardProps {
 export const LocationCard = ({ location, index }: LocationCardProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
+  const formattedRating = useFormattedRating(location ? location.rating : 0);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -60,7 +62,7 @@ export const LocationCard = ({ location, index }: LocationCardProps) => {
             </div>
             <div className="flex flex-row gap-0.5">
               <StarIcon className="fill-primary stroke-primary" />{" "}
-              <p>{useFormattedRating(location.rating)}</p>
+              <p>{formattedRating}</p>
             </div>
           </div>
         </Link>

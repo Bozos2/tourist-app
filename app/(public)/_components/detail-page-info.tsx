@@ -78,6 +78,8 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
   ratingNumber,
   userid,
 }) => {
+  const formattedRating = useFormattedRating(rating ? rating : 0);
+
   return (
     <section className="mt-4 flex flex-col lg:flex-row">
       <div className="flex flex-col">
@@ -137,7 +139,7 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
           </div>
           <div className="flex flex-row items-center gap-3">
             <Rate value={rating} />{" "}
-            <p className="text-lg font-medium">{useFormattedRating(rating)}</p>{" "}
+            <p className="text-lg font-medium">{formattedRating}</p>{" "}
             <p className="text-muted-foreground">{ratingNumber} reviews</p>
           </div>
         </div>

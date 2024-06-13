@@ -1,6 +1,10 @@
+import * as React from "react";
+
 export const useFormattedRating = (rating: number) => {
-  if (rating === 0) {
-    return "0";
-  }
-  return rating.toFixed(1);
+  return React.useMemo(() => {
+    if (rating === 0) {
+      return "0";
+    }
+    return rating.toFixed(1);
+  }, [rating]);
 };

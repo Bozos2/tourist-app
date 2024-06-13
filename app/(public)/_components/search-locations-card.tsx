@@ -62,6 +62,8 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
     router.push(`/profile/${username}-${userid}`);
   };
 
+  const formattedRating = useFormattedRating(location ? rating : 0);
+
   return (
     <div className="w-fit max-w-[900px] rounded-xl border border-input bg-background dark:border-0 dark:bg-transparent/40  md:w-full xl:max-w-[800px] 2xl:max-w-[900px]">
       <Link
@@ -85,7 +87,7 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
               </div>
               <div className="flex flex-row items-center xl:pt-4">
                 <Rate value={rating} />{" "}
-                <p className="ml-1 text-lg">{useFormattedRating(rating)}</p>
+                <p className="ml-1 text-lg">{formattedRating}</p>
               </div>
             </div>
             <div
