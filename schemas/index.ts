@@ -116,7 +116,7 @@ export const AddLocationFormSchema = z.object({
   images: z.array(z.string()),
   video: z.optional(z.string().url({ message: "URL/link of video required" })),
   dateArrived: z.date(),
-  address: z.optional(z.string().min(1)),
+  address: z.optional(z.string()),
   openingTime: z.optional(z.string()),
   closingTime: z.optional(z.string()),
   price: z.optional(z.coerce.number().min(1)),

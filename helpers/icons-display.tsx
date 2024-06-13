@@ -16,12 +16,12 @@ export const SpecialFeatures: React.FC<IconDataProps> = ({
   const hiddenCount = features.length - visibleData.length;
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1280) {
-        setVisibleData(features.slice(0, 3));
-      } else if (window.innerWidth <= 870 && window.innerWidth >= 768) {
-        setVisibleData(features.slice(0, 1));
-      } else {
+      if (window.innerWidth <= 900) {
         setVisibleData(features.slice(0, 2));
+      } else if (window.innerWidth >= 1280 && window.innerWidth < 1536) {
+        setVisibleData(features.slice(0, 2));
+      } else {
+        setVisibleData(features.slice(0, 3));
       }
     };
 

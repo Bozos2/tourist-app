@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -27,6 +28,7 @@ import { PiDotsThreeBold } from "react-icons/pi";
 const CategoryFilter = () => {
   const [swiper, setSwiper] = useState<null | SwiperType>(null);
   const [locations, setLocations] = useState<LocationsTypes[]>(data);
+  const [activeCategory, setActiveCategory] = useState<string>("");
 
   const [slideConfig, setSlideConfig] = useState({
     isBeginning: true,
@@ -38,6 +40,10 @@ const CategoryFilter = () => {
   useEffect(() => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResizeWindow);
+
+    //To set default locations
+    clickHandler("Historical");
+
     return () => {
       window.removeEventListener("resize", handleResizeWindow);
     };
@@ -53,6 +59,7 @@ const CategoryFilter = () => {
   }, [swiper]);
 
   const clickHandler = (name: string) => {
+    setActiveCategory(name);
     category(name).then((data) => {
       const mappedData: LocationsTypes[] = data.map((item) => ({
         id: item.id,
@@ -60,7 +67,7 @@ const CategoryFilter = () => {
         name: item.name,
         country: item.country,
         city: item.city,
-        rating: 5,
+        rating: item.rating,
       }));
       setLocations(mappedData);
     });
@@ -95,11 +102,26 @@ const CategoryFilter = () => {
               {CategoryData.map((data, i) => (
                 <SwiperSlide key={i} className="!w-16">
                   <div
-                    className="group flex w-16 flex-col hover:cursor-pointer focus:text-primary"
+                    className="group flex w-16 flex-col  hover:cursor-pointer"
                     onClick={() => clickHandler(data.name)}
                   >
-                    {data.icon}
-                    <p className="text-center text-sm text-zinc-700 group-hover:text-primary group-focus:text-primary dark:text-muted-foreground">
+                    <data.icon
+                      className={cn("h-12 w-16 group-hover:text-primary", {
+                        "text-primary": activeCategory === data.name,
+                        "text-zinc-700 dark:text-muted-foreground":
+                          activeCategory != data.name,
+                      })}
+                    />
+                    <p
+                      className={cn(
+                        "text-center text-sm group-hover:text-primary",
+                        {
+                          "text-primary": activeCategory === data.name,
+                          "text-zinc-700 dark:text-muted-foreground":
+                            activeCategory != data.name,
+                        },
+                      )}
+                    >
                       {data.name}
                     </p>
                   </div>
@@ -140,8 +162,20 @@ const CategoryFilter = () => {
             onClick={() => clickHandler(data.name)}
             tabIndex={0}
           >
-            {data.icon}
-            <p className="text-center text-sm text-zinc-700 group-hover:text-primary group-focus:text-primary dark:text-muted-foreground">
+            <data.icon
+              className={cn("h-12 w-16 group-hover:text-primary", {
+                "text-primary": activeCategory === data.name,
+                "text-zinc-700 dark:text-muted-foreground":
+                  activeCategory != data.name,
+              })}
+            />
+            <p
+              className={cn("text-center text-sm  group-hover:text-primary", {
+                "text-primary": activeCategory === data.name,
+                "text-zinc-700 dark:text-muted-foreground":
+                  activeCategory != data.name,
+              })}
+            >
               {data.name}
             </p>
           </div>
@@ -156,68 +190,45 @@ const CategoryFilter = () => {
 
 export default CategoryFilter;
 
+interface IconProps {
+  className: string;
+}
+
 const CategoryData = [
   {
-    href: "",
     name: "Historical",
-    icon: (
-      <HistoricalSites className="h-12 w-16 text-zinc-700 group-hover:text-primary group-focus:text-primary dark:text-muted-foreground" />
-    ),
+    icon: (props: IconProps) => <HistoricalSites {...props} />,
   },
   {
-    href: "",
     name: "Urban",
-    icon: (
-      <UrbanArea className="h-12 w-16 text-zinc-700 group-hover:text-primary group-focus:text-primary dark:text-muted-foreground" />
-    ),
+    icon: (props: IconProps) => <UrbanArea {...props} />,
   },
   {
-    href: "",
     name: "Parks",
-    icon: (
-      <PiParkLight className="h-12 w-16 text-zinc-700 group-hover:text-primary group-focus:text-primary dark:text-muted-foreground" />
-    ),
+    icon: (props: IconProps) => <PiParkLight {...props} />,
   },
   {
-    href: "",
     name: "Lakes",
-    icon: (
-      <MdOutlineWater className="h-12 w-16 text-zinc-700 group-hover:text-primary group-focus:text-primary dark:text-muted-foreground" />
-    ),
+    icon: (props: IconProps) => <MdOutlineWater {...props} />,
   },
   {
-    href: "",
     name: "Caves",
-    icon: (
-      <Cave className="h-12 w-16 text-zinc-700 group-hover:text-primary group-focus:text-primary dark:text-muted-foreground" />
-    ),
+    icon: (props: IconProps) => <Cave {...props} />,
   },
   {
-    href: "",
     name: "Mountains",
-    icon: (
-      <PiMountains className="h-12 w-16 text-zinc-700 group-hover:text-primary group-focus:text-primary dark:text-muted-foreground" />
-    ),
+    icon: (props: IconProps) => <PiMountains {...props} />,
   },
   {
-    href: "",
     name: "Waterfalls",
-    icon: (
-      <GiWaterfall className="h-12 w-16 p-1 text-zinc-700 group-hover:text-primary group-focus:text-primary dark:text-muted-foreground" />
-    ),
+    icon: (props: IconProps) => <GiWaterfall {...props} />,
   },
   {
-    href: "",
     name: "Beaches",
-    icon: (
-      <LuPalmtree className="h-12 w-16 p-1 text-zinc-700 group-hover:text-primary group-focus:text-primary dark:text-muted-foreground" />
-    ),
+    icon: (props: IconProps) => <LuPalmtree {...props} />,
   },
   {
-    href: "",
-    name: "Others",
-    icon: (
-      <PiDotsThreeBold className="h-12 w-16 text-zinc-700 group-hover:text-primary group-focus:text-primary dark:text-muted-foreground" />
-    ),
+    name: "Other",
+    icon: (props: IconProps) => <PiDotsThreeBold {...props} />,
   },
 ];

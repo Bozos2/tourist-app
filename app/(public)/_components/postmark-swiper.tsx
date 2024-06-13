@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 
 const postmarkData = [
   { href: "/explore/search?country=France&city=Paris", image: images.paris },
-  { href: "/explore/search?country=China&city=Bejing", image: images.peking },
+  { href: "/explore/search?country=China&city=Beijing", image: images.peking },
   {
     href: "/explore/search?country=United+States&city=New+York",
     image: images.newyork,
@@ -26,11 +26,11 @@ const postmarkData = [
   { href: "/explore/search?country=Germany&city=Berlin", image: images.berlin },
   { href: "/explore/search?country=Italy&city=Rome", image: images.rome },
   { href: "/explore/search?country=Egypt&city=Giza", image: images.giza },
-  { href: "/explore/search?country=Greece&city=Athena", image: images.athena },
+  { href: "/explore/search?country=Greece&city=Athens", image: images.athena },
   { href: "/explore/search?country=India&city=Agra", image: images.agra },
   { href: "/explore/search?country=Japan&city=Tokyo", image: images.tokyo },
   {
-    href: "/explore/search?country=United+Kingdon&city=London",
+    href: "/explore/search?country=United+Kingdom&city=London",
     image: images.london,
   },
 ];
@@ -56,25 +56,12 @@ export const PostmarkSwiper = () => {
     <div className="relative flex  flex-col pt-12">
       <Swiper
         spaceBetween={40}
-        breakpoints={{
-          320: { slidesPerView: 1.3 },
-          360: { slidesPerView: 1.4 },
-          420: { slidesPerView: 1.6 },
-          500: { slidesPerView: 2 },
-          580: { slidesPerView: 2.4 },
-          640: { slidesPerView: 2 },
-          680: { slidesPerView: 2.3 },
-          820: { slidesPerView: 2.5 },
-          910: { slidesPerView: 3 },
-          1134: { slidesPerView: 4 },
-          1438: { slidesPerView: 5 },
-          1716: { slidesPerView: 6 },
-        }}
+        slidesPerView="auto"
         onSwiper={(swiper) => setSwiper(swiper)}
         className="h-full w-full"
       >
         {postmarkData.map((data, i) => (
-          <SwiperSlide key={i}>
+          <SwiperSlide key={i} className="!w-fit">
             <PostmarkCard href={data.href} image={data.image} />
           </SwiperSlide>
         ))}

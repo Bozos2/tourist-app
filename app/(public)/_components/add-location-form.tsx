@@ -152,6 +152,7 @@ export default function AddLocationForm() {
   const [coordinates, setCoordinates] = useState<[number, number]>([0, 0]);
   const [centeredCoord, setCenteredCoord] = useState<[number, number]>([0, 0]);
   const formRef = useRef<HTMLFormElement | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const {
     uploadFiles,
@@ -480,12 +481,20 @@ export default function AddLocationForm() {
                           </PopoverTrigger>
                           <PopoverContent className="w-full p-0">
                             <Command>
-                              <CommandInput placeholder="Search city..." />
+                              <CommandInput
+                                placeholder="Search city..."
+                                value={searchTerm}
+                                onValueChange={(value) => setSearchTerm(value)}
+                              />
                               <CommandEmpty>No city found.</CommandEmpty>
                               <CommandGroup className="max-h-[200px]">
                                 <Virtuoso
                                   style={{ height: "200px" }}
-                                  data={cities}
+                                  data={cities?.filter((city) =>
+                                    city
+                                      .toLowerCase()
+                                      .includes(searchTerm.toLowerCase()),
+                                  )}
                                   itemContent={(index, city) => (
                                     <CommandItem
                                       value={city}

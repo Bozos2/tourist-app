@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useTransition } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useTransition, useState } from "react";
 import { addFavorites } from "@/actions/favorites";
 
 import { Button } from "@/components/ui/button";
@@ -11,10 +11,24 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 import { ArrowLeftIcon, HeartIcon } from "@radix-ui/react-icons";
 import { Share2Icon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
+import { LuCopy } from "react-icons/lu";
+import { IoCheckmarkSharp } from "react-icons/io5";
 
 export const DeatilTopbar = ({ id }: { id: string }) => {
   const [isPending, setTransition] = useTransition();
@@ -54,18 +68,7 @@ export const DeatilTopbar = ({ id }: { id: string }) => {
         </Tooltip>
       </TooltipProvider>
       <div>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="link">
-                <Share2Icon className="h-7 w-7 text-primary" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent className="border bg-background text-foreground">
-              <p>Share</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <DialogShareButton />
         <Button
           variant="outline"
           onClick={() => favoritesHandler(id)}
@@ -76,5 +79,60 @@ export const DeatilTopbar = ({ id }: { id: string }) => {
         </Button>
       </div>
     </div>
+  );
+};
+
+const DialogShareButton = () => {
+  const [copied, setCopied] = useState<boolean>(false);
+  const pathname = usePathname();
+  const baseUrl = "https://tourist-app-ten.vercel.app";
+  const link = `${baseUrl}${pathname}`;
+
+  const copylink = () => {
+    navigator.clipboard.writeText(link);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 4000);
+  };
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="link">
+          <Share2Icon className="h-7 w-7 text-primary" />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Share link</DialogTitle>
+        </DialogHeader>
+        <div className="flex items-center space-x-2">
+          <div className="grid flex-1 gap-2">
+            <Label htmlFor="link" className="sr-only">
+              Link
+            </Label>
+            <Input
+              id="link"
+              defaultValue={`https://tourist-app-ten.vercel.app${pathname}`}
+              readOnly
+            />
+          </div>
+          <Button type="submit" size="sm" className="px-3" onClick={copylink}>
+            <span className="sr-only">Copy</span>
+            {copied ? (
+              <IoCheckmarkSharp className="h-4 w-4" />
+            ) : (
+              <LuCopy className="h-4 w-4" />
+            )}
+          </Button>
+        </div>
+        <DialogFooter className="sm:justify-start">
+          <DialogClose asChild>
+            <Button type="button" variant="secondary">
+              Close
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };

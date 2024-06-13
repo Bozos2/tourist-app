@@ -1,6 +1,8 @@
 "use client";
 
-import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
+import { useEffect } from "react";
+
+import { MapContainer, Marker, TileLayer, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
@@ -26,9 +28,24 @@ interface MapsProps {
   zoom: number;
 }
 
+function ChangeView({
+  center,
+  zoom,
+}: {
+  center: [number, number];
+  zoom: number;
+}) {
+  const map = useMap();
+  useEffect(() => {
+    map.setView(center, zoom);
+  }, [center, zoom]);
+  return null;
+}
+
 export default function MyMap({ locations, position, zoom }: MapsProps) {
   return (
     <MapContainer center={position} zoom={zoom} scrollWheelZoom={true}>
+      <ChangeView center={position} zoom={zoom} />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

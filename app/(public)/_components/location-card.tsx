@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useFormattedRating } from "@/hooks/use-formatted-rating";
 
 import ImageSlider from "./image-slider";
 import { LocationsTypes } from "@/types";
@@ -59,7 +60,7 @@ export const LocationCard = ({ location, index }: LocationCardProps) => {
             </div>
             <div className="flex flex-row gap-0.5">
               <StarIcon className="fill-primary stroke-primary" />{" "}
-              <p className="pt-0.5">{location.rating.toFixed(1)}</p>
+              <p>{useFormattedRating(location.rating)}</p>
             </div>
           </div>
         </Link>

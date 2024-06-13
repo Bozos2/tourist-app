@@ -69,7 +69,7 @@ export function ProfileForm() {
 
   const defaultValues = {
     gender: user?.gender || undefined,
-    dob: user?.dob || undefined,
+    dob: user?.dob ? new Date(user.dob) : undefined,
     country: user?.country || undefined,
     bio: user?.bio || "This is my bio.",
     urls:

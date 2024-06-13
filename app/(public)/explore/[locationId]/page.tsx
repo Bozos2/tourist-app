@@ -60,7 +60,7 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
             {location?.name}
           </h1>
           <p className="text-xs text-muted-foreground md:text-sm">
-            Created {format(new Date(location?.dateArrived!), "PP")}
+            Created {format(new Date(location?.createdAt!), "PP")}
           </p>
         </div>
         <div className="flex  justify-center text-center">
@@ -128,18 +128,21 @@ const LocationPage: React.FC<LoocationDetailProps> = async ({ params }) => {
             </div>
           </div>
         </div>
-
         <div className="mt-12">
-          <h1 className="pb-4 text-xl font-semibold">
-            Locations near this place
-          </h1>
-          <LocationsList locations={nearLocations} />
-        </div>
-        <div className="sm:mt-3">
-          <h1 className="pb-4 text-xl font-semibold">
-            Same category locations
-          </h1>
-          <LocationsList locations={sameCategoryLocations} />
+          {nearLocations.length >= 1 ? (
+            <div>
+              <h1 className="pb-4 text-xl font-semibold">
+                Locations near this place
+              </h1>
+              <LocationsList locations={nearLocations} />
+            </div>
+          ) : null}
+          <div className="sm:mt-3">
+            <h1 className="pb-4 text-xl font-semibold">
+              Same category locations
+            </h1>
+            <LocationsList locations={sameCategoryLocations} />
+          </div>
         </div>
       </div>
     </main>

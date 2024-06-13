@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { specialFeaturesData, idealForData } from "@/helpers/card-icons-data";
 import DisplayIcons from "@/helpers/detail-icons-display";
 import { DrawerDialog } from "./dialog-drawer-review";
+import { useFormattedRating } from "@/hooks/use-formatted-rating";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Rate } from "./ratings";
@@ -14,6 +15,12 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -130,7 +137,7 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
           </div>
           <div className="flex flex-row items-center gap-3">
             <Rate value={rating} />{" "}
-            <p className="text-lg font-medium">{rating.toFixed(1)}</p>{" "}
+            <p className="text-lg font-medium">{useFormattedRating(rating)}</p>{" "}
             <p className="text-muted-foreground">{ratingNumber} reviews</p>
           </div>
         </div>
@@ -175,17 +182,32 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
             </h1>
             <div className="flex flex-col flex-wrap justify-center  gap-3 scrollScreen:items-center sm:flex-row lg:block lg:space-y-3">
               <div className="mr-2 flex flex-row items-center gap-4">
-                <FaMapMarkerAlt className="h-6 w-6 text-primary" />{" "}
-                <p className="font-medium text-muted-foreground">
-                  {city}, {country}
-                </p>
+                <div className="w-6">
+                  <FaMapMarkerAlt className="h-6 w-6 text-primary" />{" "}
+                </div>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <p className="line-clamp-2 font-medium text-muted-foreground">
+                        {city}, {country}
+                      </p>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>
+                        {city}, {country}
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
               <div className="mr-2 flex flex-row items-center gap-4">
                 <BiCategory className="h-6 w-6 text-primary" />{" "}
                 <p className="font-medium text-muted-foreground">{category}</p>
               </div>
               <div className="mr-2 flex flex-row items-center gap-4">
-                <IoCalendarNumberOutline className="h-6 w-6 text-primary" />{" "}
+                <div className="w-6">
+                  <IoCalendarNumberOutline className="h-6 w-6 text-primary" />{" "}
+                </div>
                 <p className="font-medium text-muted-foreground">
                   {" "}
                   {format(new Date(dateArrived), "PP")}
@@ -193,8 +215,21 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
               </div>
               {address ? (
                 <div className="mr-2 flex flex-row items-center gap-4">
-                  <IoHomeOutline className="h-6 w-6 text-primary" />{" "}
-                  <p className="font-medium text-muted-foreground">{address}</p>
+                  <div className="w-6">
+                    <IoHomeOutline className="h-6 w-6 text-primary" />{" "}
+                  </div>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <p className="truncate font-medium text-muted-foreground">
+                          {address}
+                        </p>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{address}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </div>
               ) : null}
               {openingTime &&
@@ -202,7 +237,9 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
               openingTime.trim() !== "" &&
               closingTime.trim() !== "" ? (
                 <div className="mr-2 flex flex-row items-center gap-4">
-                  <FaRegClock className="h-6 w-6 text-primary" />{" "}
+                  <div className="w-6">
+                    <FaRegClock className="h-6 w-6 text-primary" />{" "}
+                  </div>
                   <p className="font-medium text-muted-foreground">
                     {openingTime} - {closingTime}
                   </p>
@@ -210,7 +247,9 @@ export const DetailPageInfo: React.FC<DetailPageProps> = ({
               ) : null}
               {price ? (
                 <div className="mr-2 flex flex-row items-center gap-4">
-                  <IoCashOutline className="h-6 w-6 text-primary" />{" "}
+                  <div className="w-6">
+                    <IoCashOutline className="h-6 w-6 text-primary" />{" "}
+                  </div>
                   <p className="font-medium text-muted-foreground">{price} €</p>
                 </div>
               ) : (

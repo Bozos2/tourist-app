@@ -9,6 +9,7 @@ import Link from "next/link";
 import { IoArrowBack } from "react-icons/io5";
 import { SearchLocationsCardSkeleton } from "../../_components/search-locations-card";
 import { convertCoordinates } from "@/helpers/convert-prisma-coordinates";
+import { PlaceMarkersInfo } from "../../_components/place-markers-info";
 
 const SearchLocationsCard = dynamic(
   () => import("../../_components/search-locations-card"),
@@ -70,7 +71,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
     }));
   }
 
-  const zoom = city ? 15 : country ? 7 : 18;
+  const zoom = city ? 15 : country ? 6 : 16;
 
   return (
     <section className="flex justify-center">
@@ -79,8 +80,8 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
           <FilterBar query={query} city={city} country={country} />
         </div>
         {location && location.length > 0 ? (
-          <div className="mt-12 flex w-full flex-row justify-between gap-4">
-            <div className="space-y-6 md:w-full">
+          <div className="mt-12 flex w-full flex-col-reverse justify-between gap-4 xl:flex-row">
+            <div className="flex flex-col items-center space-y-6 md:w-full">
               {location.map((location: any) => (
                 <Suspense
                   fallback={<SearchLocationsCardSkeleton />}
@@ -105,8 +106,9 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
                 </Suspense>
               ))}
             </div>
-            <div className="relative h-full w-full max-w-[450px]">
-              <div className="sticky top-0 h-[800px] w-full">
+            <div className="relative mb-12 h-full  w-full xl:max-w-[450px]">
+              <div className="sticky top-0 h-[300px] w-full xl:h-[800px]">
+                <PlaceMarkersInfo />
                 <Map
                   locations={location}
                   position={location[0]?.coordinates}

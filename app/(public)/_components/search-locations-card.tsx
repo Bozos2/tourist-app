@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { specialFeaturesData, idealForData } from "@/helpers/card-icons-data";
 import SpecialFeatures from "@/helpers/icons-display";
 import Link from "next/link";
+import { useFormattedRating } from "@/hooks/use-formatted-rating";
 
 import { format } from "date-fns";
 
@@ -62,18 +63,18 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
   };
 
   return (
-    <div className="max-w-[800px] rounded-xl border border-input bg-background dark:border-0  dark:bg-transparent/40 xl:max-w-[900px]">
+    <div className="w-fit max-w-[900px] rounded-xl border border-input bg-background dark:border-0 dark:bg-transparent/40  md:w-full xl:max-w-[800px] 2xl:max-w-[900px]">
       <Link
         href={`/explore/${title.toLocaleLowerCase()}-${id}`}
         className="flex flex-col md:flex-row"
       >
-        <div className="w-72 scrollScreen:w-80 md:w-72 xl:w-80">
+        <div className="w-72 scrollScreen:w-80  2xl:w-80">
           <ImageSlider urls={urls} aspectRatio="aspect-square" id={id} />
         </div>
         <div className="w-72 px-3 py-3 scrollScreen:w-80 md:w-full md:px-4">
           <div className="flex flex-row justify-between">
-            <div className="flex flex-col gap-1 xl:w-full">
-              <h1 className="w-64 truncate pr-2 text-xl font-bold text-gray-900 dark:text-white scrollScreen:w-72 md:w-52 mdp:w-72 lg:w-96 xl:w-[450px] xl:text-2xl">
+            <div className="flex flex-col gap-1 2xl:w-full">
+              <h1 className="w-64 truncate pr-2 text-xl font-bold text-gray-900 dark:text-white scrollScreen:w-72 md:w-52 mdp:w-80 mdp:text-2xl lg:w-[450px] xl:w-80 xl:text-xl 2xl:w-[450px] 2xl:text-2xl">
                 {title}
               </h1>
               <div className="flex flex-row items-center">
@@ -84,7 +85,7 @@ const SearchLocationsCard: React.FC<LocationProps> = (props) => {
               </div>
               <div className="flex flex-row items-center xl:pt-4">
                 <Rate value={rating} />{" "}
-                <p className="ml-1">{rating.toFixed(1)}</p>
+                <p className="ml-1 text-lg">{useFormattedRating(rating)}</p>
               </div>
             </div>
             <div
