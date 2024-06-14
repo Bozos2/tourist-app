@@ -45,6 +45,7 @@ const CommentsSection: React.FC<CommentsProp> = ({ locationId }) => {
 
   useEffect(() => {
     fetchComments("all");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleTabChange = (tab: string) => {

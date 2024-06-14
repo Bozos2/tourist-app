@@ -12,7 +12,7 @@ export const Progress = () => {
 
   return (
     <motion.div
-      className="fixed left-0 right-0 top-0 z-[100] h-1.5 origin-left bg-[#5a61dc]"
+      className="fixed left-0 right-0 top-0 z-[1000] h-1.5 origin-left bg-[#5a61dc]"
       style={{ scaleX }}
     />
   );

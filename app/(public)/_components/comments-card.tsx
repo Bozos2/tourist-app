@@ -54,7 +54,10 @@ const CommentsCard: React.FC<CommentCardProps> = ({
             </AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
-            <Link href="/" className="text-lg font-medium hover:underline">
+            <Link
+              href={`/profile/${username}-${id}`}
+              className="text-lg font-medium hover:underline"
+            >
               {username}
             </Link>
             <Rate value={rating} size="sm" className="text-sm" />

@@ -94,6 +94,7 @@ export const FilterBar = ({ query, country, city }: SearchParams) => {
     } catch (error) {
       console.error("Error fetching cities:", error);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countrySelected]);
 
   useEffect(() => {
@@ -102,6 +103,7 @@ export const FilterBar = ({ query, country, city }: SearchParams) => {
       return;
     }
     handleCountryChange();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleCountryChange]);
 
   //filter logic

@@ -63,6 +63,30 @@ export async function getPublicLocations(userId: string) {
   });
 }
 
+export const getPopularLocations = async () => {
+  const popularLocations = await db.locations.findMany({
+    orderBy: {
+      comments: {
+        _count: "desc",
+      },
+    },
+    take: 7,
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          role: true,
+          image: true,
+          emailVerified: true,
+        },
+      },
+    },
+  });
+
+  return popularLocations;
+};
+
 export const getNearLocations = async () => {
   const ipResponse = await fetch(`${process.env.NEXT_APP_URL}/api/geo`);
   const { ip } = await ipResponse.json();

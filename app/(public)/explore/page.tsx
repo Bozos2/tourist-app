@@ -7,8 +7,7 @@ import { LocationsList } from "../_components/locations-list";
 import { Button } from "@/components/ui/button";
 import { PostmarkSwiper } from "../_components/postmark-swiper";
 import { PromiseLocationsList } from "../_components/promise-location-list";
-
-import { data } from "@/helpers/dummy-data";
+import { getPopularLocations } from "@/actions/location";
 
 import img3 from "@/assets/images/explore-image.png";
 
@@ -19,7 +18,9 @@ const CategoryFilterDynamic = dynamic(
   },
 );
 
-const ExplorePage = () => {
+const ExplorePage = async () => {
+  const popularLocations = await getPopularLocations();
+
   return (
     <section className="flex w-full justify-center overflow-hidden">
       <div className="flex w-full max-w-[1500px] flex-col items-center justify-center px-6 sm:px-12">
@@ -58,7 +59,7 @@ const ExplorePage = () => {
             </Button>
           </div>
           <div className="w-full pt-12">
-            <LocationsList locations={data} />
+            <LocationsList locations={popularLocations} />
           </div>
         </div>
         <div className="w-full pt-12">

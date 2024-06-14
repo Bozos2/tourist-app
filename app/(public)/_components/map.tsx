@@ -38,7 +38,7 @@ function ChangeView({
   const map = useMap();
   useEffect(() => {
     map.setView(center, zoom);
-  }, [center, zoom]);
+  }, [map, center, zoom]);
   return null;
 }
 

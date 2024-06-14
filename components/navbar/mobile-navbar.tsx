@@ -18,7 +18,6 @@ import { FaRegUser } from "react-icons/fa";
 import { ExitIcon } from "@radix-ui/react-icons";
 
 import { LogoutButton } from "../auth/logout-button";
-import { Logo } from "./navbar-logo";
 import { useCurrentUser } from "@/hooks/use-current-user";
 
 import { Button } from "../ui/button";
@@ -33,10 +32,12 @@ export const MobileNavbar = () => {
 
   const pathname = usePathname();
 
+  //To close navbar on route change
   useEffect(() => {
     if (nav) {
       setNav(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   const handleNav = () => {
