@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     template: "%s - Trip Teasers",
   },
   description: "Get everything what you need for your next adventure!",
+  metadataBase: new URL("https://tourist-app-ten.vercel.app"),
   icons: { icon: "favicon.ico" },
   openGraph: {
     images: "/opengraph-image.png",

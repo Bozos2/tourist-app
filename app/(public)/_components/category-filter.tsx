@@ -13,7 +13,6 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { LocationsList } from "./locations-list";
 import { category } from "@/actions/category";
 import { LocationsTypes } from "@/types";
-import { data } from "@/helpers/dummy-data";
 
 import HistoricalSites from "@/assets/svgs/CategoryIcons/historical-sites";
 import UrbanArea from "@/assets/svgs/CategoryIcons/urban-area";
@@ -27,7 +26,7 @@ import { PiDotsThreeBold } from "react-icons/pi";
 
 const CategoryFilter = () => {
   const [swiper, setSwiper] = useState<null | SwiperType>(null);
-  const [locations, setLocations] = useState<LocationsTypes[]>(data);
+  const [locations, setLocations] = useState<LocationsTypes[]>([]);
   const [activeCategory, setActiveCategory] = useState<string>("");
 
   const [slideConfig, setSlideConfig] = useState({
