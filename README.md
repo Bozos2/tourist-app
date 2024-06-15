@@ -7,6 +7,7 @@
 
 ## 🛠️ Tech Stack
 
+<div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 5px;">
 <img src="https://img.shields.io/badge/-Typescript-black?style=for-the-badge&logo=typescript&logoColor=white&color=2F74C0" alt="typescript" />
 <img src="https://img.shields.io/badge/-Next_Js-black?style=for-the-badge&logo=nextdotjs&logoColor=white&color=000000" alt="nextjs" />
 <img src="https://img.shields.io/badge/-PostgreSQL-black?style=for-the-badge&logo=PostgreSQL&logoColor=white&color=336791" alt="postgresql" />
@@ -17,6 +18,7 @@
 <img src="https://img.shields.io/badge/-Leaflet-black?style=for-the-badge&logo=leaflet&logoColor=white&color=%2393cc28" alt="leaflet" />
 <img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white" alt="shadcnui" />
 <img src="https://img.shields.io/badge/-Uploadthing-black?style=for-the-badge&logo=uploadthing&logoColor=white&color=EE4444" alt="uploadthing" />
+</div>
 
 ## 🧩 Features
 
