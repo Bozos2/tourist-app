@@ -25,7 +25,15 @@ export const metadata: Metadata = {
   },
   description: "Get everything what you need for your next adventure!",
   metadataBase: new URL("https://tourist-app-ten.vercel.app"),
-  icons: { icon: "favicon.ico" },
+  icons: {
+    icon: "favicon.ico",
+    apple: "/apple-touch-icon.png",
+    shortcut: "/apple-touch-icon.png",
+    other: [
+      { rel: "icon", sizes: "192x192", url: "/android-chrome-192x192.png" },
+      { rel: "icon", sizes: "512x512", url: "/android-chrome-512x512.png" },
+    ],
+  },
   openGraph: {
     images: "/opengraph-image.png",
   },

@@ -14,6 +14,7 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import CommentsCard from "./comments-card";
 
 export interface User {
+  id: string;
   name: string | null;
   image: string | null;
 }
@@ -70,6 +71,7 @@ const CommentsSwiper = ({ comments }: CommentProp) => {
                 id={data.id}
                 username={data.user?.name || ""}
                 image={data.user?.image || ""}
+                userId={data.user?.id || ""}
                 title={data.title}
                 rating={data.rating}
                 createdAt={data.createdAt}

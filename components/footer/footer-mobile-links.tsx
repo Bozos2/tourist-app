@@ -24,6 +24,12 @@ const MobileLinks = () => {
               <li className="pb-1 hover:text-primary">
                 <Link href="/contact">Contact</Link>
               </li>
+              <li className="pb-1 hover:text-primary">
+                <Link href="/privacy">Privacy</Link>
+              </li>
+              <li className="pb-1 hover:text-primary">
+                <Link href="/faq">Faq</Link>
+              </li>
             </ul>
           </AccordionContent>
         </AccordionItem>

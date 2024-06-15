@@ -10,6 +10,7 @@ export async function getAllComments(locationId: string) {
     include: {
       user: {
         select: {
+          id: true,
           name: true,
           image: true,
         },
@@ -27,6 +28,7 @@ export async function getComments(locationId: string) {
     include: {
       user: {
         select: {
+          id: true,
           name: true,
           image: true,
         },
@@ -45,6 +47,7 @@ export async function getTopRatedComments(locationId: string) {
     include: {
       user: {
         select: {
+          id: true,
           name: true,
           image: true,
         },
@@ -63,6 +66,7 @@ export async function getBadRatedComments(locationId: string) {
     include: {
       user: {
         select: {
+          id: true,
           name: true,
           image: true,
         },
@@ -81,6 +85,7 @@ export async function getNewestComments(locationId: string) {
     include: {
       user: {
         select: {
+          id: true,
           name: true,
           image: true,
         },

@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export interface CommentCardProps {
   id: string;
+  userId: string;
   title: string;
   rating: number;
   createdAt: Date;
@@ -19,6 +20,7 @@ export interface CommentCardProps {
 
 const CommentsCard: React.FC<CommentCardProps> = ({
   id,
+  userId,
   title,
   rating,
   createdAt,
@@ -55,7 +57,7 @@ const CommentsCard: React.FC<CommentCardProps> = ({
           </Avatar>
           <div className="flex flex-col">
             <Link
-              href={`/profile/${username}-${id}`}
+              href={`/profile/${username}-${userId}`}
               className="text-lg font-medium hover:underline"
             >
               {username}

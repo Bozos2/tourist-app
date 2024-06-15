@@ -74,7 +74,10 @@ const CommentsSheet: React.FC<CommentsLocationIdProp> = ({ locationId }) => {
                         </AvatarFallback>
                       </Avatar>
                       <div className="flex flex-col">
-                        <Link href="/" className="font-medium hover:underline">
+                        <Link
+                          href={`/profile/${data?.user?.name}-${data?.user?.id}`}
+                          className="font-medium hover:underline"
+                        >
                           {data?.user?.name}
                         </Link>
                         <Rate

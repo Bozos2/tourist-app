@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -26,11 +25,9 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
+import { Virtuoso } from "react-virtuoso";
 
 import { countryOptions } from "@/helpers/countries";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
@@ -51,6 +48,7 @@ export const FilterBar = ({ query, country, city }: SearchParams) => {
   const [initialRender, setInitialRender] = useState<boolean>(true);
   const [isCountrySelected, setIsCountrySelected] = useState<boolean>(false);
   const [cities, setCities] = useState<Cities>([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [isSearching, startTransition] = useTransition();
   const router = useRouter();
 
@@ -237,28 +235,38 @@ export const FilterBar = ({ query, country, city }: SearchParams) => {
                 </PopoverTrigger>
                 <PopoverContent className="w-full p-0">
                   <Command className="dark:bg-[#12131F]">
-                    <CommandInput placeholder="Search city..." />
+                    <CommandInput
+                      placeholder="Search city..."
+                      value={searchTerm}
+                      onValueChange={(value) => setSearchTerm(value)}
+                    />
                     <CommandEmpty>No city found.</CommandEmpty>
-                    <CommandGroup className="max-h-[200px] overflow-y-auto">
-                      {cities?.map((country, index) => (
-                        <CommandItem
-                          value={country}
-                          key={index}
-                          onSelect={() => {
-                            form.setValue("city", country);
-                          }}
-                        >
-                          <CheckIcon
-                            className={cn(
-                              "mr-2 h-4 w-4",
-                              country === field.value
-                                ? "opacity-100"
-                                : "opacity-0",
-                            )}
-                          />
-                          {country}
-                        </CommandItem>
-                      ))}
+                    <CommandGroup className="max-h-[200px]">
+                      <Virtuoso
+                        style={{ height: "200px" }}
+                        data={cities?.filter((city) =>
+                          city.toLowerCase().includes(searchTerm.toLowerCase()),
+                        )}
+                        itemContent={(index, city) => (
+                          <CommandItem
+                            value={city}
+                            key={index}
+                            onSelect={() => {
+                              form.setValue("city", city);
+                            }}
+                          >
+                            <CheckIcon
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                city === field.value
+                                  ? "opacity-100"
+                                  : "opacity-0",
+                              )}
+                            />
+                            {city}
+                          </CommandItem>
+                        )}
+                      />
                     </CommandGroup>
                   </Command>
                 </PopoverContent>
