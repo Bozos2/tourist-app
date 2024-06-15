@@ -7,28 +7,16 @@
 
 ## 🛠️ Tech Stack
 
-<img src="https://img.shields.io/badge/-Typescript-black?style=for-the-badge&logo=typescript&logoColor=white&color=2F74C0
-" alt="typescript">
-<img src="https://img.shields.io/badge/-Next_Js-black?style=for-the-badge&logo=nextdotjs&logoColor=white&color=000000
- " alt="nextjs">
-<img src="https://img.shields.io/badge/-PostgreSQL-black?style=for-the-badge&logo=PostgreSQL&logoColor=white&color=336791
-" alt="postgresql">
-<img src="https://img.shields.io/badge/-Prisma-black?style=for-the-badge&logo=prisma&logoColor=white&color=5A67D8
- "
- alt="prisma">
-<img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logo=tailwindcss&logoColor=white&color=38BDF8"
- alt="tailwind">
-<img src="https://img.shields.io/badge/-Resend-black?style=for-the-badge&logo=resend&logoColor=white&color=000000"
- alt="resend">
-<img src="https://img.shields.io/badge/-Zod-black?style=for-the-badge&logo=zod&logoColor=white&color=3068B7
- " alt="zod">
-<img src="https://img.shields.io/badge/-Leaflet-black?style=for-the-badge&logo=leaflet&logoColor=white&color=%2393cc28
- " alt="leaflet">
-<img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white" alt="shadcnui">
-<img src="https://img.shields.io/badge/-Uploadthing-black?style=for-the-badge&logo=uploadthing&logoColor=white&color=EE4444
- " alt="uploadthing">
-<img src="https://img.shields.io/badge/-Next_Auth-black?style=for-the-badge&logo=nextauth&logoColor=white&color=A323DA
- " alt="next-auth">
+<img src="https://img.shields.io/badge/-Typescript-black?style=for-the-badge&logo=typescript&logoColor=white&color=2F74C0" alt="typescript" />
+<img src="https://img.shields.io/badge/-Next_Js-black?style=for-the-badge&logo=nextdotjs&logoColor=white&color=000000" alt="nextjs" />
+<img src="https://img.shields.io/badge/-PostgreSQL-black?style=for-the-badge&logo=PostgreSQL&logoColor=white&color=336791" alt="postgresql" />
+<img src="https://img.shields.io/badge/-Prisma-black?style=for-the-badge&logo=prisma&logoColor=white&color=5A67D8" alt="prisma" />
+<img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logo=tailwindcss&logoColor=white&color=38BDF8" alt="tailwind" />
+<img src="https://img.shields.io/badge/-Resend-black?style=for-the-badge&logo=resend&logoColor=white&color=000000" alt="resend" />
+<img src="https://img.shields.io/badge/-Zod-black?style=for-the-badge&logo=zod&logoColor=white&color=3068B7" alt="zod" />
+<img src="https://img.shields.io/badge/-Leaflet-black?style=for-the-badge&logo=leaflet&logoColor=white&color=%2393cc28" alt="leaflet" />
+<img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white" alt="shadcnui" />
+<img src="https://img.shields.io/badge/-Uploadthing-black?style=for-the-badge&logo=uploadthing&logoColor=white&color=EE4444" alt="uploadthing" />
 
 ## 🧩 Features
 
