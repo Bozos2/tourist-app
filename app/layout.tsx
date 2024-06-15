@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://tourist-app-ten.vercel.app"),
   icons: {
     icon: "favicon.ico",
-    apple: "/apple-touch-icon.png",
-    shortcut: "/apple-touch-icon.png",
+    apple: "/apple-icon.png",
+    shortcut: "/apple-icon.png",
     other: [
-      { rel: "icon", sizes: "192x192", url: "/android-chrome-192x192.png" },
-      { rel: "icon", sizes: "512x512", url: "/android-chrome-512x512.png" },
+      { rel: "icon", sizes: "192x192", url: "/icon-192x192.png" },
+      { rel: "icon", sizes: "512x512", url: "/icon-512x512.png" },
     ],
   },
   openGraph: {

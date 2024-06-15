@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import TypewriterComponent from "typewriter-effect";
@@ -40,14 +41,16 @@ export const LandingPage = () => {
             <Button
               variant="default"
               className="rounded py-6 tracking-wide text-white"
+              asChild
             >
-              Explore Now
+              <Link href="/explore">Explore Now</Link>
             </Button>
             <Button
               variant="outline"
               className=" rounded bg-transparent py-6 tracking-wide  dark:hover:text-white"
+              asChild
             >
-              Join Now
+              <Link href="/auth/register">Get Started</Link>
             </Button>
           </div>
         </div>
